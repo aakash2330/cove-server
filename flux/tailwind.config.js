@@ -7,6 +7,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       abc: ["acumin-pro", "sans-serif"],
+      pop: ["poppins", "sans-serif"],
     },
   },
   plugins: [],
