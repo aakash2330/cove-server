@@ -1,0 +1,12 @@
+/* global.css */
+@import url("https://use.typekit.net/ibd6anx.css");
+
+/* Import Tailwind CSS
+@tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* Import Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
