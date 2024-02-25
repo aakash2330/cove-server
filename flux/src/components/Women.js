@@ -1,5 +1,5 @@
-import './index.css';
-import tempImg from './images/asset26.png';
+import tempImg from '../images/asset26.png';
+import '../index.css';
 
 function Women() {
     return(
