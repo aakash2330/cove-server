@@ -1,9 +1,9 @@
-import Navbar from './Navbar';
 import Home from './Home';
+import Advertisment from './components/Advertisment';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import Women from './components/Women';
 import './index.css';
-import Women from './Women';
-import Advertisment from './Advertisment';
-import Footer from './Footer';
 
 function App() {
   return (
