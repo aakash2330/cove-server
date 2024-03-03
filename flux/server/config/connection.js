@@ -6,6 +6,8 @@ const {connect, connection} = require('mongoose');
 connect('mongodb://localhost:27017/fluxDB', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 }).then(() => {
     console.log('Connected to MongoDB');
 }).catch((error) => {

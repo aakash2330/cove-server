@@ -1,0 +1,170 @@
+[
+  {
+    "productId": 1,
+    "userId": 2,
+    "commentDescription": "Love these Nike Air Monarch IV! The classic style is perfect for everyday wear, and the comfort is unmatched.",
+    "createdAt": "2024-02-15"
+  },
+  {
+    "productId": 2,
+    "userId": 3,
+    "commentDescription": "The Nike Air Vapormax Plus in red is a showstopper! Bold and trendy, these sneakers make a statement wherever you go. Highly recommended.",
+    "createdAt": "2024-02-20"
+  },
+  {
+    "productId": 3,
+    "userId": 1,
+    "commentDescription": "The vibrant green Nike Waffle One Sneaker is my new favorite! Comfortable and stylish, perfect for everyday activities.",
+    "createdAt": "2024-02-25"
+  },
+  {
+    "productId": 4,
+    "userId": 4,
+    "commentDescription": "Nike Running Shoe in sleek black is my go-to for daily runs. Optimal performance and comfort make these a must-have for runners!",
+    "createdAt": "2024-03-02"
+  },
+  {
+    "productId": 5,
+    "userId": 5,
+    "commentDescription": "These green Flat Slip On Pumps from Vans are so cute! Perfect for casual occasions, and they offer both comfort and fashion.",
+    "createdAt": "2024-03-08"
+  },
+  {
+    "productId": 6,
+    "userId": 3,
+    "commentDescription": "The Knit Ballet Flat from Adidas in classic black is versatile and elegant. Ideal for both casual and semi-formal occasions.",
+    "createdAt": "2024-03-15"
+  },
+  {
+    "productId": 7,
+    "userId": 4,
+    "commentDescription": "Loafer Flats from Vans in pristine white are so comfortable and stylish. They complete my casual yet sophisticated look perfectly.",
+    "createdAt": "2024-03-21"
+  },
+  {
+    "productId": 8,
+    "userId": 5,
+    "commentDescription": "Nike Zoom Freak in vibrant green is a game-changer! High-performance sneakers with a bold look, perfect for athletic pursuits.",
+    "createdAt": "2024-03-28"
+  },
+  {
+    "productId": 9,
+    "userId": 1,
+    "commentDescription": "Nike Men's Sneaker in cool blue is my new favorite. Comfortable and stylish, these sneakers from Adidas are a versatile footwear option.",
+    "createdAt": "2024-04-03"
+  },
+  {
+    "productId": 10,
+    "userId": 4,
+    "commentDescription": "PUMA BLACK-OCE sneakers in trendy green are a fashion statement! Perfect blend of style and comfort for everyday adventures.",
+    "createdAt": "2024-04-10"
+  },
+  {
+    "productId": 11,
+    "userId": 5,
+    "commentDescription": "Pacer Future Sneaker in bold red is my go-to for a stylish and comfortable stride. Love the futuristic design!",
+    "createdAt": "2024-04-18"
+  },
+  {
+    "productId": 12,
+    "userId": 1,
+    "commentDescription": "Unisex-Adult Super sneakers from Puma in classic black are my everyday go-to. Comfortable and stylish for casual and sporty occasions.",
+    "createdAt": "2024-04-25"
+  },
+  {
+    "productId": 13,
+    "userId": 4,
+    "commentDescription": "Roma Basic Sneaker in pristine white is a timeless and clean style from Puma. Perfect for everyday looks.",
+    "createdAt": "2024-05-02"
+  },
+  {
+    "productId": 14,
+    "userId": 5,
+    "commentDescription": "Pacer Future Doubleknit sneakers from Puma in sleek black are my new favorites. Stylish and comfortable for everyday wear.",
+    "createdAt": "2024-05-09"
+  },
+  {
+    "productId": 15,
+    "userId": 3,
+    "commentDescription": "Fusion Evo Golf Shoe from Puma in vibrant green is perfect for hitting the greens in style. Fashion meets functionality!",
+    "createdAt": "2024-05-16"
+  },
+  {
+    "productId": 16,
+    "userId": 1,
+    "commentDescription": "Rainbow Chex Skate flats from Vans in bold red are my go-to for skateboarding sessions. Comfortable and fashionable.",
+    "createdAt": "2024-05-22"
+  },
+  {
+    "productId": 17,
+    "userId": 4,
+    "commentDescription": "Low-Top Trainers from Vans in classic white are perfect for a laid-back and comfortable look. Love them!",
+    "createdAt": "2024-05-29"
+  },
+  {
+    "productId": 18,
+    "userId": 2,
+    "commentDescription": "Vans Unisex Low-Top sandals in cool blue are versatile and stylish. Comfort meets fashion for casual outings.",
+    "createdAt": "2024-06-05"
+  },
+  {
+    "productId": 19,
+    "userId": 5,
+    "commentDescription": "Classic Bandana Sneakers from Nike in bold black offer a timeless and trendy look. Love the classic style!",
+    "createdAt": "2024-06-12"
+  },
+  {
+    "productId": 20,
+    "userId": 2,
+    "commentDescription": "Chunky High Heel from Vans in classic black adds a touch of sophistication to any look. Love the elevation!",
+    "createdAt": "2024-06-19"
+  },
+  {
+    "productId": 21,
+    "userId": 3,
+    "commentDescription": "Slip On Stiletto High Heel from Puma in sleek black is perfect for a stylish and comfortable stride. Love these heels!",
+    "createdAt": "2024-06-26"
+  },
+  {
+    "productId": 22,
+    "userId": 1,
+    "commentDescription": "DREAM PAIRS Court Shoes from Nike in bold red are perfect for formal events. Stylish and comfortable, they complete my look.",
+    "createdAt": "2024-07-03"
+  },
+  {
+    "productId": 23,
+    "userId": 2,
+    "commentDescription": "Nike Air Vapormax Plus in striking red is a showstopper! Bold and trendy, making a statement wherever you go.",
+    "createdAt": "2024-07-10"
+  },
+  {
+    "productId": 24,
+    "userId": 3,
+    "commentDescription": "Low Mid Block Heels from Nike in classic black are my go-to for formal occasions. Stylish and comfortable!",
+    "createdAt": "2024-07-17"
+  },
+  {
+    "productId": 25,
+    "userId": 2,
+    "commentDescription": "Chunky High Heel from Adidas in classic black adds a touch of sophistication to any look. Love the elevation!",
+    "createdAt": "2024-07-24"
+  },
+  {
+    "productId": 26,
+    "userId": 2,
+    "commentDescription": "Amore Fashion Stilettos from Adidas in pristine white are perfect for formal occasions. Stylish and comfortable!",
+    "createdAt": "2024-07-31"
+  },
+  {
+    "productId": 27,
+    "userId": 3,
+    "commentDescription": "Bridal Sandals Glitter from Adidas in classic black add a touch of sparkle and elegance to my special day. Love them!",
+    "createdAt": "2024-08-07"
+  },
+  {
+    "productId": 28,
+    "userId": 2,
+    "commentDescription": "Wedding Prom Bridal flats from Adidas in classic black are perfect for special occasions. Comfortable and stylish!",
+    "createdAt": "2024-08-14"
+  }
+]

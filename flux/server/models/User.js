@@ -5,6 +5,7 @@ const Cart = require('./Cart');
 
 //Schema to create a Post model
 const userSchema = new Schema({
+    userId: { type: Types.ObjectId, required: true, auto: true },
     username: { type: Types.ObjectId, required: true, trim: true },
     email: {
         type: String,

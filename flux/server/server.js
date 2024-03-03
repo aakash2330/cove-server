@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const dotenv = require('dotenv');
+const MongoStore = require('connect-mongo')(session);
+const routes = require('../src/components');
+
 
 const PORT =process.env.PORT || 3001;
-
 const app = express();
 
-dotenv.config();
+const mongo = require('./config/connection');
 
 //Middleware to parse JSON
 app.use(express.json());
@@ -17,8 +18,23 @@ app.use(express.urlencoded({extend: false }));
 
 //Session Middleware
 app.use(session({
-    secret
+    secret: "Super secret secret",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongo }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 30,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+    },
 }))
+
+//Create static directory here!
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Using the controller routes
+app.use(require('./controllers/'));
 
 //Setting up the server
 app.listen(PORT, () => {
