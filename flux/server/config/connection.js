@@ -30,7 +30,7 @@ db.on('disconnected', () => {
 });
 
 // Closing the connection when the application is exited
-ProcessingInstruction.on('SIGINT', () => {
+process.on('SIGINT', () => {
     connection.close(() => {
         console.log('Mongoose connection is disconnected due to application termination');
         process.exit(0);

@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const routes = require('../src/components');
 
+require('dotenv').config();
 
 const PORT =process.env.PORT || 3001;
 const app = express();
@@ -18,7 +18,7 @@ app.use(express.urlencoded({extend: false }));
 
 //Session Middleware
 app.use(session({
-    secret: "Super secret secret",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongo }),
