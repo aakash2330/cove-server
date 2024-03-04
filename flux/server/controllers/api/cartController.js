@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const { Cart, User, Product } = require('../models');
+const withAuth = require('../../middleware/withAuth');
 
 // Get all products
 //I'm planning to name the home page home because '/' will bring me to the animation advert page
 //Trying to get the image title and new price
-router.getCartProducts('/cart', async (req, res) => {
+//Not sure if I need withAuth if I have a method isAuthenticated but I'll find out soon
+router.getCartProducts('/cart', withAuth, async (req, res) => {
     try{
         if(!req.isAuthenticated()) {
             console.log("User is not authenticated");
