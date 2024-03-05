@@ -1,4 +1,4 @@
-const { connection } = require('mongoose');
+const { connectToDB } = require('../config/connection');
 const { Product } = require('../models/Product');
 const { User } = require('../models/User');
 const { Comment } = require('../models/Comment');
@@ -7,8 +7,9 @@ const commentData = require('./commentData.json');
 const productData = require('./productData.json');
 const userData = require('./userData.json');
 
-//Seding function
+//Seeding function
 const seedDB = async () => {
+    await connectToDB();
     try{
         await Comment.deleteMany({});
         await Comment.insertMany(commentData);
@@ -19,12 +20,7 @@ const seedDB = async () => {
         console.log('Database seeded!');
     } catch(error){
         console.error('Error seeding the database: ', error);
-    } finally {
-        // Close connection to DB after seeding is complete
-        connection.close(() => {
-            console.log('Database closed after seed.');
-        });
-    }
+    } 
 };
 
 seedDB();

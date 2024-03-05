@@ -5,7 +5,7 @@ const Comment = require('./Comment');
 
 //Schema to create a Post model
 const productSchema = new Schema({
-    _id: { type: Types.ObjectId, required: true, auto: true },
+    productId: { type: Types.ObjectId, required: true, auto: true },
     img: String, //String is shorthand for {type: String}
     title: { type: String, required: true},
     description: String,
@@ -15,9 +15,9 @@ const productSchema = new Schema({
     color: String,
     category: String,
     //each product can have multiple users
-    owner: { type: Types.ObjectId, User},
+    users: { type: Types.ObjectId, ref: 'User'},
     //each product can have multiple comments
-    comments: [{ type: Types.ObjectId, ref: Comment}]
+    comments: [{ type: Types.ObjectId, ref: 'Comment'}]
 },
 {
     toJSON: {

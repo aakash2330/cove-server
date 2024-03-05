@@ -2,17 +2,16 @@
 //Using destructuring to get connect and connection from the mongoose library
 const {connect, connection} = require('mongoose');
 
-//Instead of writing mongoose.connect we already attained connect from the monmgoose docs
-connect('mongodb://localhost:27017/fluxDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((error) => {
-    console.error('Error connecting to MongoDB:', error.message);
-});
+//Instead of writing mongoose.connect we already attained connect from the mongoose docs
+const connectToDB = async () => {
+    connect('mongodb://localhost:27017/fluxDB').then(() => {
+        console.log('Connected to MongoDB');
+    }).catch((error) => {
+        console.error('Error connecting to MongoDB:', error.message);
+    });
+};
+
+connectToDB();
 
 //Handling the different connection events
 const db = connection;
@@ -36,4 +35,4 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
-module.exports = connection;
+module.exports = { connectToDB };
