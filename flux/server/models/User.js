@@ -1,5 +1,5 @@
 //Destructuring and getting schema and types from Mongoose documentation
-const { Schema, Types } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 const Product = require('./Product');
 const Cart = require('./Cart');
 
@@ -21,9 +21,9 @@ const userSchema = new Schema({
         maxLength: [16, 'Slow down, password too strong!']
     },
     //Each user can have multiple products
-    products: [{ type: Types.ObjectId, ref: Product}],
+    products: [{ type: Types.ObjectId, ref: 'Product'}],
     //each user has a single cart
-    cart: { type: Types.ObjectId, ref: Cart}
+    cart: { type: Types.ObjectId, ref: 'Cart'}
 },
     {
         toJSON: {
