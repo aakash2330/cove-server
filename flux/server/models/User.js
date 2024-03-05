@@ -5,8 +5,8 @@ const Cart = require('./Cart');
 
 //Schema to create a Post model
 const userSchema = new Schema({
-    userId: { type: Types.ObjectId, required: true, auto: true },
-    username: { type: Types.ObjectId, required: true, trim: true },
+    userId: { type: Number, required: true, auto: true },
+    username: { type: String, required: true, trim: true },
     email: {
         type: String,
         required: true,
@@ -21,7 +21,7 @@ const userSchema = new Schema({
         maxLength: [16, 'Slow down, password too strong!']
     },
     //Each user can have multiple products
-    products: [{ type: Types.ObjectId, ref: 'Product'}],
+    products: [{ type: Number, ref: 'Product'}],
     //each user has a single cart
     cart: { type: Types.ObjectId, ref: 'Cart'}
 },
@@ -31,5 +31,7 @@ const userSchema = new Schema({
         },
     });
 
+//Initializing the User Model
+const User = model('user', userSchema);
 
-module.exports = userSchema;
+module.exports = User;
