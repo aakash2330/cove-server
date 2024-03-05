@@ -5,7 +5,7 @@ const {connect, connection} = require('mongoose');
 //Instead of writing mongoose.connect we already attained connect from the mongoose docs
 const connectToDB = async () => {
     connect('mongodb://localhost:27017/fluxDB').then(() => {
-        console.log('Connected to MongoDB');
+        console.log('Initial connection to database');
     }).catch((error) => {
         console.error('Error connecting to MongoDB:', error.message);
     });
@@ -21,7 +21,7 @@ db.on('error', (error) => {
 });
 
 db.once('open', () => {
-    console.log('Connected from MongoDB');
+    console.log('MongoDB opened');
 });
 
 db.on('disconnected', () => {
@@ -30,9 +30,8 @@ db.on('disconnected', () => {
 
 // Closing the connection when the application is exited
 process.on('SIGINT', () => {
-    connection.close(() => {
+    connection.close();
         console.log('Mongoose connection is disconnected due to application termination');
         process.exit(0);
-    });
 });
 module.exports = { connectToDB };
