@@ -1,4 +1,4 @@
-import './index.css';
+import '../index.css';
 // import React, { useState } from 'react';
 // import Women from './Women';
 

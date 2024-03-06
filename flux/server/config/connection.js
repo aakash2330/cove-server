@@ -1,20 +1,20 @@
 //Importing mongoose packages for connection
 //Using destructuring to get connect and connection from the mongoose library
-const {connect, connection} = require('mongoose');
+const mongoose = require('mongoose');
 
 //Instead of writing mongoose.connect we already attained connect from the mongoose docs
-const connectToDB = async () => {
-    connect('mongodb://localhost:27017/fluxDB').then(() => {
-        console.log('Initial connection to database');
-    }).catch((error) => {
-        console.error('Error connecting to MongoDB:', error.message);
-    });
-};
+// const connectToDB = async () => {
+//     connect('mongodb://localhost:27017/fluxDB').then(() => {
+//         console.log('Initial connection to database');
+//     }).catch((error) => {
+//         console.error('Error connecting to MongoDB:', error.message);
+//     });
+// };
 
-connectToDB();
+// connectToDB();
 
 //Handling the different connection events
-const db = connection;
+const db = mongoose.connection;
 
 db.on('error', (error) => {
     console.error('MongoDB connection error:', error);
@@ -30,8 +30,12 @@ db.on('disconnected', () => {
 
 // Closing the connection when the application is exited
 process.on('SIGINT', () => {
-    connection.close();
+    db.close();
         console.log('Mongoose connection is disconnected due to application termination');
         process.exit(0);
 });
-module.exports = { connectToDB };
+
+//Connect to the database
+mongoose.connect('mongodb://localhost:27017/fluxDB');
+
+module.exports = db;

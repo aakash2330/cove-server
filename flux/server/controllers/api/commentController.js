@@ -4,7 +4,7 @@ const router = require('express').Router();
 // Get all products
 //I'm planning to name the home page home because '/' will bring me to the animation advert page
 //Trying to get the image title and new price
-router.getAllComments('/home/', async (req, res) => {
+router.getAllComments('/api/comments/', async (req, res) => {
     try{
         const products = await Product.find();
         res.json(products);

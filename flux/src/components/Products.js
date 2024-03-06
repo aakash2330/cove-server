@@ -1,7 +1,8 @@
 import tempImg from '../images/asset26.png';
 import '../index.css';
 
-function Women() {
+const Products = () => {
+
     return(
         <div className='flex border-solid border-2 border-orange-400 m-8'>
         <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
@@ -28,4 +29,4 @@ function Women() {
     );
 }
 
-export default Women;
+export default Products;
