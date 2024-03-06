@@ -26,7 +26,7 @@ router.getProduct( async (req, res) => {
     }
 });
 
-router.getProductCategory('/home/:category', async (req, res) => {
+router.getProductCategory('/api/home/:category', async (req, res) => {
     const productCategory = req.params.category;
     try{
         const product = await Product.find({ category: productCategory });
