@@ -17,11 +17,14 @@ function App() {
         </header>
         <div className='content'>
           {/* Switch makes sure only one route is shown at a given time */}
-        {/* Switch was replaced with routes in version 6 of react */}
+          {/* Switch was replaced with routes in version 6 of react */}
           <Routes>
-            <Route path="/home" element={ <Home />} />
-            {/* index makes this a child of the element above */}
-            <Route index element={ <Products />} />
+            <Route path="/home" element={
+              <>
+                <Home />
+                <Products />
+              </>
+            } />
           </Routes>
           <Advertisment />
           <Footer />

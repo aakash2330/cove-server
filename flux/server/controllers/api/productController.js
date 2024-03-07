@@ -1,17 +1,18 @@
-const { Product } = require('../models');
+const Product = require('../../models/Product');
 const router = require('express').Router();
 
 // Get all products
 //I'm planning to name the home page home because '/' will bring me to the animation advert page
 //Trying to get the image title and new price
-router.getAllProducts('/home', async (req, res) => {
-    try{
-        const products = await Product.find();
-        res.json(products);
-    } catch (error) {
-        res.status(500).json({ error: 'Could not fetch all products'});
-    }
-});
+// router.get('/products', async (req, res) => {
+//     try{
+//         const products = await Product.find();
+//         res.json(products);
+//         console.log(products);
+//     } catch (error) {
+//         res.status(500).json({ error: 'Could not fetch all products'});
+//     }
+// });
 
 router.getProduct( async (req, res) => {
     const productId = req.params.id;

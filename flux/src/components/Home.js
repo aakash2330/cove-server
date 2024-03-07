@@ -19,28 +19,20 @@ function Home() {
             <div className='border-r border-slate-300 py-1'></div>
             <div>
             {/* <p className='mx-7' onClick={handleCategories}>Women</p> */}
-            <p className='mx-7'>Women</p>
+            <p className='mx-7'>Sneakers</p>
             </div>
             <div className='border-r border-slate-300 py-1'></div>
             <div>
-            <p className='mx-7'>Men</p>
+            <p className='mx-7'>Sandals</p>
             </div>
             <div className='border-r border-slate-300 py-1'></div>
             <div>
-            <p className='mx-7'>Kids</p>
+            <p className='mx-7'>Flats</p>
             </div>
             <div className='border-r border-slate-300 py-1'></div>
             <div>
-            <p className='mx-7'>Baby</p>
+            <p className='mx-7'>Heels</p>
             </div>
-            <div className='border-r border-slate-300 py-1'></div>
-            <div>
-            <p className='mx-7'>Sport</p>
-            </div>
-            {/* </div> */}
-            {/* <div className='CatgeoryDisplay'>
-                {link && <Women />}
-            </div> */}
         </div>
         
     );

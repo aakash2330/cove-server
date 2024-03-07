@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -11,6 +11,12 @@ const app = express();
 const mongo = require('./config/connection');
 const MongoStore = require('connect-mongo')(session);
 
+// Enable CORS for all routes
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust to match your React app's URL
+    credentials: true, // Enable credentials (cookies, authorization headers, etc.)
+  }));
+  
 //Session Middleware
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -40,7 +46,10 @@ app.use(express.urlencoded({extended: false }));
 app.use(express.static(path.join(__dirname, '../build')));
 
 //Using the controller routes
-app.use(require('./controllers/'));
+app.use(require('./controllers'));
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Catch-all route for serving the React app
 app.get('*', (req, res) => {
