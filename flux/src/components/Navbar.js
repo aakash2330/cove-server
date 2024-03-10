@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom';
 import '../index.css';
-
 function Navbar() {
 
     return(
         <nav className='flex border-solid border-2 border-yellow-400 justify-between px-10 text-base font-thin tracking-wide py-10'>
             <div className="flex flex-row border-solid border-2 border-red-400 flex-grow w-1 items-center justify-start space-x-4">
+            <Link to={`/home`}>
             <p className='border-transparent border-b hover:border-black py-1'>Shop</p>
+            </Link>
             <p className='border-transparent border-b hover:border-black py-1 '>Shop</p>
             <p className='border-transparent border-b hover:border-black py-1'>Contact</p>
             </div>

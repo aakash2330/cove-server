@@ -1,10 +1,13 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import Advertisment from './components/Advertisment';
+import Comments from './components/Comments';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import ProductCategory from './components/ProductCategory';
 import Products from './components/Products';
+import SingleProduct from './components/SingleProduct';
 import './index.css';
 
 function App() {
@@ -23,10 +26,26 @@ function App() {
               <>
                 <Home />
                 <Products />
+                <Advertisment />
               </>
-            } />
+            }
+            />
+            <Route path="/api/product/category/:category" element={
+              <>
+                <Home />
+                <ProductCategory />
+                <Advertisment />
+              </>
+            }
+            />
+            <Route path="/api/product/:productId" element={
+              <>
+            <SingleProduct />
+            <Comments />
+              </>
+          } 
+            />
           </Routes>
-          <Advertisment />
           <Footer />
         </div>
       </div>

@@ -1,7 +1,5 @@
 //Destructuring and getting schema and types from Mongoose documentation
 const { Schema, Types, model } = require('mongoose');
-const Product = require('./Product');
-const Cart = require('./Cart');
 
 //Schema to create a Post model
 const userSchema = new Schema({
@@ -32,6 +30,6 @@ const userSchema = new Schema({
     });
 
 //Initializing the User Model
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;

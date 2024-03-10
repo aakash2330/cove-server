@@ -1,7 +1,5 @@
 //Destructuring and getting schema and types from Mongoose documentation
-const { Schema, Types, model } = require('mongoose');
-const User = require('./User');
-const Comment = require('./Comment');
+const { Schema, model } = require('mongoose');
 
 //Schema to create a Post model
 const productSchema = new Schema({
@@ -17,7 +15,7 @@ const productSchema = new Schema({
     //each product can have multiple users
     users: [{ type: Number, ref: 'User'}],
     //each product can have multiple comments
-    comments: [{ type: Types.ObjectId, ref: 'Comment'}]
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 },
 {
     toJSON: {
@@ -26,6 +24,6 @@ const productSchema = new Schema({
 });
 
 //Initializing the Product Model
-const Product= model('product', productSchema);
+const Product= model('Product', productSchema);
 
 module.exports = Product;

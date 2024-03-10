@@ -1,40 +1,34 @@
-const { Product } = require('../models');
+const Comment = require('../../models/Comment');
+const Product = require('../../models/Product');
 const router = require('express').Router();
 
-// Get all products
-//I'm planning to name the home page home because '/' will bring me to the animation advert page
-//Trying to get the image title and new price
-router.getAllComments('/api/comments/', async (req, res) => {
+
+
+router.get('/:productId', async (req, res) => {
+    const productId = req.params.productId;
+    console.log('ProductId in route:', productId);
+//If this works you can do this with the normal single product get and focus the comment
+// routes for creating new comments. They don't need to be gotten they just need to be sent there
     try{
-        const products = await Product.find();
-        res.json(products);
+        const comments = await Comment.find({productId: productId});
+        console.log('These are my comments for this product: ', comments);
+        const product = await Product.findOne({productId: productId}).populate('comments');
+
+        if(!comments) {
+            return res.status(404).json({ error: 'Comment not found'});
+        }
+
+        //Putting both the product and the comments in the response
+        const response = {
+            product: product,
+            comments: comments
+        }
+
+        res.json(response);
     } catch (error) {
-        res.status(500).json({ error: 'Could not fetch all products'});
+        console.error('Error fetching comments:', error.message);
+        res.status(500).json({ error: 'Could not fetch any comments'});
     }
 });
 
-router.getProduct( async (req, res) => {
-    const productId = req.params.id;
-    try{
-        const product = await Product.findById(productId);
-        if(!product) {
-            return res.status(404).json({ error: 'Product not found'});
-        }
-        res.json(product);
-    } catch (error) {
-        res.status(500).json({ error: 'Could not fetch all products'});
-    }
-});
-
-router.getProductCategory('/home/:category', async (req, res) => {
-    const productCategory = req.params.category;
-    try{
-        const product = await Product.find({ category: productCategory });
-        if(product.length === 0) {
-            return res.status(404).json({ error: 'Product not found'});
-        }
-        res.json(product);
-    } catch (error) {
-        res.status(500).json({ error: 'Could not fetch all products'});
-    }
-});
+module.exports = router;

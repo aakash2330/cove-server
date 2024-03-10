@@ -1,8 +1,7 @@
-const { connectToDB } = require('../config/connection');
+const mongoose = require('mongoose');
 const { Product } = require('../models/Product');
 const { User } = require('../models/User');
 const { Comment } = require('../models/Comment');
-const mongoose = require('mongoose');
 
 const commentData = require('./commentData.json');
 const productData = require('./productData.json');
@@ -10,25 +9,39 @@ const userData = require('./userData.json');
 
 //Seeding function
 const seedDB = async () => {
-    await connectToDB();
+   
     try{
-        console.log('Successfully connected to the database!!!')
-        await mongoose.model('comment').deleteMany({});
+      await mongoose.connect('mongodb://localhost:27017/fluxDB');
+        console.log('Successfully connected to the database!!!');
+        
+        //Directly registering the models here.
+        const Comment = mongoose.model('comment');
+        const Product = mongoose.model('product');
+        const User = mongoose.model('user');
+
+        //deleting from the database
+        await Comment.deleteMany({});
         console.log('Comments Deleted');
-        await mongoose.model('comment').insertMany(commentData);
-        console.log('Comments Added');
-        await mongoose.model('product').deleteMany({});
+        await Product.deleteMany({});
         console.log('Products Deleted');
-        await mongoose.model('product').insertMany(productData);
-        console.log('Products Added');
-        await mongoose.model('user').deleteMany({});
+        await User.deleteMany({});
         console.log('Users Deleted');
-        await mongoose.model('user').insertMany(userData);
+
+        //Adding to the database
+        await Comment.insertMany(commentData);
+        console.log('Comments Added');
+        await Product.insertMany(productData);
+        console.log('Products Added');
+        await User.insertMany(userData);
         console.log('Users Added');
+
         console.log('Database seeded!');
     } catch(error){
         console.error('Error seeding the database: ', error);
-    } 
+    } finally {
+        mongoose.connection.close();
+        console.log('Closing connection...');
+    }
 };
 
 seedDB();
