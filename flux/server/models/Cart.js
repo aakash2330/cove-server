@@ -16,5 +16,7 @@ const cartSchema = new Schema({
     },
 });
 
+//Initializing the Product Model
+const Product= model('Cart', cartSchema);
 
 module.exports = cartSchema;

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import '../index.css';
 
-const Products = () => {
-    const [products, setProducts] = useState([]);
+const SingleProduct = () => {
+    const { productId } = useParams();
+    const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3001/home/home');
+                const response = await fetch(`http://localhost:3001/api/product/${productId}`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                setProducts(data);
+                console.log('Data from API:', data); 
+                setProduct(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setError('Could not fetch data');
@@ -25,7 +27,7 @@ const Products = () => {
         };
 
         fetchData();
-    }, []); // Empty dependency array ensures the effect runs only once on mount
+    }, [productId]); 
 
     //Come back to this. Make this do something else when loading
     if (loading) {
@@ -36,11 +38,13 @@ const Products = () => {
         return <p>Error: {error}</p>;
     }
 
+    //Check if product is defined before accessing its properties
+    if(!product || Object.keys(product).length === 0){
+        return <p>Product not found</p>;
+    }
     return (
         <div className='flex flex-wrap border-solid border-2 border-orange-400 m-8'>
-            {products.map((product) => (
-                <li key={product.productId} className='list-none'>
-                    <Link to={`/api/product/${product.productId}`}>
+                
                     <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
                         <img
                             src={product.img}
@@ -50,11 +54,9 @@ const Products = () => {
                         <p className='text-2xl mt-4'>{product.title}</p>
                         <p className='my-1'>${product.newPrice}</p>
                     </div>
-                    </Link>
-                </li>
-            ))}
+                
         </div>
     );
 }
 
-export default Products;
+export default SingleProduct;

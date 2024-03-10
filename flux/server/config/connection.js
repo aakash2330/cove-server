@@ -2,17 +2,6 @@
 //Using destructuring to get connect and connection from the mongoose library
 const mongoose = require('mongoose');
 
-//Instead of writing mongoose.connect we already attained connect from the mongoose docs
-// const connectToDB = async () => {
-//     connect('mongodb://localhost:27017/fluxDB').then(() => {
-//         console.log('Initial connection to database');
-//     }).catch((error) => {
-//         console.error('Error connecting to MongoDB:', error.message);
-//     });
-// };
-
-// connectToDB();
-
 //Handling the different connection events
 const db = mongoose.connection;
 

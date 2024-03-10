@@ -3,31 +3,26 @@ const router = require('express').Router();
 
 // Get all products
 //I'm planning to name the home page home because '/' will bring me to the animation advert page
-//Trying to get the image title and new price
-// router.get('/products', async (req, res) => {
-//     try{
-//         const products = await Product.find();
-//         res.json(products);
-//         console.log(products);
-//     } catch (error) {
-//         res.status(500).json({ error: 'Could not fetch all products'});
-//     }
-// });
 
-router.getProduct( async (req, res) => {
-    const productId = req.params.id;
+//Getting Product based the title clicked.
+router.get( '/:productId', async (req, res) => {
+    const singleProduct = req.params.productId;
     try{
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({ productId: singleProduct }).populate('comments');
+
         if(!product) {
             return res.status(404).json({ error: 'Product not found'});
         }
         res.json(product);
+        console.log(product);
     } catch (error) {
-        res.status(500).json({ error: 'Could not fetch all products'});
+        console.error('Error catching single product: ', error);
+        res.status(500).json({ error: 'Could not fetch single product'});
     }
 });
 
-router.getProductCategory('/api/home/:category', async (req, res) => {
+//Getting Products based on category
+router.get('/category/:category', async (req, res) => {
     const productCategory = req.params.category;
     try{
         const product = await Product.find({ category: productCategory });
@@ -39,3 +34,5 @@ router.getProductCategory('/api/home/:category', async (req, res) => {
         res.status(500).json({ error: 'Could not fetch all products'});
     }
 });
+
+module.exports = router;
