@@ -8,7 +8,7 @@ function Navbar() {
             <Link to={`/home`}>
             <p className='border-transparent border-b hover:border-black py-1'>Shop</p>
             </Link>
-            <p className='border-transparent border-b hover:border-black py-1 '>Shop</p>
+            <p className='border-transparent border-b hover:border-black py-1 '>Collection</p>
             <p className='border-transparent border-b hover:border-black py-1'>Contact</p>
             </div>
             <div className='flex-row justify-between border-solid border-2 border-blue-400 flex-grow w-1 text-center items-center text-2xl font-medium tracking-widest'>
