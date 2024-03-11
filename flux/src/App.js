@@ -1,9 +1,11 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
+//Might want to destructure all of these for less lines when you're done
 import Advertisment from './components/Advertisment';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ProductCategory from './components/ProductCategory';
 import Products from './components/Products';
@@ -45,6 +47,7 @@ function App() {
               </>
           } 
             />
+            <Route path ="/auth/login" element = { <Login /> } />
           </Routes>
           <Footer />
         </div>
