@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import '../index.css';
-function Navbar() {
+
+//Taking the actual state values to use here
+const Navbar = ({isLoggedIn, username}) => {
 
     return(
         <nav className='flex border-solid border-2 border-yellow-400 justify-between px-10 text-base font-thin tracking-wide py-10'>
@@ -16,7 +18,12 @@ function Navbar() {
             </div>
             <div className='flex flex-row border-solid border-2 border-green-400 flex-grow w-1 items-center justify-end space-x-4'>
             <p className=''>Icon 1</p>
+            {isLoggedIn ? (
+            <p className=''>{username}</p> ) : (
+            <Link to={`/auth/login`}>
             <p className=''>Sign In</p>
+            </Link>
+            )}
             <span className='material-symbols-outlined'>
                     shopping_cart
                 </span>
