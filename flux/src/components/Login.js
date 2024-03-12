@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
-const Login = () => {
+//Updating the state values here for the login info
+const Login = ({ setIsLoggedIn, setUsername}) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -26,11 +27,18 @@ const Login = () => {
                 }),
             });
 
-            if(response.ok) {
-                const { token } = await response.json();
-
+            if (response.ok) {
+                const responseData = await response.json();
+                const { token, username } = responseData;
+                console.log('Response Data: ', responseData);
+                setIsLoggedIn(true); 
+                //setting the state of username to the associated username to use in Navbar
+                setUsername(username);
+                console.log('Lets see the value of Username: ', username);
                 //Save token to local storage for when the user makes a future request
                 localStorage.setItem('token', token);
+                //Saving the username as well so it is displayed and the state doesn't lose it on reload
+                localStorage.setItem('username', username);
 
                 //After login redirect to the home page
                 navigate('/home');
@@ -39,21 +47,21 @@ const Login = () => {
                 const errorData = await response.json();
                 console.error('Failed Login', errorData.message);
             }
-        } catch(error) {
+        } catch (error) {
             console.error('Error during login: ', error.message);
         }
     };
 
-        // Update state on input change
-        const handleInputChange = (e) => {
-            if (e.target.name === 'email') {
-                setEmail(e.target.value);
-                console.log("Checking the email now: ", email);
-            } else if (e.target.name === 'password') {
-                setPassword(e.target.value);
-                console.log("Checking the password now: ", password);
-            }
-        };
+    // Update state on input change
+    const handleInputChange = (e) => {
+        if (e.target.name === 'email') {
+            setEmail(e.target.value);
+            console.log("Checking the email now: ", email);
+        } else if (e.target.name === 'password') {
+            setPassword(e.target.value);
+            console.log("Checking the password now: ", password);
+        }
+    };
 
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -65,7 +73,7 @@ const Login = () => {
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit} method= "POST" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+            <form onSubmit={handleSubmit} method="POST" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                 <div>
                     <label htmlFor="email" className="sr-only">Email</label>
 

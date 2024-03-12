@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-
 //Might want to destructure all of these for less lines when you're done
 import Advertisment from './components/Advertisment';
 import Comments from './components/Comments';
@@ -13,12 +13,15 @@ import SingleProduct from './components/SingleProduct';
 import './index.css';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
+  const [username, setUsername] = useState('');
+
   return (
     //Allowing router to work across app.js
     <Router>
       <div className="App font-abc text-gray-900 bg-white">
         <header className="App-header">
-          <Navbar />
+          <Navbar isLoggedIn={isLoggedIn} username={username}/>
         </header>
         <div className='content'>
           {/* Switch makes sure only one route is shown at a given time */}
@@ -47,7 +50,9 @@ function App() {
               </>
           } 
             />
-            <Route path ="/auth/login" element = { <Login /> } />
+            <Route path ="/auth/login" element = { 
+            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername}/> 
+            } />
           </Routes>
           <Footer />
         </div>
