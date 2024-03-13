@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 //Might want to destructure all of these for less lines when you're done
 import Advertisment from './components/Advertisment';
@@ -15,6 +15,18 @@ import './index.css';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
   const [username, setUsername] = useState('');
+
+  //useEffect allows me to perform side functions in my component
+  useEffect(() => {
+    //Defining this in a component that is always rendered so it doesn't disappear on refresh
+    //Checking to see if a token still exists in local storage then logging in a user based on that
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    if(token) {
+        setIsLoggedIn(true);
+        setUsername(username);
+    }
+  }, []); //Empty array dependency ensures that this only runs once //Second argument
 
   return (
     //Allowing router to work across app.js
