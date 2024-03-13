@@ -1,41 +1,28 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../index.css';
 //Importing react dom to use portals
 import ReactDOM from 'react-dom';
 
 //Taking the actual state values to use here
-const Navbar = ({ isLoggedIn, username }) => {
-    const navigate = useNavigate();
+const Navbar = ({ isLoggedIn, username, onLogout }) => {
     const [showModal, setShowModal] = useState(false);
 
-    const signOut = async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem('token');
-        try {
-            localStorage.removeItem('token');
-            localStorage.removeItem('username');
-
-            if (!token) {
-                //After logout redirect to the home page
-                navigate('/home');
-            } else {
-                //Handle failed logout
-                console.error('Failed Logout');
-            }
-        } catch (error) {
-            console.error('Error during logout: ', error.message);
-        }
-    };
-
+   
     function Modal() {
         //Where I want to put it on the dom
         const modalContainer = document.querySelector('#modal');
         console.log(modalContainer);
 
+        // Check if the modal container is found
+        if (!modalContainer) {
+            console.error('Modal container not found in the DOM');
+            return null; // Return null if the container is not found
+        }
+
         return ReactDOM.createPortal(
             //The element I want to place
-            <p className='text-gray-900 border-solid border-2 border-blue-400' onClick={signOut}>Sign Out</p>,
+            <p className='text-gray-900 border-solid border-2 border-blue-400' onClick={onLogout}>Sign Out</p>,
             modalContainer
         );
     };
@@ -56,7 +43,7 @@ const Navbar = ({ isLoggedIn, username }) => {
                 <p className=''>Icon 1</p>
                 {isLoggedIn ? (
                     <>
-                        <p className='username' onClick={() => {console.log('Clicked!'); setShowModal(!showModal); }}>Hi {username}</p>
+                        <p className='username' onClick={() => { console.log('Clicked!'); setShowModal(!showModal); }}>Hi {username}</p>
                         {/* If the modal is set to true then show modal and on close set the modal to false */}
                         {showModal && <Modal />}
                     </>
