@@ -2,7 +2,26 @@ const Comment = require('../../models/Comment');
 const Product = require('../../models/Product');
 const router = require('express').Router();
 
+// Sending the information to the comment collection in the db
+router.post('/newComment', async (req, res) => {
+    const { username, newComment, productId } = req.body; //Extracting username and comments from the body
+    console.log('Username in route:', username);
+    console.log('Comment in route:', newComment);
+    console.log('Product ID in route:', productId);
 
+    try {
+        const createdComment = await Comment.create({ 
+            productId: productId,
+            username: username ,
+            commentDescription: newComment,
+        });
+        console.log('This is the new comment to be added: ', createdComment);
+        res.status(201).json(createdComment); // Respond with the newly created comment
+    } catch(error) {
+        console.error('Error creating comment: ', error.message);
+        res.status(500).json({ error: 'Could not create comment' });
+    }
+});
 
 router.get('/:productId', async (req, res) => {
     const productId = req.params.productId;

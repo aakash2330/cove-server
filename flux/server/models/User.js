@@ -7,7 +7,6 @@ SALT_WORK_FACTOR = 10;
 
 //Schema to create a Post model
 const userSchema = new Schema({
-    userId: { type: Number, required: true, auto: true, unique: true},
     username: { type: String, required: true, unique: true },
     email: {
         type: String,

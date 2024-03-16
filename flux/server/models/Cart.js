@@ -6,7 +6,7 @@ const Product = require('./Product');
 //Schema to create a Post model
 const cartSchema = new Schema({
     //each user can have one active shopping cart
-    user: { type: Number, ref: 'User'},
+    user: { type: Schema.Types.ObjectId, ref: 'User'},
     //each shopping cart can contain multiple products
     products: [{ type: Number, ref: 'Product'}]
 },

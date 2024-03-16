@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ProductCategory from './components/ProductCategory';
 import Products from './components/Products';
+import Register from './components/Register';
 import SingleProduct from './components/SingleProduct';
 import './index.css';
 
@@ -22,18 +23,27 @@ function App() {
     //Checking to see if a token still exists in local storage then logging in a user based on that
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-    if(token) {
-        setIsLoggedIn(true);
-        setUsername(username);
+    if (token) {
+      setIsLoggedIn(true);
+      setUsername(username);
     }
   }, []); //Empty array dependency ensures that this only runs once //Second argument
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    setIsLoggedIn(false);
+    setUsername('');
+
+  };
 
   return (
     //Allowing router to work across app.js
     <Router>
       <div className="App font-abc text-gray-900 bg-white">
         <header className="App-header">
-          <Navbar isLoggedIn={isLoggedIn} username={username}/>
+          {/* passing onLogout prop to Navbar to utilize the logout func */}
+          <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
         </header>
         <div className='content'>
           {/* Switch makes sure only one route is shown at a given time */}
@@ -57,13 +67,16 @@ function App() {
             />
             <Route path="/api/product/:productId" element={
               <>
-            <SingleProduct />
-            <Comments />
+                <SingleProduct />
+                <Comments isLoggedIn={isLoggedIn} username={username} />
               </>
-          } 
+            }
             />
-            <Route path ="/auth/login" element = { 
-            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername}/> 
+            <Route path="/auth/login" element={
+              <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
+            } />
+            <Route path="/auth/register" element={
+              <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
             } />
           </Routes>
           <Footer />
