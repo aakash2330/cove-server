@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ProductCategory from './components/ProductCategory';
 import Products from './components/Products';
+import Register from './components/Register';
 import SingleProduct from './components/SingleProduct';
 import './index.css';
 
@@ -67,12 +68,15 @@ function App() {
             <Route path="/api/product/:productId" element={
               <>
                 <SingleProduct />
-                <Comments />
+                <Comments isLoggedIn={isLoggedIn} username={username} />
               </>
             }
             />
             <Route path="/auth/login" element={
               <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
+            } />
+            <Route path="/auth/register" element={
+              <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
             } />
           </Routes>
           <Footer />

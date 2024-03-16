@@ -16,6 +16,16 @@ router.post('/register', async (req, res, next) => {
         const user = new User({ username, email, password: hashedPassword });
         await user.save();
         res.json({ message: 'Account Created! ' });
+
+        //Trying to auto-log you in
+        if(user) {
+            console.log('found user!');
+            const token = jwt.sign({ userId: user._id }, secretKey, {
+                expiresIn: '1 hour'
+            });
+            //Getting the username and the token 
+            res.json({ token, username });
+        }
     } catch (error) {
         next(error);
     }
@@ -40,7 +50,7 @@ router.post('/login', async (req, res, next) => {
             return res.status(401).json({ message: 'Incorrect password' });
         }
 
-        const token = jwt.sign({ userId: user.userId }, secretKey, {
+        const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '1 hour'
         });
         //Getting the username and the token 

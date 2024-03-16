@@ -13,7 +13,7 @@ const productSchema = new Schema({
     color: String,
     category: String,
     //each product can have multiple users
-    users: [{ type: Number, ref: 'User'}],
+    users: [{ type: Schema.Types.ObjectId, ref: 'User'}],
     //each product can have multiple comments
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 },

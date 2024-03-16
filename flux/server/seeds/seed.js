@@ -36,6 +36,7 @@ const seedDB = async () => {
             console.log('User Saved: ', newUser);
         }
 
+
         // Add new data
         await Product.insertMany(productData);
         console.log('Products Added');

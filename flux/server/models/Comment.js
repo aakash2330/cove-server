@@ -5,7 +5,7 @@ const { Schema, Types, model } = require('mongoose');
 //Schema to create a Post model
 const commentSchema = new Schema({
     productId: { type: Number, required: true },
-    userId: { type: Number, required: true },
+    username: { type: String, required: true },
     commentDescription: { type: String, required: true },
     createdAt: {
         type: Date,
