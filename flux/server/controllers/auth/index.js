@@ -49,7 +49,8 @@ router.post('/login', async (req, res, next) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Incorrect password' });
         }
-
+        
+        //Saving the userid as userId to be used later
         const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '1 hour'
         });

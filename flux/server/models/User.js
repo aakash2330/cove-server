@@ -21,10 +21,11 @@ const userSchema = new Schema({
         minLength: [4, 'Weak password'],
         maxLength: [16, 'Slow down, password too strong!']
     },
-    //Each user can have multiple products
-    products: [{ type: Number, ref: 'Product'}],
-    //each user has a single cart
-    cart: { type: Types.ObjectId, ref: 'Cart'}
+    //Each user has a cart that can store multiple products
+    cart: [{
+        productId: { type: Number, ref: 'Product' },
+        quantity: {type: Number, default: 1 }
+    }],
 },
     {
         toJSON: {

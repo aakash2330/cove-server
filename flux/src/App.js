@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 //Might want to destructure all of these for less lines when you're done
 import Advertisment from './components/Advertisment';
+import Cart from './components/Cart';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -67,7 +68,7 @@ function App() {
             />
             <Route path="/api/product/:productId" element={
               <>
-                <SingleProduct />
+                <SingleProduct isLoggedIn={isLoggedIn} username={username} />
                 <Comments isLoggedIn={isLoggedIn} username={username} />
               </>
             }
@@ -77,6 +78,10 @@ function App() {
             } />
             <Route path="/auth/register" element={
               <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
+            } />
+            {/* You can change the other routes so they arent so revealing */}
+            <Route path="/cart" element={
+              <Cart setIsLoggedIn={isLoggedIn} setUsername={username} />
             } />
           </Routes>
           <Footer />

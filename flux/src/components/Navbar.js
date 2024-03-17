@@ -33,9 +33,11 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                         <p className=''>Sign In</p>
                     </Link>
                 )}
+                <Link to ={`/cart`}>
                 <span className='material-symbols-outlined'>
                     shopping_cart
                 </span>
+                </Link>
             </div>
         </nav>
     );
