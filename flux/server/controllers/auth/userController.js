@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const authenticate = require('../../middleware/Auth');
+const { authenticate } = require('../../middleware/Auth');
 const User = require('../../models/User');
 
 router.get('/profile', authenticate, (req, res) => {
@@ -11,6 +11,7 @@ router.get('/cart', authenticate, async (req, res) => {
     try {
         //Retrieving the users id from authenticated request
         const userId = req.user._id
+        console.log('The User ID: ', userId);
         const user = await User.findById(userId);
 
         if (!user) {
@@ -40,6 +41,7 @@ router.post('/addCart', authenticate, async (req, res) => {
     console.log('IMG in route:', img);
     console.log('title in route:', title);
     console.log('Price in route:', newPrice);
+    console.log('username in route:', username);
 
     // Check if they exist, I don't want to go further if they don't
     if (!productId || !img || !title || !newPrice || !username) {

@@ -42,7 +42,7 @@ const SingleProduct = ({ isLoggedIn, username }) => {
                 throw new Error('Authentication token not found');
             }
         
-            const response = await fetch('http://localhost:3001/auth/addCart', {
+            const response = await fetch('http://localhost:3001/auth/user/addCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

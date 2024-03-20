@@ -19,7 +19,6 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required'],
         minLength: [4, 'Weak password'],
-        maxLength: [16, 'Slow down, password too strong!']
     },
     //Each user has a cart that can store multiple products
     cart: [{

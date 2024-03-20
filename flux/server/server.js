@@ -46,7 +46,7 @@ app.use(express.urlencoded({extended: false }));
 app.use(express.static(path.join(__dirname, '../build')));
 
 //Using the controller routes
-app.use(require('./controllers'));
+app.use(require('./controllers/'));
 
 // Enable CORS for all routes
 app.use(cors());
