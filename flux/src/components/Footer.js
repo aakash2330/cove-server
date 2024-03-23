@@ -1,7 +1,16 @@
+import homeBanner from '../images/home-banner.png';
 import '../index.css';
 
 function Footer() {
     return(
+        <>
+        <div>
+        <img
+                src={homeBanner}
+                alt='hero banner'
+                className='object-cover w-full h-96 border-solid border-2 border-red-400'
+            />
+        </div>
         <div className='flex flex-col border-solid border-2 border-pink-400 my-16'>
             <div className='flex flex-row justify-center mx-96 mt-16 border-solid border-2 border-yellow-400'>
                 <p className='mx-2'>icon1</p>
@@ -17,6 +26,7 @@ function Footer() {
             </div>
             </div>
         </div>
+        </>
     );
 }
 
