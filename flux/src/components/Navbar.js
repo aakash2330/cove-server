@@ -7,9 +7,12 @@ import '../index.css';
 const Navbar = ({ isLoggedIn, username, onLogout }) => {
 
     return (
-        <nav className='flex border-solid border-2 border-yellow-400 justify-between px-10 text-base font-thin tracking-wide py-10'>
-            <div className="flex flex-row border-solid border-2 border-red-400 flex-grow w-1 items-center justify-start space-x-4">
-                <Link to={`/home`}>
+        <nav className='flex border-solid border-2 border-yellow-400 justify-between px-10 text-base font-thin tracking-wide py-5'>
+            <div className="flex flex-row border-solid border-2 border-red-400 flex-grow w-1 items-center justify-start space-x-4 text-sm">
+                <Link to={`/`}>
+                    <p className='border-transparent border-b hover:border-black py-1'>Home</p>
+                </Link>
+                <Link to={`/shop`}>
                     <p className='border-transparent border-b hover:border-black py-1'>Shop</p>
                 </Link>
                 <p className='border-transparent border-b hover:border-black py-1 '>Collection</p>
@@ -18,7 +21,7 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
             <div className='flex-row justify-between border-solid border-2 border-blue-400 flex-grow w-1 text-center items-center text-2xl font-medium tracking-widest'>
                 <p className='border-b-2 border-transparent'>FluxCove</p>
             </div>
-            <div className='flex flex-row border-solid border-2 border-green-400 flex-grow w-1 items-center justify-end space-x-4'>
+            <div className='flex flex-row border-solid border-2 border-green-400 flex-grow w-1 items-center justify-end space-x-4 text-sm'>
                 <p className=''>Icon 1</p>
                 {/* If log in is true then show the following else show sign up */}
                 {isLoggedIn ? (

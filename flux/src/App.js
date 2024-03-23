@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import ProductCategory from './components/ProductCategory';
 import Products from './components/Products';
 import Register from './components/Register';
+import Shop from './components/Shop';
 import SingleProduct from './components/SingleProduct';
 import './index.css';
 
@@ -50,9 +51,16 @@ function App() {
           {/* Switch makes sure only one route is shown at a given time */}
           {/* Switch was replaced with routes in version 6 of react */}
           <Routes>
-            <Route path="/home" element={
+            <Route path="/" element={
               <>
-                <Home />
+              <Home />
+              <Advertisment />
+              </>
+            } 
+            />
+            <Route path="/shop" element={
+              <>
+                <Shop />
                 <Products />
                 <Advertisment />
               </>
@@ -60,7 +68,7 @@ function App() {
             />
             <Route path="/api/product/category/:category" element={
               <>
-                <Home />
+                <Shop />
                 <ProductCategory />
                 <Advertisment />
               </>
