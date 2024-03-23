@@ -81,7 +81,7 @@ function App() {
             } />
             {/* You can change the other routes so they arent so revealing */}
             <Route path="/cart" element={
-              <Cart setIsLoggedIn={isLoggedIn} setUsername={username} />
+              <Cart isLoggedIn={isLoggedIn} username={username} />
             } />
           </Routes>
           <Footer />

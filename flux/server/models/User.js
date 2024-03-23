@@ -23,6 +23,9 @@ const userSchema = new Schema({
     //Each user has a cart that can store multiple products
     cart: [{
         productId: { type: Number, ref: 'Product' },
+        productTitle: { type: String },
+        productImage: { type: String },
+        productPrice: { type: Number },
         quantity: {type: Number, default: 1 }
     }],
 },

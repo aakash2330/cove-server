@@ -16,7 +16,7 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
 
         //API request to handle login
         try {
-            const response = await fetch('http://localhost:3001/auth/login', {
+            const response = await fetch('http://localhost:3001/auth/verify/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
