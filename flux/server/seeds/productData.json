@@ -9,7 +9,8 @@
         "newPrice": 200.00,
         "company": "Nike",
         "color": "white",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 2,
@@ -20,7 +21,8 @@
         "newPrice": 200.00,
         "company": "Nike",
         "color": "red",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": true
     },
 
     {
@@ -32,7 +34,8 @@
         "newPrice": 200.00,
         "company": "Nike",
         "color": "green",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 4,
@@ -43,7 +46,8 @@
         "newPrice": 200.00,
         "company": "Adidas",
         "color": "black",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 5,
@@ -54,7 +58,8 @@
         "newPrice": 200.00,
         "company": "Vans",
         "color": "green",
-        "category": "flats"
+        "category": "flats",
+        "sale": false
     },
     {
         "productId": 6,
@@ -65,7 +70,8 @@
         "newPrice": 50.00,
         "company": "Adidas",
         "color": "black",
-        "category": "flats"
+        "category": "flats",
+        "sale": false
     },
 
     {
@@ -77,7 +83,8 @@
         "newPrice": 50.00,
         "company": "Vans",
         "color": "white",
-        "category": "flats"
+        "category": "flats",
+        "sale": true
     },
 
     {
@@ -89,7 +96,8 @@
         "newPrice": 200.00,
         "company": "Nike",
         "color": "green",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
 
     {
@@ -101,7 +109,8 @@
         "newPrice": 200.00,
         "company": "Adidas",
         "color": "blue",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
 
     {
@@ -113,7 +122,8 @@
         "newPrice": 150.00,
         "company": "Puma",
         "color": "green",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 11,
@@ -124,7 +134,8 @@
         "newPrice": 150.00,
         "company": "Puma",
         "color": "red",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 12,
@@ -135,7 +146,8 @@
         "newPrice": 150.00,
         "company": "Puma",
         "color": "black",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 13,
@@ -146,7 +158,8 @@
         "newPrice": 150.00,
         "company": "Puma",
         "color": "white",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 14,
@@ -157,7 +170,8 @@
         "newPrice": 150.00,
         "company": "Puma",
         "color": "black",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
 
     {
@@ -169,7 +183,8 @@
         "newPrice": 100.00,
         "company": "Puma",
         "color": "green",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 16,
@@ -180,7 +195,8 @@
         "newPrice": 100.00,
         "company": "Vans",
         "color": "red",
-        "category": "flats"
+        "category": "flats",
+        "sale": false
     },
     {
         "productId": 17,
@@ -191,7 +207,8 @@
         "newPrice": 100.00,
         "company": "Vans",
         "color": "white",
-        "category": "sandals"
+        "category": "sandals",
+        "sale": false
     },
     {
         "productId": 18,
@@ -202,7 +219,8 @@
         "newPrice": 100.00,
         "company": "Vans",
         "color": "blue",
-        "category": "sandals"
+        "category": "sandals",
+        "sale": false
     },
     {
         "productId": 19,
@@ -213,7 +231,8 @@
         "newPrice": 50.00,
         "company": "Nike",
         "color": "black",
-        "category": "sandals"
+        "category": "sandals",
+        "sale": false
     },
     {
         "productId": 20,
@@ -224,7 +243,8 @@
         "newPrice": 50.00,
         "company": "Vans",
         "color": "black",
-        "category": "heels"
+        "category": "heels",
+        "sale": true
     },
     {
         "productId": 21,
@@ -235,7 +255,8 @@
         "newPrice": 100.00,
         "company": "puma",
         "color": "black",
-        "category": "heels"
+        "category": "heels",
+        "sale": false
     },
     {
         "productId": 22,
@@ -246,7 +267,8 @@
         "newPrice": 150.00,
         "company": "Nike",
         "color": "red",
-        "category": "heels"
+        "category": "heels",
+        "sale": false
     },
     {
         "productId": 23,
@@ -257,7 +279,8 @@
         "newPrice": 200.00,
         "company": "Nike",
         "color": "red",
-        "category": "sneakers"
+        "category": "sneakers",
+        "sale": false
     },
     {
         "productId": 24,
@@ -268,7 +291,8 @@
         "newPrice": 200.00,
         "company": "Nike",
         "color": "black",
-        "category": "heels"
+        "category": "heels",
+        "sale": false
     },
     {
         "productId": 25,
@@ -279,7 +303,8 @@
         "newPrice": 50.00,
         "company": "Adidas",
         "color": "black",
-        "category": "heels"
+        "category": "heels",
+        "sale": false
     },
     {
         "productId": 26,
@@ -290,7 +315,8 @@
         "newPrice": 150.00,
         "company": "Adidas",
         "color": "white",
-        "category": "heels"
+        "category": "heels",
+        "sale": false
     },
     {
         "productId": 27,
@@ -301,7 +327,8 @@
         "newPrice": 50.00,
         "company": "Adidas",
         "color": "black",
-        "category": "heels"
+        "category": "heels",
+        "sale": false
     },
     {
         "productId": 28,
@@ -312,7 +339,8 @@
         "newPrice": 50.00,
         "company": "Adidas",
         "color": "black",
-        "category": "flats"
+        "category": "flats",
+        "sale": false
     }
 ]
 

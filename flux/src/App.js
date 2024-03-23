@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import HomeDisplay from './components/HomeDisplay';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ProductCategory from './components/ProductCategory';
@@ -55,6 +56,7 @@ function App() {
               <>
               <Home />
               <Advertisment />
+              <HomeDisplay />
               </>
             } 
             />
