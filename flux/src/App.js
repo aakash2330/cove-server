@@ -77,10 +77,9 @@ function App() {
               </>
             }
             />
-            <Route path="/collection" element={
+            <Route path="/contact" element={
               <>
                 <Contact />
-                <Advertisment />
               </>
             }
             />
