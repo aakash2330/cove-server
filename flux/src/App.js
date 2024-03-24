@@ -3,7 +3,9 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 //Might want to destructure all of these for less lines when you're done
 import Advertisment from './components/Advertisment';
 import Cart from './components/Cart';
+import Collection from './components/Collection';
 import Comments from './components/Comments';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import HomeDisplay from './components/HomeDisplay';
@@ -64,6 +66,20 @@ function App() {
               <>
                 <Shop />
                 <Products />
+                <Advertisment />
+              </>
+            }
+            />
+            <Route path="/collection" element={
+              <>
+                <Collection />
+                <Advertisment />
+              </>
+            }
+            />
+            <Route path="/collection" element={
+              <>
+                <Contact />
                 <Advertisment />
               </>
             }
