@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../index.css';
 
 const Cart = ({ username }) => {
@@ -95,7 +96,15 @@ const Cart = ({ username }) => {
     //Check if product is defined before accessing its properties
     //Array.isArray is a built in method to check to see if something is an array
     if (!Array.isArray(cartItems) || Object.keys(cartItems).length === 0) {
-        return <p>No products in the cart</p>;
+        return(
+            <>
+            <p>Shopping Cart</p>
+            <p>You have nothing in your shopping cart</p>
+            <Link to={`/shop`}>
+            <button className='bg-black text-white'>Continue Shopping</button>
+            </Link>
+            </>
+        );
     }
 
     return (
