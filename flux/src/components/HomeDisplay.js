@@ -9,30 +9,30 @@ import '../index.css';
 function HomeDisplay() {
     return (
         <div>
-            <div className='flex flex-row'>
-            <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
+            <div className='flex flex-row justify-center pt-14'>
+            <div className='flex-col border-solid border-2 border-blue-400 m-8 w-[550px] h-[748px]'>
                 <img
                     src={sneakers}
                     alt='guy in sneakers'
-                    className='object-cover object-center w-[518px] h-[690px] border-solid border-2 border-red-400'
+                    className='object-cover object-center w-[518px] h-[692.99px] border-solid border-2 border-red-400 px-8'
                 />
                 <p className='text-2xl mt-4'>Sneakers</p>
                 <p className='my-1'>Arrow</p>
             </div>
-            <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
+            <div className='flex-col border-solid border-2 border-blue-400 m-8 w-[550px] h-[748px]'>
                 <img
                     src={heels}
                     alt='girl in heels'
-                    className='object-cover object-center w-[518px] h-[690px]  border-solid border-2 border-red-400'
+                    className='object-cover object-center w-[518px] h-[692.99px]  border-solid border-2 border-red-400 px-8'
                 />
                 <p className='text-2xl mt-4'>Heels</p>
                 <p className='my-1'>Arrow</p>
             </div>
-            <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
+            <div className='flex-col border-solid border-2 border-blue-400 m-8 w-[550px] h-[748px]'>
                 <img
                     src={sandals}
                     alt='girl in sandals'
-                    className='object-cover object-center w-[518px] h-[690px]  border-solid border-2 border-red-400'
+                    className='object-cover object-center w-[518px] h-[692.99px]  border-solid border-2 border-red-400 px-8'
                 />
                 <p className='text-2xl mt-4'>Sandals</p>
                 <p className='my-1'>Arrow</p>

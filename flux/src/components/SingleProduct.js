@@ -90,7 +90,7 @@ const SingleProduct = ({ isLoggedIn, username }) => {
                         <img
                             src={product.img}
                             alt='placeholder template'
-                            className='object-cover object-center max-w-full max-h-full border-solid border-2 border-red-400'
+                            className='object-cover object-center w-[669px] h-[444px] border-solid border-2 border-red-400'
                         />
                         <p className='text-2xl mt-4'>{product.title}</p>
                         <p className='my-1'>${product.newPrice}</p>

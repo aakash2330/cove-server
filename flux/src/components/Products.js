@@ -41,7 +41,7 @@ const Products = () => {
             {products.map((product) => (
                 <li key={product.productId} className='list-none'>
                     <Link to={`/api/product/${product.productId}`}>
-                    <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
+                    <div className='flex-col border-solid border-2 border-blue-400 m-8 w-[669px] h-[444px]'>
                         <img
                             src={product.img}
                             alt='placeholder template'
