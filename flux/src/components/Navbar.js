@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
-//Importing react dom to use portals
+
 
 //Taking the actual state values to use here
 const Navbar = ({ isLoggedIn, username, onLogout }) => {

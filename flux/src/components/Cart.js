@@ -106,10 +106,15 @@ const Cart = ({ username }) => {
             </>
         );
     }
-
+// Add cart item price adding functionalities 
+// probably store the information in an array then add them to do the total score 
+// then checkout button.
     return (
         <>
             <div className='flex flex-wrap border-solid border-2 border-orange-400 m-8'>
+                <div>
+                    <p>Shopping Cart</p>
+                </div>
                 {cartItems.map((item) => (
                     <div key={item.productId} className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
                         <img

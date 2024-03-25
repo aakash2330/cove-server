@@ -109,13 +109,17 @@ const Comments = ({ isLoggedIn, username }) => {
 ) : (
     <p>Login to add a comment</p>
 ) }
+<div>
+    <p>Comments:</p>
+</div>
         <div className='flex flex-wrap border-solid border-2 border-orange-400 m-8'>
             {comments.map((comment) => (
                 <li key={comment._id} className='list-none'>
                     <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
                         {/* <p className='text-2xl mt-4'>{comment.productId}</p> */}
-                        {/* Will add username and convert date posted after user is added */}
+                        <p>{comment.username}</p>
                         <p className='my-1'>{comment.commentDescription}</p>
+                        <p>{comment.createdAt}</p>
                     </div>
                 </li>
             ))}
