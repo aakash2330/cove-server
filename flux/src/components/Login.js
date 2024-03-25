@@ -84,7 +84,7 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
                             name="email"
                             value={email}
                             onChange={handleInputChange}
-                            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            className="w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter email"
                         />
                     </div>
@@ -100,7 +100,7 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
                             name="password"
                             value={password}
                             onChange={handleInputChange}
-                            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            className="w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter password"
                         />
                     </div>
@@ -114,7 +114,7 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
 
                     <button
                         type="submit"
-                        className="inline-block rounded-lg bg-black px-5 py-3 text-sm font-medium text-white"
+                        className="inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2"
                     >
                         Sign in
                     </button>

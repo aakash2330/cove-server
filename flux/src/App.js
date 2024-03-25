@@ -7,6 +7,7 @@ import Collection from './components/Collection';
 import Comments from './components/Comments';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import FooterAd from './components/FooterAd';
 import Home from './components/Home';
 import HomeDisplay from './components/HomeDisplay';
 import Login from './components/Login';
@@ -45,7 +46,7 @@ function App() {
   return (
     //Allowing router to work across app.js
     <Router>
-      <div className="App font-abc text-gray-900 bg-white">
+      <div className="App font-abc subpixel-antialiased text-gray-900 bg-white">
         <header className="App-header">
           {/* passing onLogout prop to Navbar to utilize the logout func */}
           <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
@@ -59,6 +60,7 @@ function App() {
               <Home />
               <Advertisment />
               <HomeDisplay />
+              <FooterAd />
               </>
             } 
             />
@@ -67,13 +69,13 @@ function App() {
                 <Shop />
                 <Products />
                 <Advertisment />
+                <FooterAd />
               </>
             }
             />
             <Route path="/collection" element={
               <>
                 <Collection />
-                <Advertisment />
               </>
             }
             />

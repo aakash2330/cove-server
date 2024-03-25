@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      flexGrow: {
+        2: '2'
+      }
+    },
     fontFamily: {
       abc: ["acumin-pro", "sans-serif"],
       pop: ["poppins", "sans-serif"],

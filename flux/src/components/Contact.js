@@ -3,9 +3,9 @@ import '../index.css';
 
 function Contact() {
    return(
-    <div>
-    <div className='flex flex-col w-1/2'>
-        <h1>Contact Us</h1>
+    <div className='flex flex-row mx-44'>
+    <div className='flex flex-col w-1/2 mt-32'>
+        <h1 className='mb-8'>Contact Us</h1>
         <p>We're dedicated to providing you with the best shopping experience for all 
             your footwear needs. Whether you're browsing for the perfect pair of sneakers, 
             elegant heels, or rugged boots, we're here to help. Your satisfaction is our priority,
@@ -27,7 +27,7 @@ function Contact() {
           name="name"
           id="name"
           placeholder="Full Name"
-          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+          className="w-full border border-[#e0e0e0] text-[#6B7280] bg-white py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
       </div>
       <div className="mb-5">
