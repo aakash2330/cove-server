@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom';
 import '../index.css';
-// import React, { useState } from 'react';
-// import Women from './Women';
 
 
 function Shop() {
-//     const [link, setLink] = useState(false);
-    
-//     const handleCategories= () => {
-//      setLink(!link);
-//     }
 
     return(
         <div className='flex border-b border-slate-300 justify-center m-16 py-16 text-base'>
@@ -39,8 +32,8 @@ function Shop() {
             </div>
             <div className='border-r border-slate-300 py-1'></div>
             <div>
-            <Link to={`/api/product/category/heels`}>
-            <p className='mx-7'>Heels</p>
+            <Link to={`/api/product/category/boots`}>
+            <p className='mx-7'>Boots</p>
             </Link>
             </div>
         </div>

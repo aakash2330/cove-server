@@ -2,6 +2,7 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../../models/User');
+// const { Logout }= require('../../../src/components/Logout');
 
 const {authenticate, secretKey } = require('../../middleware/Auth');
 
@@ -54,6 +55,9 @@ router.post('/login', async (req, res, next) => {
         const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '1 hour'
         });
+
+        //Logging out if the token is expired
+        // if(token)
         //Getting the username and the token 
         res.json({ token, username: user.username });
 

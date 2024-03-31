@@ -5,25 +5,25 @@ const { Schema, model } = require('mongoose');
 const productSchema = new Schema({
     productId: { type: Number, required: true, auto: true },
     img: String, //String is shorthand for {type: String}
-    title: { type: String, required: true},
+    title: { type: String, required: true },
     description: String,
-    prevPrice: Number,
-    newPrice: { type: Number, required: true},
+    price: { type: Number, required: true },
     company: String,
     color: String,
     category: String,
+    sale: Boolean,
     //each product can have multiple users
-    users: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     //each product can have multiple comments
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 },
-{
-    toJSON: {
-        getters: true,
-    },
-});
+    {
+        toJSON: {
+            getters: true,
+        },
+    });
 
 //Initializing the Product Model
-const Product= model('Product', productSchema);
+const Product = model('Product', productSchema);
 
 module.exports = Product;

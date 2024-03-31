@@ -36,17 +36,19 @@ router.get('/cart', authenticate, async (req, res) => {
 
 //Post new products to the users cart
 router.post('/addCart', authenticate, async (req, res) => {
-    const { productId, img, title, newPrice, username } = req.body; //Extracting product information from
+    const { productId, img, title, price, size, quantity, username } = req.body; //Extracting product information from
     console.log('Product ID in route:', productId);
     console.log('IMG in route:', img);
     console.log('title in route:', title);
-    console.log('Price in route:', newPrice);
+    console.log('Price in route:', price);
+    console.log('Size in route:', size);
+    console.log('Quantity in route:', quantity);
     console.log('username in route:', username);
     const isProductIdANum = req.body.productId; // Extract productId from req.body
 console.log('Type of productId:', typeof isProductIdANum);
 
     // Check if they exist, I don't want to go further if they don't
-    if (!productId || !img || !title || !newPrice || !username) {
+    if (!productId || !img || !title || !price || !size || !quantity || !username) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -61,14 +63,15 @@ console.log('Type of productId:', typeof isProductIdANum);
         //Check for existing cart item
         //The productId being produced from req.body is a string so we converted it back to int
         const existingCartItem = user.cart.find(item => item.productId === parseInt(productId));
+        const existingSize = user.cart.find(item => item.productSize === parseInt(size));
 
-        if (existingCartItem) {
+        if (existingCartItem && existingSize) {
             //Changing the quantity value instead of adding another object
             console.log('Existing item found!: ', existingCartItem);
             existingCartItem.quantity += 1;
         } else {
             //Adding the product to the cart
-            user.cart.push({ productId, productImage: img, productTitle: title, productPrice: newPrice });
+            user.cart.push({ productId, productImage: img, productTitle: title, productPrice: price, productSize: size, quantity: quantity });
         }
 
         await user.save();

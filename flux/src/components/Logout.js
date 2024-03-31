@@ -20,7 +20,7 @@ const Logout = ({ setIsLoggedIn, setUsername}) => {
 
             if (!token) {
                 //After logout redirect to the home page
-                navigate('/home');
+                navigate('/');
             } else {
                 //Handle failed login
                 const errorData = await response.json();
