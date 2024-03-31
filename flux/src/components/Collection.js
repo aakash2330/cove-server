@@ -37,24 +37,21 @@ function Collection() {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center  border-solid border-2 border-blue-500'>
+        <div className='flex flex-col items-center justify-center'>
         <div>
-            <p>New Arrivals</p>
+            <p className='text-xl font-semibold pt-4 uppercase'>Embrace your creativity</p>
         </div>
         <div className='flex flex-row items-center justify-center'>
-            <button className='bg-gray-300 text-black text-lg py-2 px-2' onClick={subOne}>&lt;</button>
-            <div className='border-b border-slate-300 mt-24 mb-56 w-1/2'>
+            <button className=' inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mx-2' onClick={subOne}>&lt;</button>
+            <div className='mt-12 mb-14 w-1/2'>
                 <img
                     src={images[currentIndex]}
                     alt='collection images'
-                    className='object-fit h-[691.219px] w-[810px] border-solid border-2 border-red-400'
+                    className='object-fit h-[691.219px] w-[810px]'
                 />
-                <p>Focused on high quality manufacturing and design</p>
+                <p className='pt-4 text-base'>Focused on high quality manufacturing and design</p>
             </div>
-            <button className='bg-gray-300 text-black text-lg py-2 px-2' onClick={addOne}>&gt;</button>
-        </div>
-        <div>
-        <p>Coming soon</p>
+            <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mx-2' onClick={addOne}>&gt;</button>
         </div>
 </div>
     );

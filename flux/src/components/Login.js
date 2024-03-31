@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 //Updating the state values here for the login info
-const Login = ({ setIsLoggedIn, setUsername}) => {
+const Login = ({ setIsLoggedIn, setUsername }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
                 const responseData = await response.json();
                 const { token, username } = responseData;
                 console.log('Response Data: ', responseData);
-                setIsLoggedIn(true); 
+                setIsLoggedIn(true);
                 //setting the state of username to the associated username to use in Navbar
                 setUsername(username);
                 console.log('Lets see the value of Username: ', username);
@@ -41,7 +42,7 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
                 localStorage.setItem('username', username);
 
                 //After login redirect to the home page
-                navigate('/home');
+                navigate('/');
             } else {
                 //Handle failed login
                 const errorData = await response.json();
@@ -65,13 +66,14 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
 
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-lg text-center">
+            <div className="mx-auto max-w-lg text-center flex flex-col items-center">
                 <h1 className="text-2xl font-bold sm:text-3xl">Shop with us today!</h1>
 
-                <p className="mt-4 text-gray-500">
-                    Put a Shopping bag here.
+                <p className="mt-4">
+                    <HiOutlineShoppingBag size={40} />
                 </p>
             </div>
+
 
             <form onSubmit={handleSubmit} method="POST" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                 <div>
@@ -112,12 +114,14 @@ const Login = ({ setIsLoggedIn, setUsername}) => {
                         <a className="underline" href="/auth/register">Sign up</a>
                     </p>
 
-                    <button
-                        type="submit"
-                        className="inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2"
-                    >
-                        Sign in
-                    </button>
+                    <a href='/auth/login'>
+                        <button
+                            type="submit"
+                            className="inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2"
+                        >
+                            Sign in
+                        </button>
+                    </a>
                 </div>
             </form>
         </div>

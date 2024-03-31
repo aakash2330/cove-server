@@ -45,6 +45,9 @@ app.use(express.urlencoded({extended: false }));
 // Serve static files from the build folder (where react would create static files)
 app.use(express.static(path.join(__dirname, '../build')));
 
+// Serve static files from the 'public' folder (for other static files)
+app.use(express.static(path.join(__dirname, '../public')));
+
 //Using the controller routes
 app.use(require('./controllers/'));
 

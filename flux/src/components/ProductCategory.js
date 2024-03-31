@@ -11,6 +11,7 @@ const ProductCategory = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // if(products.length === 0) {
                 const response = await fetch(`http://localhost:3001/api/product/category/${category}`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
@@ -18,6 +19,7 @@ const ProductCategory = () => {
                 const data = await response.json();
                 console.log('Data from API:', data); 
                 setProducts(data);
+            // }
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setError('Could not fetch data');
@@ -44,18 +46,20 @@ const ProductCategory = () => {
     }
 
     return (
-        <div className='flex flex-wrap border-solid border-2 border-orange-400 m-8'>
+        <div className='flex flex-wrap justify-evenly m-4'>
             {products.map((product) => (
                 <li key={product.productId} className='list-none'>
                     <Link to={`/api/product/${product.productId}`}>
-                    <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
+                    <div className='flex-col m-4 w-[332px] h-[434px]'>
+                    <div className='w-[332px] h-[330px] bg-[#efefef]'>
                         <img
-                            src={product.img}
+                            src={`/${product.img}`}
                             alt='placeholder template'
-                            className='object-cover object-center max-w-full max-h-full border-solid border-2 border-red-400'
+                            className='object-scale-down object-center w-[330px] h-[330px]'
                         />
-                        <p className='text-2xl mt-4'>{product.title}</p>
-                        <p className='my-1'>${product.newPrice}</p>
+                        </div>
+                        <p className='text-base mt-4 font-light'>{product.title}</p>
+                        <p className='my-1 text-sm font-semibold'>${product.price}.00</p>
                     </div>
                 </Link>
                 </li>

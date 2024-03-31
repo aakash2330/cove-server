@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 //Updating the state values here for the register
-const Register = ({ setIsLoggedIn, setUsername, username}) => {
+const Register = ({ setIsLoggedIn, setUsername, username }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ const Register = ({ setIsLoggedIn, setUsername, username}) => {
                 const responseData = await response.json();
                 const { token, username } = responseData;
                 console.log('Response Data: ', responseData);
-                setIsLoggedIn(true); 
+                setIsLoggedIn(true);
                 //setting the state of username to the associated username to use in Navbar
                 setUsername(username);
                 console.log('Lets see the value of Username: ', username);
@@ -69,11 +70,11 @@ const Register = ({ setIsLoggedIn, setUsername, username}) => {
 
     return (
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-lg text-center">
+            <div className="mx-auto max-w-lg text-center flex flex-col items-center">
                 <h1 className="text-2xl font-bold sm:text-3xl">First time shopping?</h1>
 
-                <p className="mt-4 text-gray-500">
-                    Put a Shopping bag here.
+                <p className="mt-4">
+                    <HiOutlineShoppingBag size={40} />
                 </p>
             </div>
 

@@ -10,3 +10,10 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+/* Showing an underline for the page you are currently on Navbar */
+
+.active-link {
+    border-bottom-color: black;
+}

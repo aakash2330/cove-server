@@ -21,11 +21,13 @@ const userSchema = new Schema({
         minLength: [4, 'Weak password'],
     },
     //Each user has a cart that can store multiple products
+    //Added productSize but its not implemented yet
     cart: [{
         productId: { type: Number, ref: 'Product' },
         productTitle: { type: String },
         productImage: { type: String },
         productPrice: { type: Number },
+        productSize: { type: Number },
         quantity: {type: Number, default: 1 }
     }],
 },

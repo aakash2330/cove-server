@@ -2,164 +2,236 @@
   
   {
     "productId": 1,
-    "username": "Brownie789",
-    "commentDescription": "The Nike Air Vapormax Plus in red is a showstopper! Bold and trendy, these sneakers make a statement wherever you go. Highly recommended.",
+    "username": "AliceSmith22",
+    "commentDescription": "These sneakers are so stylish and comfortable!",
     "createdAt": "2024-02-20"
   },
   {
     "productId": 2,
-    "username": "JohnDoe84",
-    "commentDescription": "The vibrant green Nike Waffle One Sneaker is my new favorite! Comfortable and stylish, perfect for everyday activities.",
+    "username": "EmmaJohnson",
+    "commentDescription": "Love the design and quality of these Jordans!",
     "createdAt": "2024-02-25"
   },
   {
     "productId": 3,
-    "username": "EmmaJohnson",
-    "commentDescription": "Nike Running Shoe in sleek black is my go-to for daily runs. Optimal performance and comfort make these a must-have for runners!",
+    "username": "ChrisTaylor",
+    "commentDescription": "Classic Air Jordans with a retro twist, absolutely love them!",
     "createdAt": "2024-03-02"
   },
   {
     "productId": 4,
-    "username": "ChrisTaylor",
-    "commentDescription": "These green Flat Slip On Pumps from Vans are so cute! Perfect for casual occasions, and they offer both comfort and fashion.",
+    "username": "JohnDoe84",
+    "commentDescription": "These boots are perfect for winter, so cozy and warm!",
     "createdAt": "2024-03-08"
   },
   {
     "productId": 5,
-    "username": "Brownie789",
-    "commentDescription": "The Knit Ballet Flat from Adidas in classic black is versatile and elegant. Ideal for both casual and semi-formal occasions.",
+    "username": "DavidBrown",
+    "commentDescription": "The Birkenstock slides are my go-to for summer comfort.",
     "createdAt": "2024-03-15"
   },
   {
     "productId": 6,
-    "username": "EmmaJohnson",
-    "commentDescription": "Loafer Flats from Vans in pristine white are so comfortable and stylish. They complete my casual yet sophisticated look perfectly.",
+    "username": "DavidBrown",
+    "commentDescription": "Super sleek and lightweight, perfect for everyday wear.",
     "createdAt": "2024-03-21"
   },
   {
     "productId": 7,
-    "username": "ChrisTaylor",
-    "commentDescription": "Nike Zoom Freak in vibrant green is a game-changer! High-performance sneakers with a bold look, perfect for athletic pursuits.",
+    "username": "EmmaJohnson",
+    "commentDescription": "Dr. Martens never disappoint, these boots are badass!",
     "createdAt": "2024-03-28"
   },
   {
     "productId": 8,
-    "username": "JohnDoe84",
-    "commentDescription": "Nike Men's Sneaker in cool blue is my new favorite. Comfortable and stylish, these sneakers from Adidas are a versatile footwear option.",
+    "username": "ChrisTaylor",
+    "commentDescription": "Great sneakers for active kids, my son loves them.",
     "createdAt": "2024-04-03"
   },
   {
     "productId": 9,
-    "username": "EmmaJohnson",
-    "commentDescription": "PUMA BLACK-OCE sneakers in trendy green are a fashion statement! Perfect blend of style and comfort for everyday adventures.",
+    "username": "JohnDoe84",
+    "commentDescription": "Comfy slides for post-workout relaxation.",
     "createdAt": "2024-04-10"
   },
   {
     "productId": 10,
-    "username": 5,
-    "commentDescription": "Pacer Future Sneaker in bold red is my go-to for a stylish and comfortable stride. Love the futuristic design!",
+    "username": "JohnDoe84",
+    "commentDescription": "Clean design, perfect for casual outings.",
     "createdAt": "2024-04-18"
   },
   {
     "productId": 11,
-    "username": "AliceSmith22",
-    "commentDescription": "Unisex-Adult Super sneakers from Puma in classic black are my everyday go-to. Comfortable and stylish for casual and sporty occasions.",
+    "username": "ChrisTaylor",
+    "commentDescription": "Love the flight-inspired design, very unique!",
     "createdAt": "2024-04-25"
   },
   {
     "productId": 12,
-    "username": "EmmaJohnson",
-    "commentDescription": "Roma Basic Sneaker in pristine white is a timeless and clean style from Puma. Perfect for everyday looks.",
+    "username": "DavidBrown",
+    "commentDescription": "Bold colorway, these Jordans definitely stand out.",
     "createdAt": "2024-05-02"
   },
   {
     "productId": 13,
-    "username": "ChrisTaylor",
-    "commentDescription": "Pacer Future Doubleknit sneakers from Puma in sleek black are my new favorites. Stylish and comfortable for everyday wear.",
+    "username": "AliceSmith22",
+    "commentDescription": "Versatile sandals that go with everything!",
     "createdAt": "2024-05-09"
   },
   {
     "productId": 14,
-    "username": "Brownie789",
-    "commentDescription": "Fusion Evo Golf Shoe from Puma in vibrant green is perfect for hitting the greens in style. Fashion meets functionality!",
+    "username": "EmmaJohnson",
+    "commentDescription": "Retro vibes with modern comfort, a must-have!!",
     "createdAt": "2024-05-16"
   },
   {
     "productId": 15,
-    "username": "JohnDoe84",
-    "commentDescription": "Rainbow Chex Skate flats from Vans in bold red are my go-to for skateboarding sessions. Comfortable and fashionable.",
+    "username": "AliceSmith22",
+    "commentDescription": "Comfortable and stylish, perfect for long walks.",
     "createdAt": "2024-05-22"
   },
   {
     "productId": 16,
-    "username": "EmmaJohnson",
-    "commentDescription": "Low-Top Trainers from Vans in classic white are perfect for a laid-back and comfortable look. Love them!",
+    "username": "JohnDoe84",
+    "commentDescription": "Classic flats for everyday wear, love the simplicity.",
     "createdAt": "2024-05-29"
   },
   {
     "productId": 17,
-    "username": "AliceSmith22",
-    "commentDescription": "Vans Unisex Low-Top sandals in cool blue are versatile and stylish. Comfort meets fashion for casual outings.",
+    "username": "DavidBrown",
+    "commentDescription": "Iconic Air Max design with unbeatable comfort.",
     "createdAt": "2024-06-05"
   },
   {
     "productId": 18,
-    "username": "ChrisTaylor",
-    "commentDescription": "Classic Bandana Sneakers from Nike in bold black offer a timeless and trendy look. Love the classic style!",
+    "username": "AliceSmith22",
+    "commentDescription": "Revolutionary cushioning and sleek style!",
     "createdAt": "2024-06-12"
   },
   {
     "productId": 19,
-    "username": "AliceSmith22",
-    "commentDescription": "Chunky High Heel from Vans in classic black adds a touch of sophistication to any look. Love the elevation!",
+    "username": "ChrisTaylor",
+    "commentDescription": "Effortlessly chic, perfect for a laid-back look.",
     "createdAt": "2024-06-19"
   },
   {
     "productId": 20,
-    "username": "Brownie789",
-    "commentDescription": "Slip On Stiletto High Heel from Puma in sleek black is perfect for a stylish and comfortable stride. Love these heels!",
+    "username": "AliceSmith22",
+    "commentDescription": "Cool and comfortable slides for summer.",
     "createdAt": "2024-06-26"
   },
   {
     "productId": 21,
-    "username": "JohnDoe84",
-    "commentDescription": "DREAM PAIRS Court Shoes from Nike in bold red are perfect for formal events. Stylish and comfortable, they complete my look.",
+    "username": "ChrisTaylor",
+    "commentDescription": "Simple yet stylish slides for everyday wear.",
     "createdAt": "2024-07-03"
   },
   {
     "productId": 22,
-    "username": "AliceSmith22",
-    "commentDescription": "Nike Air Vapormax Plus in striking red is a showstopper! Bold and trendy, making a statement wherever you go.",
+    "username": "DavidBrown",
+    "commentDescription": "Urban style meets natural elements, very cool!",
     "createdAt": "2024-07-10"
   },
   {
     "productId": 23,
-    "username": "Brownie789",
-    "commentDescription": "Low Mid Block Heels from Nike in classic black are my go-to for formal occasions. Stylish and comfortable!",
+    "username": "ChrisTaylor",
+    "commentDescription": "Classic Dunks with a retro twist, love them!",
     "createdAt": "2024-07-17"
   },
   {
     "productId": 24,
-    "username": "AliceSmith22",
-    "commentDescription": "Chunky High Heel from Adidas in classic black adds a touch of sophistication to any look. Love the elevation!",
+    "username": "JohnDoe84",
+    "commentDescription": "Simple and comfortable slides for lounging.",
     "createdAt": "2024-07-24"
   },
   {
     "productId": 25,
-    "username": "AliceSmith22",
-    "commentDescription": "Amore Fashion Stilettos from Adidas in pristine white are perfect for formal occasions. Stylish and comfortable!",
+    "username": "DavidBrown",
+    "commentDescription": "Responsive cushioning and sleek design, perfect for workouts.",
     "createdAt": "2024-07-31"
   },
   {
     "productId": 26,
-    "username": "Brownie789",
-    "commentDescription": "Bridal Sandals Glitter from Adidas in classic black add a touch of sparkle and elegance to my special day. Love them!",
+    "username": "AliceSmith22",
+    "commentDescription": "Sturdy boots for outdoor adventures, highly recommend!",
     "createdAt": "2024-08-07"
   },
   {
     "productId": 27,
-    "username": "AliceSmith22",
-    "commentDescription": "Wedding Prom Bridal flats from Adidas in classic black are perfect for special occasions. Comfortable and stylish!",
+    "username": "EmmaJohnson",
+    "commentDescription": "Timeless boots with premium quality, love the brand!",
     "createdAt": "2024-08-14"
+  },
+  {
+    "productId": 28,
+    "username": "JohnDoe84",
+    "commentDescription": "Great sandals for hiking and outdoor activities.",
+    "createdAt": "2024-08-15"
+  },
+  {
+    "productId": 29,
+    "username": "EmmaJohnson",
+    "commentDescription": "Durable sandals perfect for summer adventures.",
+    "createdAt": "2024-08-16"
+  },
+  {
+    "productId": 30,
+    "username": "AliceSmith22",
+    "commentDescription": "Classic Timberland boots, rugged and reliable.",
+    "createdAt": "2024-07-14"
+  },
+  {
+    "productId": 31,
+    "username": "EmmaJohnson",
+    "commentDescription": "Cozy and stylish boots for cold days.",
+    "createdAt": "2024-09-14"
+  },
+  {
+    "productId": 32,
+    "username": "EmmaJohnson",
+    "commentDescription": "Luxurious comfort in a shorter silhouette.",
+    "createdAt": "2024-08-12"
+  },
+  {
+    "productId": 33,
+    "username": "JohnDoe84",
+    "commentDescription": "Comfortable clogs for casual wear, love them!",
+    "createdAt": "2024-08-11"
+  },
+  {
+    "productId": 34,
+    "username": "EmmaJohnson",
+    "commentDescription": "Chic clogs with a stylish design, perfect for everyday.",
+    "createdAt": "2024-08-08"
+  },
+  {
+    "productId": 35,
+    "username": "DavidBrown",
+    "commentDescription": "Glamorous boots with cozy warmth, perfect for winter.",
+    "createdAt": "2024-08-03"
+  },
+  {
+    "productId": 36,
+    "username": "JohnDoe84",
+    "commentDescription": "Classic UGG boots with a versatile style.",
+    "createdAt": "2024-01-01"
+  },
+  {
+    "productId": 37,
+    "username": "EmmaJohnson",
+    "commentDescription": "Comfortable sandals for everyday wear, highly recommend!",
+    "createdAt": "2024-11-05"
+  },
+  {
+    "productId": 38,
+    "username": "ChrisTaylor",
+    "commentDescription": "Luxurious sheepskin boots, a winter essential.",
+    "createdAt": "2024-04-10"
+  },
+  {
+    "productId": 39,
+    "username": "ChrisTaylor",
+    "commentDescription": "Stylish and cozy boots with a unique braided detail.",
+    "createdAt": "2024-05-19"
   }
 ]

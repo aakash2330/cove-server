@@ -8,8 +8,8 @@ const Comments = ({ isLoggedIn, username }) => {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
-    //Retrieving commments from the database
+
+    //Retrieving comments from the database
     const fetchData = async () => {
         try {
             const response = await fetch(`http://localhost:3001/api/comment/${productId}`);
@@ -17,7 +17,7 @@ const Comments = ({ isLoggedIn, username }) => {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
             const data = await response.json();
-            console.log('Comment Data from API:', data); 
+            console.log('Comment Data from API:', data);
             setComments(data.comments);
         } catch (error) {
             console.error('Error fetching data:', error.message);
@@ -31,49 +31,49 @@ const Comments = ({ isLoggedIn, username }) => {
         fetchData();
     }, []); // Empty dependency array ensures the effect runs only once on mount
 
- // Update state on input change
- const handleInputChange = (e) => {
-    if (e.target.name === 'newComment') {
-        setNewComment(e.target.value);
-        console.log("Adding comment now: ", newComment);
-    } 
-};
-     // Handling the submission
-     const createComment = async (e) => {
+    // Update state on input change
+    const handleInputChange = (e) => {
+        if (e.target.name === 'newComment') {
+            setNewComment(e.target.value);
+            console.log('Adding comment now: ', newComment);
+        }
+    };
+    // Handling the submission
+    const createComment = async (e) => {
         e.preventDefault();
         //API request to post comment if logged in
         try {
-           const response = await fetch('http://localhost:3001/api/comment/newComment', {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({
-                   username,
-                   newComment,
-                   productId,
-               }),
-           });
-   
-           if (response.ok) {
-               const responseData = await response.json();
-               console.log('Response Data: ', responseData);
-               
-               
-               //Need to refresh the component
-               fetchData(); //Grabbing the updated information from the db
-               setNewComment('');
-              
-           } else {
-               //Handle failed login
-               const errorData = await response.json();
-               console.error('Failed To set Comment', errorData.message);
-           }
-       } catch (error) {
-           console.error('Error comment creation: ', error.message);
-       }
+            const response = await fetch('http://localhost:3001/api/comment/newComment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    newComment,
+                    productId,
+                }),
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log('Response Data: ', responseData);
+
+
+                //Need to refresh the component
+                fetchData(); //Grabbing the updated information from the db
+                setNewComment('');
+
+            } else {
+                //Handle failed login
+                const errorData = await response.json();
+                console.error('Failed To set Comment', errorData.message);
+            }
+        } catch (error) {
+            console.error('Error comment creation: ', error.message);
+        }
     }
-   
+
 
     //Come back to this. Make this do something else when loading
     if (loading) {
@@ -86,44 +86,47 @@ const Comments = ({ isLoggedIn, username }) => {
 
     return (
         <>
-        { isLoggedIn ? (
-            
-        <form onSubmit={createComment} method="POST" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+            <div>
+                <p className='ml-8'>Comments:</p>
+            </div>
+            {isLoggedIn ? (
                 <div>
-                    <label htmlFor="userComment" className="sr-only">Add A Comment</label>
-
-                    <div className="relative">
-                        <input
-                            type="text"
-                            id="newComment"
-                            name="newComment"
-                            value={newComment}
-                            onChange={handleInputChange}
-                            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter Comment"
-                        />
+                <form onSubmit={createComment} method='POST' className='ml-8 mb-0 mt-8 max-w-md space-y-4'>
+                    <div>
+                        <div className='relative'>
+                            <input
+                                type='text'
+                                id='newComment'
+                                name='newComment'
+                                value={newComment}
+                                onChange={handleInputChange}
+                                className='w-full border border-gray-500 p-4 pe-12 text-sm shadow-sm'
+                                placeholder='Enter Comment'
+                            />
+                        </div>
                     </div>
-                </div>
                 </form>
-              
-) : (
-    <p>Login to add a comment</p>
-) }
-<div>
-    <p>Comments:</p>
-</div>
-        <div className='flex flex-wrap border-solid border-2 border-orange-400 m-8'>
-            {comments.map((comment) => (
-                <li key={comment._id} className='list-none'>
-                    <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
-                        {/* <p className='text-2xl mt-4'>{comment.productId}</p> */}
-                        <p>{comment.username}</p>
-                        <p className='my-1'>{comment.commentDescription}</p>
-                        <p>{comment.createdAt}</p>
-                    </div>
-                </li>
-            ))}
-        </div>
+                </div>
+            ) : (
+                <p className='ml-8'>Login to add a comment</p>
+            )}
+            <div className='flex flex-col m-8'>
+                {comments.map((comment) => (
+                    <li key={comment._id} className='list-none'>
+                        <div class='relative grid grid-cols-1 gap-4 p-4 mb-8 border border-gray-600'>
+                            <div class='relative flex gap-4'>
+                                    <div class='flex flex-col w-full'>
+                                        <div class='flex flex-row justify-between'>
+                                            <p class='relative text-xl whitespace-nowrap truncate overflow-hidden'>{comment.username}</p>
+                                        </div>
+                                        <p class='text-gray-600 text-sm'>{comment.createdAt.slice(0,10)}</p>
+                                    </div>
+                            </div>
+                            <p class='mt-4 text-base font-light text-gray-600'>{comment.commentDescription}</p>
+                        </div>
+                    </li>
+                ))}
+            </div>
         </>
     );
 }

@@ -19,9 +19,9 @@ function Footer() {
 
         {/* Social Media Links */}
         <div className='flex grow flex-col ml-20 h-[206px] w-[94px] underline underline-offset-8'>
-            <p className='pb-2'>Twitter</p>
-            <p className='pb-2'>Instagram</p>
-            <p className='pb-2'>Youtube</p>
+            <a href='https://twitter.com/?lang=en' className='pb-2'>Twitter</a>
+            <a href='https://www.instagram.com/' className='pb-2'>Instagram</a>
+            <a href='https://www.youtube.com/' className='pb-2'>Youtube</a>
         </div>
 
         {/* Sign Up Section */}
@@ -30,7 +30,7 @@ function Footer() {
                 <p className='text-lg'>Sign up to receive news and updates</p>
             </div>
             <div className='flex flex-row justify-center items-center mb-4'>
-                <input type='email' name='email' id='email' autoComplete='email' placeholder='Email' className='border-slate-400 py-3.5 px-6'/>
+                <input type='email' name='email' id='email' placeholder='Email' className='border-slate-400 py-3.5 px-6 text-black'/>
                 <button type='button' className='inline-block font-medium bg-slate-800 text-white hover:bg-slate-600 py-3.5 px-6 ml-2'>Sign Up</button>
             </div>
         </div>

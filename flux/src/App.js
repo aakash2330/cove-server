@@ -13,6 +13,7 @@ import HomeDisplay from './components/HomeDisplay';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ProductCategory from './components/ProductCategory';
+import ProductSale from './components/ProductSale';
 import Products from './components/Products';
 import Register from './components/Register';
 import Shop from './components/Shop';
@@ -89,7 +90,15 @@ function App() {
               <>
                 <Shop />
                 <ProductCategory />
-                <Advertisment />
+                <FooterAd />
+              </>
+            }
+            />
+            <Route path="/api/product/category/sale" element={
+              <>
+                <Shop />
+                <ProductSale />
+                <FooterAd />
               </>
             }
             />

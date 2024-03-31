@@ -5,12 +5,14 @@ import '../index.css';
 const SingleProduct = ({ isLoggedIn, username }) => {
     const { productId } = useParams();
     const [product, setProduct] = useState({});
+    const [counter, setCounter] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // if(product.length === 0) {
                 const response = await fetch(`http://localhost:3001/api/product/${productId}`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
@@ -18,6 +20,7 @@ const SingleProduct = ({ isLoggedIn, username }) => {
                 const data = await response.json();
                 console.log('Data from API:', data);
                 setProduct(data);
+                // }
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setError('Could not fetch data');
@@ -29,7 +32,7 @@ const SingleProduct = ({ isLoggedIn, username }) => {
         fetchData();
     }, [productId]);
 
-    const addToCart = async () => {
+    const addToCart = async (productData) => {
         try {
             const token = localStorage.getItem('token');
             console.log('Getting token from singleProduct: ', token);
@@ -37,6 +40,9 @@ const SingleProduct = ({ isLoggedIn, username }) => {
             console.log('Seeing if username has a value: ', showUserName);
             const showProductId = productId;
             console.log('Seeing if product id has a value: ', showProductId);
+
+            const selectSizeEl = document.getElementById('shoe-size');
+            const size = selectSizeEl.value;
 
             if (!token) {
                 throw new Error('Authentication token not found');
@@ -50,9 +56,11 @@ const SingleProduct = ({ isLoggedIn, username }) => {
                 },
                 body: JSON.stringify({
                     productId,
-                    img: product.img,
-                    title: product.title,
-                    newPrice: product.newPrice,
+                    img: productData.img,
+                    title: productData.title,
+                    price: productData.price,
+                    size: size,
+                    quantity: counter,
                     username,
                 }),
             });
@@ -69,6 +77,16 @@ const SingleProduct = ({ isLoggedIn, username }) => {
         }
     };
 
+    const addCounter = () => {
+            setCounter(prevCounter => prevCounter + 1);
+    }
+
+    const subCounter = () => {
+        if (counter > 0) {
+            setCounter(prevCounter => prevCounter - 1);
+        }
+    }
+
     //Come back to this. Make this do something else when loading
     if (loading) {
         return <p>Loading Shoes...</p>;
@@ -79,65 +97,67 @@ const SingleProduct = ({ isLoggedIn, username }) => {
     }
 
     //Check if product is defined before accessing its properties
+    //probably return an error 404 page right here
     if (!product || Object.keys(product).length === 0) {
         return <p>Product not found</p>;
     }
     return (
         <>
-            <div className='flex flex-row'>
+            {/*displaying shop - title */}
+            <div className='flex flex-row mt-8'>
                 <Link to={`/shop`}>
-                    <p className='ml-8 pr-2'>Shop</p>
+                    <p className='ml-8 pr-2 text-base font-light'>Shop</p>
                 </Link>
-                <p>&gt;</p>
-                <p className='px-2'>{product.title}</p>
-
+                <p className='text-base font-light'>&gt;</p>
+                <p className='px-2 text-base font-light'>{product.title}</p>
             </div>
-            <div className='flex flex-row border-solid border-2 border-orange-400 m-8'>
+            {/*product picture */}
+            <div className='flex flex-row m-8'>
 
-                <div className='flex-col border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
+                <div className='grow m-8 w-[669px] h-[444px] bg-[#efefef]'>
                     <img
-                        src={product.img}
+                        src={`/${product.img}`}
                         alt='placeholder template'
-                        className='object-cover object-center w-[669px] h-[444px] border-solid border-2 border-red-400'
+                        className='object-contain object-center w-full h-full'
                     />
                 </div>
-
-                <div className='h-[708px] w=[535px]'>
-                    <p className='text-2xl mt-4'>{product.title}</p>
-                    <p className='my-1'>${product.newPrice}</p>
-                    <p className='my-1'>{product.description}</p>
-                    <p>----</p>
-                    <p>Size Guide</p>
+                {/* product information */}
+                <div className='flex-col grow m-8'>
+                    <p className='text-xl font-light mt-4 mb-2'>{product.title}</p>
+                    <p className='my-2 text-lg font-semibold'>${product.price}.00</p>
+                    <p className='my-2 text-sm font-light'>{product.description}</p>
+                    <p className='my-1'>__</p>
+                    <p className='text-sm font-light underline my-1'>Size Guide</p>
                     <div className='flex flex-col'>
-                        <label for="shoe-size"> Size: </label>
-                        <select name="shoe-size" id="shoe-size" className='border-2 border-black'>
-                            <option value="select-size">Select Size</option>
-                            <option value="shoe-five">5</option>
-                            <option value="shoe-six">6</option>
-                            <option value="shoe-seven">7</option>
-                            <option value="shoe-eight">8</option>
-                            <option value="shoe-nine">9</option>
-                            <option value="shoe-ten">10</option>
-                            <option value="shoe-eleven">11</option>
-                            <option value="shoe-twelve">12</option>
-                            <option value="shoe-thirteen">13</option>
-                            <option value="shoe-fourteen">14</option>
+                        <label for='shoe-size' className='font-semibold text-sm my-1'> Size: </label>
+                        <select name='shoe-size' id='shoe-size' className='border border-black text-sm font-semibold my-1'>
+                            <option value='0'>Select Size</option>
+                            <option value='5'>5</option>
+                            <option value='6'>6</option>
+                            <option value='7'>7</option>
+                            <option value='8'>8</option>
+                            <option value='9'>9</option>
+                            <option value='10'>10</option>
+                            <option value='11'>11</option>
+                            <option value='12'>12</option>
+                            <option value='13'>13</option>
+                            <option value='14'>14</option>
                         </select>
                     </div>
                     <div className='flex flex-row'>
-                        <button className='bg-black text-white'>-</button>
-                        <p>Quantity:</p>
-                        <button className='bg-black text-white'>+</button>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1 px-3 mt-4' onClick={subCounter}>-</button>
+                        <p className='p-1 mt-4'>Quantity: {counter}</p>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1 px-3 mt-4' onClick={addCounter}>+</button>
                     </div>
 
                     {isLoggedIn ? (
                         <>
                             <div>
-                                <button className='bg-black text-white' onClick={addToCart}>Add to Cart</button>
+                                <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8' onClick={() => addToCart(product)}>Add to Cart</button>
                             </div>
                         </>
                     ) : (
-                        <button className='bg-black text-white'>Sign in to add to Cart</button>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8'>Sign in to add to Cart</button>
                     )}
                 </div>
 

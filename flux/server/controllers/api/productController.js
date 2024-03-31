@@ -35,4 +35,19 @@ router.get('/category/:category', async (req, res) => {
     }
 });
 
+router.get('/sale/:sale', async (req, res) => {
+    const productSale = req.params.sale;
+    try{
+        const product = await Product.find({ sale: productSale });
+        if(product.length === 0) {
+            return res.status(404).json({ error: 'Product not found'});
+        }
+        //If the product is true for sale then return product
+            res.json(product);
+
+    } catch (error) {
+        res.status(500).json({ error: 'Could not fetch all products'});
+    }
+});
+
 module.exports = router;
