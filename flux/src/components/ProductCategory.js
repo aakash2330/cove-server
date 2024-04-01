@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import '../index.css';
@@ -17,9 +18,9 @@ const ProductCategory = () => {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log('Data from API:', data); 
+                console.log('Data from API:', data);
                 setProducts(data);
-            // }
+                // }
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setError('Could not fetch data');
@@ -46,26 +47,33 @@ const ProductCategory = () => {
     }
 
     return (
-        <div className='flex flex-wrap justify-evenly m-4'>
+        <motion.div
+            className='flex flex-wrap justify-evenly my-4'
+            animate={{
+                x: ['-100%', '0%'],
+                opacity: [0, 1]
+            }}
+            transition={{ duration: 0.5, ease: 'linear' }}
+        >
             {products.map((product) => (
                 <li key={product.productId} className='list-none'>
                     <Link to={`/api/product/${product.productId}`}>
-                    <div className='flex-col m-4 w-[332px] h-[434px]'>
-                    <div className='w-[332px] h-[330px] bg-[#efefef]'>
-                        <img
-                            src={`/${product.img}`}
-                            alt='placeholder template'
-                            className='object-scale-down object-center w-[330px] h-[330px]'
-                        />
+                        <div className='flex-col m-4 w-[332px] h-[434px]'>
+                            <div className='w-[332px] h-[330px] bg-[#efefef]'>
+                                <img
+                                    src={`/${product.img}`}
+                                    alt='placeholder template'
+                                    className='object-scale-down object-center w-[330px] h-[330px]'
+                                />
+                            </div>
+                            <p className='text-base mt-4 font-light'>{product.title}</p>
+                            <p className='my-1 text-sm font-semibold'>${product.price}.00</p>
                         </div>
-                        <p className='text-base mt-4 font-light'>{product.title}</p>
-                        <p className='my-1 text-sm font-semibold'>${product.price}.00</p>
-                    </div>
-                </Link>
+                    </Link>
                 </li>
-    ))
-}
-        </div >
+            ))
+            }
+        </motion.div>
     );
 }
 

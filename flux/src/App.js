@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 //Might want to destructure all of these for less lines when you're done
-import Advertisment from './components/Advertisment';
+import Advertisement from './components/Advertisement';
 import Cart from './components/Cart';
 import Collection from './components/Collection';
 import Comments from './components/Comments';
@@ -59,7 +59,7 @@ function App() {
             <Route path="/" element={
               <>
               <Home />
-              <Advertisment />
+              <Advertisement />
               <HomeDisplay />
               <FooterAd />
               </>
@@ -69,7 +69,7 @@ function App() {
               <>
                 <Shop />
                 <Products />
-                <Advertisment />
+                <Advertisement />
                 <FooterAd />
               </>
             }
