@@ -111,45 +111,68 @@ const Cart = ({ username }) => {
     // probably store the information in an array then add them to do the total score 
     // then checkout button.
     return (
-        <div className='border-solid border-2 border-orange-400 m-4'>
-            <div className='flex flex-row'>
-                <div>
-                    <p>Shopping Cart</p>
-                </div>
+        <div className='m-4'>
+            <div className='ml-8 mb-6'>
+                <p className='text-2xl font-semibold uppercase'>Shopping Cart</p>
+            </div>
+            <div className='flex flex-col'>
                 {/* Product Information */}
                 {cartItems.map((item) => (
-                    <div key={item.productId} className='flex-row border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
-                        <img
-                            src={item.productImage}
-                            alt='placeholder template'
-                            className='object-fit w-[100px] h-[100px] border-solid border-2 border-red-400'
-                        />
-                        <div className='flex-col'>
-                            <p className='text-sm text-light mt-4'>{item.productTitle}</p>
-                            {/* change this to porduct size when fixed */}
-                            <p className='my-1 text-sm text-light'>${item.productPrice}</p>
+                    <div key={item.productId} className='flex flex-col grow mx-8 h-1/3'>
+                        <div className='flex flex-row'>
+                            <div className='flex flex-row'>
+                                <img
+                                    src={item.productImage}
+                                    alt='placeholder template'
+                                    className='object-scale-down w-[150px] h-[150px] bg-[#efefef]'
+                                />
+                                <div className='flex-col ml-4'>
+                                    <p className='text-base font-medium mt-4'>{item.productTitle}</p>
+                                    {/* change this to product size when fixed */}
+                                    <p className='my-1 text-sm font-light'>Item Amount: {item.quantity}</p>
+                                    <p className='my-1 text-sm font-light text-gray-600'>Size: {item.productSize}</p>
+                                </div>
+                            </div>
+                            {/* Quantity section */}
+                            <div className='flex flex-row grow my-8 w-96 h-1/3'>
+                                <div className='flex flex-row grow justify-end'>
+                                <button className='font-medium text-xl text-slate-600 mx-2' >-</button>
+                                {/* Add an amount variable to change based on the quantity  */}
+                                <p className='pt-5 text-base'>1</p>
+                                <button className='font-medium text-xl text-slate-600 mx-2' >+</button>
+                                </div>
+                                {/* Price section */}
+                                <div className='flex flex-row grow justify-end'>
+                                    <p className='inline-block my-1 font-light text-base mt-2 py-3.5'>${item.productPrice}</p>
+                                    {/* Remove item button  */}
+                                    <button className='inline-block font-medium py-3.5 px-3 mt-2' onClick={() => deleteOneCart(cartItems.productId)}>X</button>
+                                </div>
+                            </div>
                         </div>
-                        <p className='my-1'>Item Amount: {item.quantity}</p>
+                        {/* Border */}
+                        <div className='border border-b border-slate-300 my-4'></div>
                     </div>
                 ))}
-                <div className='flex flex-row border-solid border-2 border-blue-400 m-8 w-96 h-1/3'>
-                    <button className=' inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mx-2' >&lt;</button>
-                    {/* Add an amount variable to change based on the quantity  */}
-                    <p className='pt-4 text-base'>1</p>
-                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mx-2' >&gt;</button>
-                    <div>
-                        {/* Remove item button  */}
-                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2' onClick={() => deleteOneCart(cartItems.productId)}>X</button>
+            </div>
+            {/* Subtotal price section */}
+            <div className='flex justify-end mt-8 mb-2 mx-8'>
+                <div className='flex flex-row w-1/2'>
+                    <div className='flex grow'>
+                <p className='pl-1'>Subtotal Price: </p>
                     </div>
+                <div className='flex grow justify-end'>
+                <p>Value</p>
+                </div>
                 </div>
             </div>
-            <div className='border border-b border-gray-400 mx-4'></div>
-            <div>
-                <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2' onClick={() => deleteAllCart()}>Empty Cart</button>
-            </div>
-            <div>
-                <p>Subtotal Price</p>
-                <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2' onClick={() => deleteAllCart()}>Checkout</button>
+            {/* container for empty cart and checkout button */}
+            <div className='flex flex-row mb-8 mx-8'>
+                <div className='grow'>
+                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-2 w-1/2' onClick={() => deleteAllCart()}>Empty Cart</button>
+                </div>
+                <div className='flex grow justify-end'>
+                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-2 w-1/2' onClick={() => deleteAllCart()}>Checkout</button>
+                </div>
             </div>
         </div>
     );
