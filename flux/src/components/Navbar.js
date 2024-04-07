@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineInstagram } from "react-icons/ai";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { Link } from 'react-router-dom';
@@ -6,6 +6,39 @@ import '../index.css';
 
 //Taking the actual state values to use here
 const Navbar = ({ isLoggedIn, username, onLogout }) => {
+
+    const [cartAmount, setCartAmount] = useState(0);
+    const token = localStorage.getItem('token');
+
+    //Fetching the items that are existing in the cart
+    const fetchCartData = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/auth/user/cart`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Cache-Control': 'no-cache',
+                },
+            });
+            if (!response.ok) {
+                throw new Error(`Network response error: ${response.statusText}`);
+            }
+            const data = await response.json();
+            console.log('Cart Data from API:', data);
+            // Check if cart data is empty
+            const cartIsEmpty = Array.isArray(data) && data.length === 0;
+            //Ternary operator, if cart is 0 then display empty else display data length
+            setCartAmount(cartIsEmpty ? 0 : data.length);
+        } catch (error) {
+            console.error('Error fetching cart data:', error);
+        } 
+    };
+    
+
+    useEffect(() => {
+        fetchCartData();
+    }, [cartAmount]);
+
     return (
         <nav className='flex justify-between px-10 text-base font-thin tracking-wide py-5'>
             <div className="flex flex-row grow w-1 items-center justify-start space-x-4 text-sm">
@@ -41,7 +74,11 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                     </Link>
                 )}
                 <Link to ={`/cart`}>
+                <div className='flex flex-row'>
                 <PiShoppingCartSimpleFill size={20} />
+                {/* <p className='text-sm'></p> */}
+                <p className='text-sm font-light'>{cartAmount}</p>
+                </div>
                 </Link>
             </div>
         </nav>

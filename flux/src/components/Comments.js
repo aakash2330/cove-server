@@ -92,8 +92,7 @@ const Comments = ({ isLoggedIn, username }) => {
             {isLoggedIn ? (
                 <div>
                 <form onSubmit={createComment} method='POST' className='ml-8 mb-0 mt-8 max-w-md space-y-4'>
-                    <div>
-                        <div className='relative'>
+                    <div className='flex flex-row'>
                             <input
                                 type='text'
                                 id='newComment'
@@ -103,6 +102,8 @@ const Comments = ({ isLoggedIn, username }) => {
                                 className='w-full border border-gray-500 p-4 pe-12 text-sm shadow-sm'
                                 placeholder='Enter Comment'
                             />
+                        <div>
+                            <button className='inline-block font-medium text-sm border bg-black text-white hover:bg-slate-800 py-4 px-6 ml-2' onClick={handleInputChange}>Add Comment</button>
                         </div>
                     </div>
                 </form>

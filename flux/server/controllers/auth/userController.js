@@ -44,8 +44,12 @@ router.post('/addCart', authenticate, async (req, res) => {
     console.log('Size in route:', size);
     console.log('Quantity in route:', quantity);
     console.log('username in route:', username);
-    const isProductIdANum = req.body.productId; // Extract productId from req.body
-console.log('Type of productId:', typeof isProductIdANum);
+    // Extract productId from req.body
+    const isProductIdANum = req.body.productId;
+    console.log('Type of productId:', typeof isProductIdANum);
+
+    //Price being manipulated below
+    let newPrice;
 
     // Check if they exist, I don't want to go further if they don't
     if (!productId || !img || !title || !price || !size || !quantity || !username) {
@@ -68,12 +72,24 @@ console.log('Type of productId:', typeof isProductIdANum);
         if (existingCartItem && existingSize) {
             //Changing the quantity value instead of adding another object
             console.log('Existing item found!: ', existingCartItem);
-            existingCartItem.quantity += 1;
-        } else {
-            //Adding the product to the cart
-            user.cart.push({ productId, productImage: img, productTitle: title, productPrice: price, productSize: size, quantity: quantity });
-        }
+            //Storing the original price 
+            const originalPrice = existingCartItem.productPrice / existingCartItem.quantity;
+            console.log('Original Price: ', originalPrice);
 
+            //updating the quantity
+            existingCartItem.quantity = quantity;
+            console.log('Quantity: ', quantity);
+
+            //Price Based on Quantity
+            newPrice = originalPrice * quantity;
+            console.log('New Price: ', newPrice)
+
+            existingCartItem.productPrice = newPrice;
+        } else {
+            // Adding the product to the cart
+            productPrice = price * quantity;
+            user.cart.push({ productId, productImage: img, productTitle: title, productPrice: productPrice, productSize: size, quantity: quantity });
+        }
         await user.save();
 
         res.status(201).json({ message: 'Product added successfully to cart' });
@@ -83,65 +99,31 @@ console.log('Type of productId:', typeof isProductIdANum);
     }
 });
 
-router.delete('/deleteAllCart', authenticate, async (req, res) => {
-     try {
+
+router.delete('/deleteOneCart', authenticate, async (req, res) => {
+    try {
         //Retrieving the users id from authenticated request
         const userId = req.user._id
         console.log('The User ID: ', userId);
         const user = await User.findById(userId);
 
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        const cart = user.cart; // Access the user's cart field
-
-        if (!cart || cart.length === 0) {
-            console.log('User cart is empty');
-            return res.status(200).json({ message: 'User cart is empty' });
-        }
-
-        // If the cart is not empty, delete all data
-        cart.splice(0, cart.length);
-
-        // Saving the deleted information to the database
-        await user.save();
-
-    } catch (error) {
-        console.error('Error deleting products:', error);
-        res.status(500).json({ error: `Could not delete user products. ${error.message}` });
-    }
-});
-
-router.delete('/deleteOneCart', authenticate, async (req, res) => {
-    try {
-       //Retrieving the users id from authenticated request
-        const userId = req.user._id
-        console.log('The User ID: ', userId);
-        const user = await User.findById(userId);
-
         console.log('Checking for Request Body: ', req.body);
-        const { productId } = req.body; // extracting the product Id from req.body
-        console.log('Checking type of productId: ', typeof productId);
+        const { cartId } = req.body; // extracting the cart Id from req.body
+        console.log('Checking value of cartId: ', cartId);
+        console.log('Checking type of cartId: ', typeof cartId);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
         //Check for existing cart item
-        const cartIndex = user.cart.findIndex(item => item.productId === productId);
+        //Converting the object to string so that we can use the strict equal type
+        const cartIndex = user.cart.findIndex(cart => cart._id.toString() === cartId);
         console.log('Looking at the carts index: ', cartIndex);
 
         if (cartIndex >= 0) {
-            //Changing the quantity value instead of adding another object
-            console.log('Existing index found!: ', cartIndex);
-            if(user.cart[cartIndex].quantity > 1) {
-                user.cart[cartIndex].quantity -= 1;
-            } else {
-                //Remove product by index from the cart
-                user.cart.splice(cartIndex, 1);
-            }
-        } 
+            user.cart.splice(cartIndex, 1);
+        }
 
         await user.save();
 

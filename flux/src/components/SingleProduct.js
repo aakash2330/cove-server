@@ -67,7 +67,9 @@ const SingleProduct = ({ isLoggedIn, username }) => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                console.log('Cart Response Data: ', responseData)
+                console.log('Cart Response Data: ', responseData);
+                //Make a popup here saying added to cart 
+                // navigate('/cart');
             } else {
                 const errorData = await response.json();
                 console.error('Failed to add to Cart', errorData.message);
@@ -76,11 +78,11 @@ const SingleProduct = ({ isLoggedIn, username }) => {
             console.error('Error adding to cart: ', error.message);
         }
     };
-
+    
     const addCounter = () => {
-            setCounter(prevCounter => prevCounter + 1);
+        setCounter(prevCounter => prevCounter + 1);
     }
-
+    
     const subCounter = () => {
         if (counter > 0) {
             setCounter(prevCounter => prevCounter - 1);
