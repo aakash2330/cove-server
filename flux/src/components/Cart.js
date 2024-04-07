@@ -7,6 +7,8 @@ const Cart = ({ username }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const token = localStorage.getItem('token');
+    const [totalPrice, setTotalPrice] = useState(0);
+
     //Fetching the items that are existing in the cart
     const fetchCartData = async () => {
         if (cartItems.length === 0) {
@@ -15,6 +17,7 @@ const Cart = ({ username }) => {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
+                        'Cache-Control': 'no-cache',
                     },
                 });
                 if (!response.ok) {
@@ -33,55 +36,119 @@ const Cart = ({ username }) => {
     };
 
     useEffect(() => {
+        //Running calculate total price to get the new value from the state
+        calculateTotalPrice();
         fetchCartData();
-    }, [username]);
+    }, [cartItems]);
 
-    const deleteOneCart = async (productId) => {
+    const deleteOneCart = async (cartId) => {
         try {
+            //Setting loading to true before the request
+            setLoading(true);
+
             const response = await fetch(`http://localhost:3001/auth/user/deleteOneCart`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
+                    'Cache-Control': 'no-cache', // This tells server not to use Cached Response
                 },
-                body: JSON.stringify({ productId }),
+                body: JSON.stringify({ cartId: cartId.toString() }),
             });
             if (!response.ok) {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
-            console.log('Single item deleted');
-            //Fetching data after deletion
-            fetchCartData();
+
+            //Removing the deleted item from cartItems state
+            //Throwing the arrow function in setCarItems will make the parameter represent the last state as the argument
+            setCartItems(prevItem => prevItem.filter(item => item._id !== cartId));
+            setLoading(false); //End loading after request
         } catch (error) {
             console.error('Error deleting cart data:', error);
             setError('Could not delete cart data');
-        } finally {
-            setLoading(false); //End loading after request
+            setLoading(false); //End loading after error
         }
     }
 
-    const deleteAllCart = async () => {
+    const checkoutCart = async () => {
+        console.log('Checkout for now!');
+        
+    }
+
+    const calculateTotalPrice = () => {
+        // Check if cart is defined and is an array
+        if (cartItems && Array.isArray(cartItems)) { 
+            let addedValue = 0;
+            console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
+            for(let i = 0; i < cartItems.length; i++) {
+                // Check if cart[i] is not undefined before accessing its properties
+                if (cartItems[i] && cartItems[i].productPrice) {
+                    addedValue += cartItems[i].productPrice;
+                }
+            }
+    
+            setTotalPrice(addedValue);
+        console.log('total price working');
+        } else {
+            setTotalPrice(0);
+        }
+    }
+
+    const quantityUpdater = async (prodId, img, title, price, size, quantity, updatedQuantity) => {
         try {
-            const response = await fetch(`http://localhost:3001/auth/user/deleteAllCart`, {
-                method: 'DELETE',
+            const token = localStorage.getItem('token');
+            console.log('Getting token from singleProduct: ', token);
+            const showUserName = username;
+            console.log('Seeing if username has a value: ', showUserName);
+            const showProductId = prodId;
+            console.log('Seeing if product id has a value: ', showProductId);
+
+            if (!token) {
+                throw new Error('Authentication token not found');
+            }
+
+            const response = await fetch('http://localhost:3001/auth/user/addCart', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
+                    
                 },
-                body: null,
+                body: JSON.stringify({
+                    productId: prodId,
+                    img: img,
+                    title: title,
+                    price: price,
+                    size: size,
+                    quantity: updatedQuantity,
+                    username,
+                }),
             });
+
             if (!response.ok) {
                 throw new Error(`Network response error: ${response.statusText}`);
+            } 
+            
+            if(quantity !== updatedQuantity) {
+                const data = await response.json();
+                console.log('Cart Data from API:', data);
+                setCartItems(data);
             }
-
-            console.log('All items deleted');
-            //Fetching data after deletion
-            await fetchCartData();
         } catch (error) {
-            console.error('Error deleting the cart data:', error);
-            setError('Could not delete the cart data');
-        } finally {
-            setLoading(false);
+            console.error('Error adding to cart: ', error.message);
+        } 
+    };
+    
+
+    const handleAddCounter = (prodId, img, title, price, size, quantity) => {
+        const updatedQuantity = quantity + 1;
+        quantityUpdater(prodId, img, title, price, size, quantity, updatedQuantity);
+    }
+    
+    const handleSubCounter = (prodId, img, title, price, size, quantity) => {
+        if(quantity > 0) {
+            const updatedQuantity = quantity - 1;
+            quantityUpdater(prodId, img, title, price, size, quantity, updatedQuantity);
         }
     }
 
@@ -96,7 +163,7 @@ const Cart = ({ username }) => {
 
     //Check if product is defined before accessing its properties
     //Array.isArray is a built in method to check to see if something is an array
-    if (!Array.isArray(cartItems) || Object.keys(cartItems).length === 0) {
+    if (!Array.isArray(cartItems) || cartItems.length === 0) {
         return (
             <>
                 <p>Shopping Cart</p>
@@ -117,10 +184,11 @@ const Cart = ({ username }) => {
             </div>
             <div className='flex flex-col'>
                 {/* Product Information */}
-                {cartItems.map((item) => (
+                {/* Trying to retrieve index number */}
+                {cartItems.map((item, index) => (
                     <div key={item.productId} className='flex flex-col grow mx-8 h-1/3'>
                         <div className='flex flex-row'>
-                            <div className='flex flex-row'>
+                            <div className='flex flex-row grow-2'>
                                 <img
                                     src={item.productImage}
                                     alt='placeholder template'
@@ -134,18 +202,25 @@ const Cart = ({ username }) => {
                                 </div>
                             </div>
                             {/* Quantity section */}
-                            <div className='flex flex-row grow my-8 w-96 h-1/3'>
-                                <div className='flex flex-row grow justify-end'>
-                                <button className='font-medium text-xl text-slate-600 mx-2' >-</button>
-                                {/* Add an amount variable to change based on the quantity  */}
-                                <p className='pt-5 text-base'>1</p>
-                                <button className='font-medium text-xl text-slate-600 mx-2' >+</button>
+                            <div className='flex flex-row w-1/3 my-8 h-1/3'>
+                                <div className='flex flex-row mt-5'>
+                                    <button className='inline-flex items-center justify-center font-medium text-xl text-slate-600 mx-2 h-8 w-8 hover:border hover:bg-gray-300 hover:border-gray-300 hover:rounded-full' onClick={ () => {
+                                        handleSubCounter(item.productId, item.productImage, item.productTitle, item.productPrice, item.productSize, item.quantity)
+                                    }
+                                    }>-</button> 
+                                    {/* Add an amount variable to change based on the quantity  */}
+                                    <p className='text-base pt-1'>{item.quantity}</p>
+                                    <button className='inline-flex items-center justify-center font-medium text-xl text-slate-600 mx-2 h-8 w-8 hover:border hover:bg-gray-300 hover:border-gray-300 hover:rounded-full' onClick={ () => {
+                                        handleAddCounter(item.productId, item.productImage, item.productTitle, item.productPrice, item.productSize, item.quantity)
+                                    }
+                                        }>+</button>
                                 </div>
                                 {/* Price section */}
                                 <div className='flex flex-row grow justify-end'>
                                     <p className='inline-block my-1 font-light text-base mt-2 py-3.5'>${item.productPrice}</p>
                                     {/* Remove item button  */}
-                                    <button className='inline-block font-medium py-3.5 px-3 mt-2' onClick={() => deleteOneCart(cartItems.productId)}>X</button>
+                                    {/* Make this delete the object */}
+                                    <button className='inline-flex items-center justify-center font-medium py-3.5 px-3 mt-5 h-7 w-7 hover:border hover:bg-gray-300 hover:border-gray-300 hover:rounded-full' onClick={() => deleteOneCart(item._id)}>X</button>
                                 </div>
                             </div>
                         </div>
@@ -158,20 +233,17 @@ const Cart = ({ username }) => {
             <div className='flex justify-end mt-8 mb-2 mx-8'>
                 <div className='flex flex-row w-1/2'>
                     <div className='flex grow'>
-                <p className='pl-1'>Subtotal Price: </p>
+                        <p className='pl-1 text-md font-thin'>Subtotal Price: </p>
                     </div>
-                <div className='flex grow justify-end'>
-                <p>Value</p>
-                </div>
+                    <div className='flex grow justify-end'>
+                        <p className='text-xl font-semibold'>${totalPrice}.00</p>
+                    </div>
                 </div>
             </div>
             {/* container for empty cart and checkout button */}
             <div className='flex flex-row mb-8 mx-8'>
-                <div className='grow'>
-                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-2 w-1/2' onClick={() => deleteAllCart()}>Empty Cart</button>
-                </div>
                 <div className='flex grow justify-end'>
-                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-2 w-1/2' onClick={() => deleteAllCart()}>Checkout</button>
+                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-2 w-1/2' onClick={() => checkoutCart()}>Checkout</button>
                 </div>
             </div>
         </div>
