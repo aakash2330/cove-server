@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../functions/loader.js';
 import '../index.css';
 
 const ProductSale = () => {
@@ -33,7 +34,7 @@ const ProductSale = () => {
 
     //Come back to this. Make this do something else when loading
     if (loading) {
-        return <p>Loading Shoes...</p>;
+        return <Loader />;
     }
 
     if (error) {

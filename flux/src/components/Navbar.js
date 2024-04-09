@@ -10,6 +10,13 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
     const [cartAmount, setCartAmount] = useState(0);
     const token = localStorage.getItem('token');
 
+    useEffect(() => {
+        console.log("useEffect triggered");;
+        if(isLoggedIn) {
+            fetchCartData();
+        }
+    }, [isLoggedIn, cartAmount]);
+
     //Fetching the items that are existing in the cart
     const fetchCartData = async () => {
         try {
@@ -29,19 +36,16 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
             const cartIsEmpty = Array.isArray(data) && data.length === 0;
             //Ternary operator, if cart is 0 then display empty else display data length
             setCartAmount(cartIsEmpty ? 0 : data.length);
+            console.log("Cart Amount updated:", cartIsEmpty ? 0 : data.length);
         } catch (error) {
             console.error('Error fetching cart data:', error);
         } 
     };
-    
 
-    useEffect(() => {
-        fetchCartData();
-    }, [cartAmount]);
 
     return (
-        <nav className='flex justify-between px-10 text-base font-thin tracking-wide py-5'>
-            <div className="flex flex-row grow w-1 items-center justify-start space-x-4 text-sm">
+        <nav className='flex justify-between md:px-10 text-base font-thin tracking-wide py-5'>
+            <div className="flex flex-row grow w-1 items-center justify-start space-x-4 text-xs md:text-sm">
                 <Link to={`/`}>
                     <p className='border-transparent border-b hover:border-black py-1 font-light'>Home</p>
                 </Link>
@@ -55,7 +59,7 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                 <p className='border-transparent border-b hover:border-black py-1 font-light'>Contact</p>
                 </Link>
             </div>
-            <div className='flex-row justify-between grow w-1 text-center items-center text-2xl font-medium tracking-widest'>
+            <div className='flex-row justify-between grow w-1 text-center items-center md:text-2xl text-lg font-medium tracking-widest'>
                 <p className='border-b-2 border-transparent'>FluxCove</p>
             </div>
             <div className='flex flex-row grow w-1 items-center justify-end space-x-4 text-sm'>
@@ -63,21 +67,21 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
                 {/* If log in is true then show the following else show sign up */}
                 {isLoggedIn ? (
                     <>
-                        <p className='username font-semibold'>Hi, {username}</p>
+                        <p className='username font-semibold text-xs md:text-sm'>Hi, {username}</p>
                         <div className='modal'>
                             <p className='border-transparent border-b hover:border-black py-1 font-light' onClick={onLogout}>Sign Out</p>
                         </div>
                     </>
                 ) : (
                     <Link to={`/auth/login`}>
-                        <p className='border-transparent border-b hover:border-black py-1 font-light'>Sign In</p>
+                        <p className='border-transparent border-b hover:border-black py-1 font-light text-xs md:text-sm'>Sign In</p>
                     </Link>
                 )}
                 <Link to ={`/cart`}>
-                <div className='flex flex-row'>
+                <div className='flex flex-row text-xs md:text-sm'>
                 <PiShoppingCartSimpleFill size={20} />
                 {/* <p className='text-sm'></p> */}
-                <p className='text-sm font-light'>{cartAmount}</p>
+                <p className='text-xs md:text-sm font-light'>{cartAmount}</p>
                 </div>
                 </Link>
             </div>

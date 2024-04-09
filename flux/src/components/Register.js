@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 //Updating the state values here for the register
-const Register = ({ setIsLoggedIn, setUsername, username }) => {
+const Register = ({ setIsLoggedIn, setUsername }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [createUsername, setCreateUsername] = useState('');
     const navigate = useNavigate();
 
     // Handling the submission
@@ -17,13 +18,13 @@ const Register = ({ setIsLoggedIn, setUsername, username }) => {
 
         //API request to handle register
         try {
-            const response = await fetch('http://localhost:3001/auth/register', {
+            const response = await fetch('http://localhost:3001/auth/verify/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username,
+                    username: createUsername,
                     email,
                     password,
                 }),
@@ -34,16 +35,14 @@ const Register = ({ setIsLoggedIn, setUsername, username }) => {
                 const { token, username } = responseData;
                 console.log('Response Data: ', responseData);
                 setIsLoggedIn(true);
-                //setting the state of username to the associated username to use in Navbar
-                setUsername(username);
                 console.log('Lets see the value of Username: ', username);
                 //Save token to local storage for when the user makes a future request
                 localStorage.setItem('token', token);
                 //Saving the username as well so it is displayed and the state doesn't lose it on reload
                 localStorage.setItem('username', username);
-
+                setUsername(username);
                 //After login redirect to the home page
-                navigate('/home');
+                navigate('/');
             } else {
                 //Handle failed login
                 const errorData = await response.json();
@@ -56,9 +55,9 @@ const Register = ({ setIsLoggedIn, setUsername, username }) => {
 
     // Update state on input change
     const handleInputChange = (e) => {
-        if (e.target.username === 'username') {
-            setUsername(e.target.value);
-            console.log("Creating username now: ", username);
+        if (e.target.name === 'createUsername') {
+            setCreateUsername(e.target.value);
+            console.log("Creating username now: ", createUsername);
         } else if (e.target.name === 'email') {
             setEmail(e.target.value);
             console.log("Checking the email now: ", email);
@@ -80,14 +79,14 @@ const Register = ({ setIsLoggedIn, setUsername, username }) => {
 
             <form onSubmit={handleSubmit} method="POST" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                 <div>
-                    <label htmlFor="username" className="sr-only">Username</label>
+                    <label htmlFor="createUsername" className="sr-only">Username</label>
 
                     <div className="relative">
                         <input
-                            type="username"
-                            id="username"
-                            name="username"
-                            value={username}
+                            type="text"
+                            id="createUsername"
+                            name="createUsername"
+                            value={createUsername}
                             onChange={handleInputChange}
                             className="w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter username"

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import Loader from '../functions/loader.js';
 import '../index.css';
 
 const Products = () => {
@@ -11,6 +12,7 @@ const Products = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 //Only fetching if the products dont exist
                 //    if(products.length === 0) {
                 const response = await fetch('http://localhost:3001/home/shop');
@@ -33,7 +35,7 @@ const Products = () => {
 
     //Come back to this. Make this do something else when loading
     if (loading) {
-        return <p>Loading Shoes...</p>;
+        return <Loader />;
     }
 
     if (error) {

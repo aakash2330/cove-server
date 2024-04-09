@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../functions/loader';
 import '../index.css';
 
 const Cart = ({ username }) => {
@@ -36,9 +37,9 @@ const Cart = ({ username }) => {
     };
 
     useEffect(() => {
+        fetchCartData();
         //Running calculate total price to get the new value from the state
         calculateTotalPrice();
-        fetchCartData();
     }, [cartItems]);
 
     const deleteOneCart = async (cartId) => {
@@ -72,23 +73,24 @@ const Cart = ({ username }) => {
 
     const checkoutCart = async () => {
         console.log('Checkout for now!');
-        
+
     }
 
     const calculateTotalPrice = () => {
         // Check if cart is defined and is an array
-        if (cartItems && Array.isArray(cartItems)) { 
+        if (cartItems && Array.isArray(cartItems)) {
             let addedValue = 0;
             console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
-            for(let i = 0; i < cartItems.length; i++) {
+            for (let i = 0; i < cartItems.length; i++) {
                 // Check if cart[i] is not undefined before accessing its properties
                 if (cartItems[i] && cartItems[i].productPrice) {
                     addedValue += cartItems[i].productPrice;
                 }
             }
-    
+
             setTotalPrice(addedValue);
-        console.log('total price working');
+
+            console.log('total price working');
         } else {
             setTotalPrice(0);
         }
@@ -112,7 +114,7 @@ const Cart = ({ username }) => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
-                    
+
                 },
                 body: JSON.stringify({
                     productId: prodId,
@@ -127,26 +129,36 @@ const Cart = ({ username }) => {
 
             if (!response.ok) {
                 throw new Error(`Network response error: ${response.statusText}`);
-            } 
-            
-            if(quantity !== updatedQuantity) {
-                const data = await response.json();
-                console.log('Cart Data from API:', data);
-                setCartItems(data);
             }
+
+            // Update cartItems state with the new data (forcing state to re-render because it didn't recognize the data response)
+            const updatedCartItems = cartItems.map(item => {
+                if (item.productId === prodId && item.productSize === size) {
+                    // Update quantity for matching product ID and size
+                    return {
+                        ...item,
+                        quantity: updatedQuantity
+                    };
+                }
+                // Return unchanged item for other items
+                return item;
+            });
+
+            setCartItems(updatedCartItems);
+            calculateTotalPrice();
         } catch (error) {
             console.error('Error adding to cart: ', error.message);
-        } 
+        }
     };
-    
+
 
     const handleAddCounter = (prodId, img, title, price, size, quantity) => {
         const updatedQuantity = quantity + 1;
         quantityUpdater(prodId, img, title, price, size, quantity, updatedQuantity);
     }
-    
+
     const handleSubCounter = (prodId, img, title, price, size, quantity) => {
-        if(quantity > 0) {
+        if (quantity > 0) {
             const updatedQuantity = quantity - 1;
             quantityUpdater(prodId, img, title, price, size, quantity, updatedQuantity);
         }
@@ -154,7 +166,7 @@ const Cart = ({ username }) => {
 
     //Come back to this. Make this do something else when loading
     if (loading) {
-        return <p>Loading Cart...</p>;
+        return <Loader />;
     }
 
     if (error) {
@@ -204,16 +216,18 @@ const Cart = ({ username }) => {
                             {/* Quantity section */}
                             <div className='flex flex-row w-1/3 my-8 h-1/3'>
                                 <div className='flex flex-row mt-5'>
-                                    <button className='inline-flex items-center justify-center font-medium text-xl text-slate-600 mx-2 h-8 w-8 hover:border hover:bg-gray-300 hover:border-gray-300 hover:rounded-full' onClick={ () => {
-                                        handleSubCounter(item.productId, item.productImage, item.productTitle, item.productPrice, item.productSize, item.quantity)
-                                    }
-                                    }>-</button> 
+                                    <button className={`inline-flex items-center justify-center font-medium text-xl text-slate-600 mx-2 h-8 w-8 hover:border 
+                                    hover:bg-gray-300 hover:border-gray-300 hover:rounded-full
+                                    ${item.quantity === 1 ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => {
+                                            handleSubCounter(item.productId, item.productImage, item.productTitle, item.productPrice, item.productSize, item.quantity)
+                                        }
+                                        }>-</button>
                                     {/* Add an amount variable to change based on the quantity  */}
                                     <p className='text-base pt-1'>{item.quantity}</p>
-                                    <button className='inline-flex items-center justify-center font-medium text-xl text-slate-600 mx-2 h-8 w-8 hover:border hover:bg-gray-300 hover:border-gray-300 hover:rounded-full' onClick={ () => {
+                                    <button className='inline-flex items-center justify-center font-medium text-xl text-slate-600 mx-2 h-8 w-8 hover:border hover:bg-gray-300 hover:border-gray-300 hover:rounded-full' onClick={() => {
                                         handleAddCounter(item.productId, item.productImage, item.productTitle, item.productPrice, item.productSize, item.quantity)
                                     }
-                                        }>+</button>
+                                    }>+</button>
                                 </div>
                                 {/* Price section */}
                                 <div className='flex flex-row grow justify-end'>

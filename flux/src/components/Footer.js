@@ -3,7 +3,7 @@ import '../index.css';
 function Footer() {
     return(
         <>
-        <div className='flex flex-col bg-black text-white'>
+        <div className={`flex flex-col bg-black text-white bottom-0`}>
     <div className='flex flex-row items-end pt-2 px-4'>
         <p className='grow font-sm text-left'>Follow Us</p>
         <p className='grow text-2xl font-bold text-center'>FluxCove</p>

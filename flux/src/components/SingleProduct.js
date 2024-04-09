@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../index.css';
 
 const SingleProduct = ({ isLoggedIn, username }) => {
+    const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});
     const [counter, setCounter] = useState(1);
-    const [loading, setLoading] = useState(true);
+    const [addBtn, setAddBtn] = useState('Add To Cart');
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -24,9 +25,7 @@ const SingleProduct = ({ isLoggedIn, username }) => {
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setError('Could not fetch data');
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
 
         fetchData();
@@ -89,9 +88,25 @@ const SingleProduct = ({ isLoggedIn, username }) => {
         }
     }
 
-    //Come back to this. Make this do something else when loading
-    if (loading) {
-        return <p>Loading Shoes...</p>;
+    const handleClick = () => {
+        navigate('/cart');
+      };
+
+    const handleSignIn = () => {
+        navigate('/auth/login');
+      };
+
+    const displayMessage = () => {
+        //Changing button to adding
+       setAddBtn('Adding...')
+       setTimeout(() => {
+        //After one second it says added
+        setAddBtn('Added');
+        setTimeout(() => {
+            //Then it changes back to Add to cart
+            setAddBtn('Add To Cart');
+        }, 1000);
+       }, 1000);
     }
 
     if (error) {
@@ -154,12 +169,17 @@ const SingleProduct = ({ isLoggedIn, username }) => {
 
                     {isLoggedIn ? (
                         <>
-                            <div>
-                                <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8' onClick={() => addToCart(product)}>Add to Cart</button>
+                            <div className='flex flex-row'>
+                                <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8' 
+                                onClick={() => {
+                                    addToCart(product);
+                                    displayMessage();
+                                }}>{addBtn}</button>
+                                <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8 ml-2' onClick={handleClick}>Go to Cart</button>
                             </div>
                         </>
                     ) : (
-                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8'>Sign in to add to Cart</button>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8' onClick={handleSignIn}>Sign in to add to Cart</button>
                     )}
                 </div>
 
