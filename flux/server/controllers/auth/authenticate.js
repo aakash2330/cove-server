@@ -4,9 +4,8 @@ const bcrypt = require('bcrypt');
 const User = require('../../models/User');
 // const { Logout }= require('../../../src/components/Logout');
 
-const {authenticate, secretKey } = require('../../middleware/Auth');
+const { authenticate, secretKey } = require('../../middleware/Auth');
 
-//Handling authentication requests
 
 //Register a new user
 router.post('/register', async (req, res, next) => {
@@ -16,17 +15,19 @@ router.post('/register', async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({ username, email, password: hashedPassword });
         await user.save();
-        res.json({ message: 'Account Created! ' });
 
         //Trying to auto-log you in
-        if(user) {
-            console.log('found user!');
-            const token = jwt.sign({ userId: user._id }, secretKey, {
-                expiresIn: '1 hour'
-            });
-            //Getting the username and the token 
-            res.json({ token, username });
-        }
+        console.log('User Created!');
+        const token = jwt.sign({ userId: user._id }, secretKey, {
+            expiresIn: '1 hour'
+        });
+        //Getting the username and the token 
+        res.json({
+            message: 'Account Created!',
+            token,
+            username
+        });
+
     } catch (error) {
         next(error);
     }
@@ -36,7 +37,7 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
     console.log(req.body);
-        try {
+    try {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -50,7 +51,7 @@ router.post('/login', async (req, res, next) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Incorrect password' });
         }
-        
+
         //Saving the userid as userId to be used later
         const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '1 hour'

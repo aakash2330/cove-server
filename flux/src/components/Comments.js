@@ -6,7 +6,6 @@ const Comments = ({ isLoggedIn, username }) => {
     const { productId } = useParams();
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     //Retrieving comments from the database
@@ -22,9 +21,7 @@ const Comments = ({ isLoggedIn, username }) => {
         } catch (error) {
             console.error('Error fetching data:', error.message);
             setError('Could not fetch data');
-        } finally {
-            setLoading(false);
-        }
+        } 
     };
 
     useEffect(() => {
@@ -74,11 +71,6 @@ const Comments = ({ isLoggedIn, username }) => {
         }
     }
 
-
-    //Come back to this. Make this do something else when loading
-    if (loading) {
-        return <p>Loading Comments...</p>;
-    }
 
     if (error) {
         return <p>Error: {error}</p>;

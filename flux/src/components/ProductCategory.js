@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Loader from '../functions/loader';
 import '../index.css';
 
 const ProductCategory = () => {
@@ -12,6 +13,7 @@ const ProductCategory = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true)
                 // if(products.length === 0) {
                 const response = await fetch(`http://localhost:3001/api/product/category/${category}`);
                 if (!response.ok) {
@@ -34,7 +36,7 @@ const ProductCategory = () => {
 
     //Come back to this. Make this do something else when loading
     if (loading) {
-        return <p>Loading Shoes...</p>;
+        return <Loader />;
     }
 
     if (error) {
