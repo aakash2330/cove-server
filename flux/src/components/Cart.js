@@ -9,6 +9,19 @@ const Cart = ({ username }) => {
     const [error, setError] = useState(null);
     const token = localStorage.getItem('token');
     const [totalPrice, setTotalPrice] = useState(0);
+    // let totalPrice = 0;
+
+   
+        // if (cartItems && Array.isArray(cartItems)) {
+        //     console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
+        //     for (let i = 0; i < cartItems.length; i++) {
+        //         // Check if cart[i] is not undefined before accessing its properties
+        //         if (cartItems[i] && cartItems[i].productPrice) {
+        //             totalPrice += cartItems[i].productPrice;
+        //         }
+        //     }
+        // }
+  
 
     //Fetching the items that are existing in the cart
     const fetchCartData = async () => {
@@ -77,9 +90,11 @@ const Cart = ({ username }) => {
     }
 
     const calculateTotalPrice = () => {
+        let addedValue = 0;
+        console.log('Calculate total price received and running');
         // Check if cart is defined and is an array
         if (cartItems && Array.isArray(cartItems)) {
-            let addedValue = 0;
+            let totalPrice = 0;
             console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
             for (let i = 0; i < cartItems.length; i++) {
                 // Check if cart[i] is not undefined before accessing its properties
@@ -87,12 +102,8 @@ const Cart = ({ username }) => {
                     addedValue += cartItems[i].productPrice;
                 }
             }
-
-            setTotalPrice(addedValue);
-
-            console.log('total price working');
-        } else {
-            setTotalPrice(0);
+            console.log('Is total Price updating the price?: ', totalPrice);
+           setTotalPrice(addedValue);
         }
     }
 
@@ -131,20 +142,11 @@ const Cart = ({ username }) => {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
 
-            // Update cartItems state with the new data (forcing state to re-render because it didn't recognize the data response)
-            const updatedCartItems = cartItems.map(item => {
-                if (item.productId === prodId && item.productSize === size) {
-                    // Update quantity for matching product ID and size
-                    return {
-                        ...item,
-                        quantity: updatedQuantity
-                    };
-                }
-                // Return unchanged item for other items
-                return item;
-            });
+            const updatedData = await response.json();
 
-            setCartItems(updatedCartItems);
+            setCartItems(updatedData);
+            console.log('updated data:', updatedData);
+            //Calculate the new total price
             calculateTotalPrice();
         } catch (error) {
             console.error('Error adding to cart: ', error.message);

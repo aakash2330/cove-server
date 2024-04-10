@@ -11,11 +11,10 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        console.log("useEffect triggered");;
         if(isLoggedIn) {
             fetchCartData();
         }
-    }, [isLoggedIn, cartAmount]);
+    }, [isLoggedIn]);
 
     //Fetching the items that are existing in the cart
     const fetchCartData = async () => {
@@ -32,11 +31,12 @@ const Navbar = ({ isLoggedIn, username, onLogout }) => {
             }
             const data = await response.json();
             console.log('Cart Data from API:', data);
-            // Check if cart data is empty
-            const cartIsEmpty = Array.isArray(data) && data.length === 0;
-            //Ternary operator, if cart is 0 then display empty else display data length
-            setCartAmount(cartIsEmpty ? 0 : data.length);
-            console.log("Cart Amount updated:", cartIsEmpty ? 0 : data.length);
+            // // Check if cart data is empty
+            // const cartIsEmpty = Array.isArray(data) && data.length === 0;
+            // //Ternary operator, if cart is 0 then display empty else display data length
+            // const cartLength = cartIsEmpty ? 0 : data.length;
+            setCartAmount(data.length);
+            console.log('checking cart amount:', cartAmount);
         } catch (error) {
             console.error('Error fetching cart data:', error);
         } 
