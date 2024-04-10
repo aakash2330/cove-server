@@ -92,7 +92,10 @@ router.post('/addCart', authenticate, async (req, res) => {
         }
         await user.save();
 
-        res.status(201).json({ message: 'Product added successfully to cart' });
+        // res.status(201).json({ message: 'Product added successfully to cart' });
+        //Testing to see if returning the updated data will work instead of a status
+        const cart = user.cart;
+        res.json(cart);
     } catch (error) {
         console.error('Error adding to cart: ', error.message);
         res.status(500).json({ error: 'Could not add to cart' });
