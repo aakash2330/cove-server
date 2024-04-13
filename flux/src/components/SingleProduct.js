@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../index.css';
 
-const SingleProduct = ({ isLoggedIn, username }) => {
+//Try calling the set amount use state from here
+const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
     const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});
@@ -66,9 +67,8 @@ const SingleProduct = ({ isLoggedIn, username }) => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                console.log('Cart Response Data: ', responseData);
-                //Make a popup here saying added to cart 
-                // navigate('/cart');
+                console.log('Cart Response Data After Pressing the add button: ', responseData);
+                setCartItems(responseData);
             } else {
                 const errorData = await response.json();
                 console.error('Failed to add to Cart', errorData.message);
