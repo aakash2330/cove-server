@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Loader from '../functions/loader';
+// import Loader from '../functions/loader';
 import '../index.css';
 
-const Cart = ({ username }) => {
-    const [cartItems, setCartItems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+const Cart = ({ username, cartItems, setCartItems }) => {
     const token = localStorage.getItem('token');
     const [totalPrice, setTotalPrice] = useState(0);
-    // let totalPrice = 0;
+    // const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-   
-        // if (cartItems && Array.isArray(cartItems)) {
-        //     console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
-        //     for (let i = 0; i < cartItems.length; i++) {
-        //         // Check if cart[i] is not undefined before accessing its properties
-        //         if (cartItems[i] && cartItems[i].productPrice) {
-        //             totalPrice += cartItems[i].productPrice;
-        //         }
-        //     }
-        // }
-  
+    useEffect(() => {
+        // if (cartItems.length === 0) {
+        fetchCartData();
+    // }
+    //Running calculate total price to get the new value from the state
+    calculateTotalPrice();
+    }, [cartItems]);
 
-    //Fetching the items that are existing in the cart
-    const fetchCartData = async () => {
+      //Fetching the items that are existing in the cart
+      const fetchCartData = async () => {
         if (cartItems.length === 0) {
             try {
                 const response = await fetch(`http://localhost:3001/auth/user/cart`, {
@@ -43,22 +37,17 @@ const Cart = ({ username }) => {
             } catch (error) {
                 console.error('Error fetching cart data:', error);
                 setError('Could not fetch cart data');
-            } finally {
-                setLoading(false);
-            }
+            } 
+            // finally {
+                // setLoading(false);
+            // }
         }
     };
-
-    useEffect(() => {
-        fetchCartData();
-        //Running calculate total price to get the new value from the state
-        calculateTotalPrice();
-    }, [cartItems]);
 
     const deleteOneCart = async (cartId) => {
         try {
             //Setting loading to true before the request
-            setLoading(true);
+            // setLoading(true);
 
             const response = await fetch(`http://localhost:3001/auth/user/deleteOneCart`, {
                 method: 'DELETE',
@@ -72,15 +61,15 @@ const Cart = ({ username }) => {
             if (!response.ok) {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
-
+            const data = await response.json();
             //Removing the deleted item from cartItems state
             //Throwing the arrow function in setCarItems will make the parameter represent the last state as the argument
             setCartItems(prevItem => prevItem.filter(item => item._id !== cartId));
-            setLoading(false); //End loading after request
+            // setLoading(false); //End loading after request
         } catch (error) {
             console.error('Error deleting cart data:', error);
             setError('Could not delete cart data');
-            setLoading(false); //End loading after error
+            // setLoading(false); //End loading after error
         }
     }
 
@@ -166,10 +155,10 @@ const Cart = ({ username }) => {
         }
     }
 
-    //Come back to this. Make this do something else when loading
-    if (loading) {
-        return <Loader />;
-    }
+    //    //Come back to this. Make this do something else when loading
+    //    if (loading) {
+    //     return <Loader />;
+    // }
 
     if (error) {
         return <p>Error: {error}</p>;

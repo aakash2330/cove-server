@@ -129,8 +129,10 @@ router.delete('/deleteOneCart', authenticate, async (req, res) => {
         }
 
         await user.save();
+        // const cart = user.cart;
 
         res.status(201).json({ message: 'Product added deleted from cart' });
+        // res.json(cart);
     } catch (error) {
         console.error('Error deleting from cart: ', error.message);
         res.status(500).json({ error: 'Could not delete from cart' });

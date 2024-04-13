@@ -23,7 +23,9 @@ import './index.css';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
   const [username, setUsername] = useState('');
-
+  //Not sure if I will have better luck declaring this in cart, passing it to app then passing it down to navbar
+  const [cartItems, setCartItems] = useState([]);
+  
   //useEffect allows me to perform side functions in my component
   useEffect(() => {
     //Defining this in a component that is always rendered so it doesn't disappear on refresh
@@ -44,13 +46,14 @@ function App() {
 
   };
 
+
   return (
     //Allowing router to work across app.js
     <Router>
       <div className="App font-abc subpixel-antialiased text-gray-900 bg-white">
         <header className="App-header">
           {/* passing onLogout prop to Navbar to utilize the logout func */}
-          <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
+          <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} cartAmount={cartItems.length} />
         </header>
         <div className='content'>
           {/* Switch makes sure only one route is shown at a given time */}
@@ -104,7 +107,7 @@ function App() {
             />
             <Route path="/api/product/:productId" element={
               <>
-                <SingleProduct isLoggedIn={isLoggedIn} username={username} />
+                <SingleProduct isLoggedIn={isLoggedIn} username={username} setCartItems={setCartItems} />
                 <Comments isLoggedIn={isLoggedIn} username={username} />
               </>
             }
@@ -117,7 +120,7 @@ function App() {
             } />
             {/* You can change the other routes so they arent so revealing */}
             <Route path="/cart" element={
-              <Cart isLoggedIn={isLoggedIn} username={username} />
+              <Cart isLoggedIn={isLoggedIn} username={username} cartItems={cartItems} setCartItems={setCartItems} />
             } />
           </Routes>
           <Footer />
