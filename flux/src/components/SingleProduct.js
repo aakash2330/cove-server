@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../index.css';
@@ -34,7 +35,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
 
     const addToCart = async (productData) => {
         try {
-            const token = localStorage.getItem('token');
+            const token = Cookies.get('token');
             console.log('Getting token from singleProduct: ', token);
             const showUserName = username;
             console.log('Seeing if username has a value: ', showUserName);

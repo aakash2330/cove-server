@@ -1,10 +1,10 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
-
 //Updating the state values here for the login info
-const Login = ({ setIsLoggedIn, setUsername }) => {
+const Login = ({ setIsLoggedIn, setUsername, refetchCartData, setUserId }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -36,11 +36,11 @@ const Login = ({ setIsLoggedIn, setUsername }) => {
                 //setting the state of username to the associated username to use in Navbar
                 setUsername(username);
                 console.log('Lets see the value of Username: ', username);
-                //Save token to local storage for when the user makes a future request
-                localStorage.setItem('token', token);
+                //Saving token to cookies to avoid XSS attacks
+                Cookies.set('token', token, { expires: 1, secure: true });
                 //Saving the username as well so it is displayed and the state doesn't lose it on reload
                 localStorage.setItem('username', username);
-
+                refetchCartData();
                 //After login redirect to the home page
                 navigate('/');
             } else {

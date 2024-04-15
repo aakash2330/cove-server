@@ -57,9 +57,17 @@ router.post('/login', async (req, res, next) => {
             expiresIn: '1 hour'
         });
 
-        //Logging out if the token is expired
-        // if(token)
-        //Getting the username and the token 
+        // const refreshToken = jwt.sign({userId: user.id}, secreyKey, {
+        //     expiresIn: '1d'
+        // });
+
+        res.cookie('token', token, {
+            expires: new Date(Date.now() + 3600000), // Cookie expires in an hour
+            httpOnly: true, // Cookie only accessible by the server
+            secure: true, // Cookie is only sent over on HTTPs
+            sameSite: 'strict' // Prevent CSRF attacks
+        });
+
         res.json({ token, username: user.username });
 
     } catch (error) {
