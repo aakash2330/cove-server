@@ -1,54 +1,26 @@
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-// import Loader from '../functions/loader';
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { Link, useNavigate } from 'react-router-dom';
 import '../index.css';
 
-const Cart = ({ username, cartItems, setCartItems }) => {
-    const token = localStorage.getItem('token');
+
+
+const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, refetchCartData, userId }) => {
+    const token = Cookies.get('token');
     const [totalPrice, setTotalPrice] = useState(0);
-    // const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
-        // if (cartItems.length === 0) {
-        fetchCartData();
-    // }
-    //Running calculate total price to get the new value from the state
-    calculateTotalPrice();
-    }, [cartItems]);
+        //Utilizing the fetch statement from the parent component
+        refetchCartData();
+        //Running calculate total price to get the new value from the state
+        calculateTotalPrice();
+    }, [cartItems, isLoggedIn]);
 
-      //Fetching the items that are existing in the cart
-      const fetchCartData = async () => {
-        if (cartItems.length === 0) {
-            try {
-                const response = await fetch(`http://localhost:3001/auth/user/cart`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                        'Cache-Control': 'no-cache',
-                    },
-                });
-                if (!response.ok) {
-                    throw new Error(`Network response error: ${response.statusText}`);
-                }
-                const data = await response.json();
-                console.log('Cart Data from API:', data);
-                setCartItems(data);
-            } catch (error) {
-                console.error('Error fetching cart data:', error);
-                setError('Could not fetch cart data');
-            } 
-            // finally {
-                // setLoading(false);
-            // }
-        }
-    };
 
     const deleteOneCart = async (cartId) => {
         try {
             //Setting loading to true before the request
-            // setLoading(true);
-
             const response = await fetch(`http://localhost:3001/auth/user/deleteOneCart`, {
                 method: 'DELETE',
                 headers: {
@@ -65,18 +37,35 @@ const Cart = ({ username, cartItems, setCartItems }) => {
             //Removing the deleted item from cartItems state
             //Throwing the arrow function in setCarItems will make the parameter represent the last state as the argument
             setCartItems(prevItem => prevItem.filter(item => item._id !== cartId));
-            // setLoading(false); //End loading after request
         } catch (error) {
             console.error('Error deleting cart data:', error);
             setError('Could not delete cart data');
-            // setLoading(false); //End loading after error
         }
     }
 
-    const checkoutCart = async () => {
-        console.log('Checkout for now!');
-
+    const checkoutCart = () => {
+        fetch('http://localhost:3001/auth/payment/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                items: cartItems 
+            })
+        }).then(async (res) => {
+            if (res.ok) {
+                const checkout = await res.json();
+                console.log(checkout);
+                window.location = checkout.url;
+            } else {
+                return res.json().then(json => Promise.reject(json));
+            }
+        }).catch(e => {
+            console.error(e);
+        });
     }
+    
 
     const calculateTotalPrice = () => {
         let addedValue = 0;
@@ -92,13 +81,12 @@ const Cart = ({ username, cartItems, setCartItems }) => {
                 }
             }
             console.log('Is total Price updating the price?: ', totalPrice);
-           setTotalPrice(addedValue);
+            setTotalPrice(addedValue);
         }
     }
 
     const quantityUpdater = async (prodId, img, title, price, size, quantity, updatedQuantity) => {
         try {
-            const token = localStorage.getItem('token');
             console.log('Getting token from singleProduct: ', token);
             const showUserName = username;
             console.log('Seeing if username has a value: ', showUserName);
@@ -155,26 +143,21 @@ const Cart = ({ username, cartItems, setCartItems }) => {
         }
     }
 
-    //    //Come back to this. Make this do something else when loading
-    //    if (loading) {
-    //     return <Loader />;
-    // }
-
-    if (error) {
-        return <p>Error: {error}</p>;
-    }
 
     //Check if product is defined before accessing its properties
     //Array.isArray is a built in method to check to see if something is an array
     if (!Array.isArray(cartItems) || cartItems.length === 0) {
         return (
-            <>
-                <p>Shopping Cart</p>
-                <p>You have nothing in your shopping cart</p>
+            <div className='flex flex-col justify-center items-center my-8'>
+                <p className='text-2xl font-semibold uppercase'>Shopping Cart</p>
+                <p className='text-xl mt-4'>You have nothing in your shopping cart</p>
+                <p className="my-4">
+                    <HiOutlineShoppingBag size={30} />
+                </p>
                 <Link to={`/shop`}>
-                    <button className='bg-black text-white'>Continue Shopping</button>
+                    <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-4'>Continue Shopping</button>
                 </Link>
-            </>
+            </div>
         );
     }
     // Add cart item price adding functionalities 

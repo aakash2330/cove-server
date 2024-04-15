@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const cors = require('cors');
-
 require('dotenv').config();
 
 const PORT =process.env.PORT || 3001;
@@ -11,9 +10,9 @@ const app = express();
 const mongo = require('./config/connection');
 const MongoStore = require('connect-mongo')(session);
 
-// Enable CORS for all routes
+// Enable CORS 
 app.use(cors({
-    origin: 'http://localhost:3000', // Adjust to match your React app's URL
+    origin: 'http://localhost:3000', // Using cors on localhost 3000 so it can talk to 3001
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
   }));
   

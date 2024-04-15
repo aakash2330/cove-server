@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +38,7 @@ const Register = ({ setIsLoggedIn, setUsername }) => {
                 setIsLoggedIn(true);
                 console.log('Lets see the value of Username: ', username);
                 //Save token to local storage for when the user makes a future request
-                localStorage.setItem('token', token);
+                Cookies.set('token', token, { expires: 1, secure: true });
                 //Saving the username as well so it is displayed and the state doesn't lose it on reload
                 localStorage.setItem('username', username);
                 setUsername(username);
