@@ -12,22 +12,22 @@ function FooterAd () {
 <img
         src={grid1}
         alt='hero banner'
-        className='object-cover h-[410px] w-full'
+        className='object-cover h-[210px] md:h-[410px] w-full'
     />
 <img
         src={grid2}
         alt='hero banner'
-        className='object-cover h-[410px] w-full'
+        className='object-cover h-[210px] md:h-[410px] w-full'
     />
 <img
         src={grid3}
         alt='hero banner'
-        className='object-cover h-[410px] w-full'
+        className='object-cover h-[210px] md:h-[410px] w-full'
     />
 <img
         src={grid4}
         alt='hero banner'
-        className='object-cover h-[410px] w-full'
+        className='object-cover h-[210px] md:h-[410px] w-full'
     />
 </div>
     );

@@ -55,11 +55,7 @@ router.post('/login', async (req, res, next) => {
         //Saving the userid as userId to be used later
         const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '1 hour'
-        });
-
-        // const refreshToken = jwt.sign({userId: user.id}, secreyKey, {
-        //     expiresIn: '1d'
-        // });
+        })
 
         res.cookie('token', token, {
             expires: new Date(Date.now() + 3600000), // Cookie expires in an hour

@@ -3,6 +3,7 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 //Need to change this from localhost after deployment
 const CLIENT_URL = process.env.CLIENT_URL;
+
 router.post('/create-checkout-session', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
@@ -13,7 +14,8 @@ router.post('/create-checkout-session', async (req, res) => {
         return {
           price_data: {
             currency: 'usd',
-            unit_amount: item.productPrice,
+            //Stripe deals with prices in cents so this will transform it back to its original price
+            unit_amount: item.productPrice * 100,
             product_data: {
               name: item.productTitle,
               description: `Size: ${item.productSize}`,

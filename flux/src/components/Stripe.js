@@ -1,12 +1,25 @@
-import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { PaymentElement, useStripe } from '@stripe/react-stripe-js';
 import React from 'react';
 import '../index.css';
 
 //Updating the state values here for the login info
 const Stripe = () => {
-
+// Set up appearance changes
+const appearance = {
+    theme: 'flat',
+    variables: {
+      fontFamily: 'sans-serif',
+      fontLineHeight: '1.5',
+      borderRadius: '10px',
+      colorBackground: '#F6F8FA',
+      accessibleColorOnColorPrimary: '#262626'
+    },
+  };
+  
+  // Initialize Stripe Elements with appearance
+  const elements = stripe.elements({ appearance });
     const stripe = useStripe();
-    const elements= useElements();
+    // const elements= useElements();
 
     const handleSubmit = async (e) => {
         //Prevent page refresh
