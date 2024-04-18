@@ -130,9 +130,9 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
                 <p className='px-2 text-base font-light'>{product.title}</p>
             </div>
             {/*product picture */}
-            <div className='flex flex-row m-8'>
+            <div className='flex flex-col md:flex-row m-8'>
 
-                <div className='grow m-8 w-[669px] h-[444px] bg-[#efefef]'>
+                <div className='grow mb-8 md:mb-0 md:mr-8 w-full md:w-[669px] md:h-[444px] bg-[#efefef]'>
                     <img
                         src={`/${product.img}`}
                         alt='placeholder template'
@@ -180,7 +180,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
                             </div>
                         </>
                     ) : (
-                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8' onClick={handleSignIn}>Sign in to add to Cart</button>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-8 md:text-base sm:tex-sm' onClick={handleSignIn}>Sign in to add to Cart</button>
                     )}
                 </div>
 

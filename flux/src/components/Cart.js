@@ -44,6 +44,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
     }
 
     const checkoutCart = () => {
+
         fetch('http://localhost:3001/auth/payment/create-checkout-session', {
             method: 'POST',
             headers: {
@@ -165,14 +166,14 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
     // then checkout button.
     return (
         <div className='m-4'>
-            <div className='ml-8 mb-6'>
+            <div className=' ml-4 md:ml-8 mb-6'>
                 <p className='text-2xl font-semibold uppercase'>Shopping Cart</p>
             </div>
             <div className='flex flex-col'>
                 {/* Product Information */}
                 {/* Trying to retrieve index number */}
                 {cartItems.map((item, index) => (
-                    <div key={item.productId} className='flex flex-col grow mx-8 h-1/3'>
+                    <div key={item.productId} className='flex flex-col grow mx-4 md:mx-8 h-1/3'>
                         <div className='flex flex-row'>
                             <div className='flex flex-row grow-2'>
                                 <img
@@ -181,9 +182,9 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
                                     className='object-scale-down w-[150px] h-[150px] bg-[#efefef]'
                                 />
                                 <div className='flex-col ml-4'>
-                                    <p className='text-base font-medium mt-4'>{item.productTitle}</p>
+                                    <p className='text-sm md:text-base font-medium mt-4'>{item.productTitle}</p>
                                     {/* change this to product size when fixed */}
-                                    <p className='my-1 text-sm font-light'>Item Amount: {item.quantity}</p>
+                                    <p className='my-1 text-sm font-light'>Amount: {item.quantity}</p>
                                     <p className='my-1 text-sm font-light text-gray-600'>Size: {item.productSize}</p>
                                 </div>
                             </div>

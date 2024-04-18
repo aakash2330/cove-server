@@ -26,11 +26,11 @@ import './index.css';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
   const [username, setUsername] = useState('');
-  //Not sure if I will have better luck declaring this in cart, passing it to app then passing it down to navbar
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
-  //navigate directories
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //navigate directories
+  const timeout = 60 * 60 * 1000;
+  let logoutTimer; // Variable to be used in logout timer functions
 
   //useEffect allows me to perform side functions in my component
   useEffect(() => {
@@ -42,14 +42,15 @@ function App() {
       setIsLoggedIn(true);
       setUsername(username);
       fetchCartData();
+      startLogoutTimer(); // starts timer once we log in
     }
   }, []); //Only fetches these once
 
   const handleLogout = () => {
     try {
+      clearTimeout(logoutTimer); //clearing timer so it doesnt trigger the logout function when signed out
       setIsLoggedIn(false);
-      setUsername();
-
+      setUsername('');
       Cookies.remove('token');
       localStorage.removeItem('username');
       //After logout redirect to the home page
@@ -61,6 +62,14 @@ function App() {
       console.error('Error during logout: ', error.message);
     }
   };
+
+
+  const startLogoutTimer = () => {
+    // setTimeout(callbackFunction, delay); so we run logout after delay 
+    logoutTimer = setTimeout(() => {
+      handleLogout();
+    }, timeout); // delay of 1 hour
+  }
 
   //Fetching the items that are existing in the cart
   const fetchCartData = async () => {
