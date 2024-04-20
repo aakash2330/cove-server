@@ -28,9 +28,10 @@ function App() {
   const [username, setUsername] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
+  const [autoLogout, setAutoLogout] = useState(false);
   const navigate = useNavigate(); //navigate directories
-  const timeout = 60 * 60 * 1000;
-  let logoutTimer; // Variable to be used in logout timer functions
+  // const timeout = 10 * 1000; //currently testing for 10 seconds
+  // let logoutTimer; // Variable to be used in logout timer functions
 
   //useEffect allows me to perform side functions in my component
   useEffect(() => {
@@ -42,13 +43,20 @@ function App() {
       setIsLoggedIn(true);
       setUsername(username);
       fetchCartData();
-      startLogoutTimer(); // starts timer once we log in
+      // startLogoutTimer(); // starts timer once we log in
     }
   }, []); //Only fetches these once
 
+  useEffect(() => {
+    if(autoLogout) {
+      handleLogout();
+    }
+  }, [autoLogout]);
+
   const handleLogout = () => {
     try {
-      clearTimeout(logoutTimer); //clearing timer so it doesnt trigger the logout function when signed out
+      // clearTimeout(logoutTimer); //clearing timer so it doesnt trigger the logout function when signed out'
+      setAutoLogout(false);
       setIsLoggedIn(false);
       setUsername('');
       Cookies.remove('token');
@@ -64,12 +72,14 @@ function App() {
   };
 
 
-  const startLogoutTimer = () => {
-    // setTimeout(callbackFunction, delay); so we run logout after delay 
-    logoutTimer = setTimeout(() => {
-      handleLogout();
-    }, timeout); // delay of 1 hour
-  }
+  // const startLogoutTimer = () => {
+  //   console.log('timer starting');
+  //   // setTimeout(callbackFunction, delay); so we run logout after delay 
+  //   logoutTimer = setTimeout(() => {
+  //     console.log('Logging out');
+  //     handleLogout();
+  //   }, timeout); // delay of 1 hour
+  // }
 
   //Fetching the items that are existing in the cart
   const fetchCartData = async () => {
@@ -168,10 +178,10 @@ function App() {
           }
           />
           <Route path="/auth/login" element={
-            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} refetchCartData={refetchCartData} />
+            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} refetchCartData={refetchCartData} setAutoLogout={setAutoLogout} />
           } />
           <Route path="/auth/register" element={
-            <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
+            <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} setAutoLogout={setAutoLogout} />
           } />
           {/* You can change the other routes so they arent so revealing */}
           <Route path="/cart" element={

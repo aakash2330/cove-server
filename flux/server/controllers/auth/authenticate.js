@@ -9,6 +9,7 @@ const { authenticate, secretKey } = require('../../middleware/Auth');
 
 //Register a new user
 router.post('/register', async (req, res, next) => {
+    let logoutOnExpire;
     const { username, email, password } = req.body;
 
     try {
@@ -21,11 +22,24 @@ router.post('/register', async (req, res, next) => {
         const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '1 hour'
         });
+
+        res.cookie('token', token, {
+            expires: new Date(Date.now() + 604800000), // Cookie expires in 7 days
+            httpOnly: true, // Cookie only accessible by the server
+            secure: true, // Cookie is only sent over on HTTPs
+            sameSite: 'strict' // Prevent CSRF attacks
+        });
+
+        if(token.exp) {
+            logoutOnExpire = true;
+        }
+
         //Getting the username and the token 
         res.json({
             message: 'Account Created!',
             token,
-            username
+            username,
+            logoutOnExpire
         });
 
     } catch (error) {
@@ -35,12 +49,13 @@ router.post('/register', async (req, res, next) => {
 
 //Login with an existing user
 router.post('/login', async (req, res, next) => {
+    let logoutOnExpire;
     const { email, password } = req.body;
     console.log(req.body);
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Invalid username or email. Please try again.' });
         }
 
         console.log('User Found: ', user);
@@ -58,13 +73,17 @@ router.post('/login', async (req, res, next) => {
         })
 
         res.cookie('token', token, {
-            expires: new Date(Date.now() + 3600000), // Cookie expires in an hour
+            expires: new Date(Date.now() + 604800000), // 7 days in millisec (7 x 24 x 60 x 60 x 1000)
             httpOnly: true, // Cookie only accessible by the server
             secure: true, // Cookie is only sent over on HTTPs
             sameSite: 'strict' // Prevent CSRF attacks
         });
 
-        res.json({ token, username: user.username });
+        if(token.exp) {
+            logoutOnExpire = true;
+        }
+
+        res.json({ token, username: user.username, logoutOnExpire });
 
     } catch (error) {
         next(error);

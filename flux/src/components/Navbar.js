@@ -8,21 +8,20 @@ import '../index.css';
 
 //Taking the actual state values to use here
 const Navbar = ({ isLoggedIn, username, onLogout, cartAmount }) => {
-
     const [toggleMenu, setToggleMenu] = useState(false);
 
     const menuSelect = () => {
         setToggleMenu(!toggleMenu);
     }
-
+    
     return (
         <nav className='flex justify-between md:px-10 text-base font-thin tracking-wide py-5'>
             {/* Hamburger Menu */}
             <div className='lg:hidden grow md:justify-center'>
                 {!toggleMenu ?
                     (
-                        <div className='lg:hidden md:flex md:grow'>
-                            <button onClick={menuSelect} className='md:flex md:items-center py-2'>
+                        <div className='lg:hidden flex grow'>
+                            <button onClick={menuSelect} className='flex items-center py-3 md:py-2'>
                                 <RxHamburgerMenu size={20} />
                             </button>
                         </div>
@@ -74,16 +73,18 @@ const Navbar = ({ isLoggedIn, username, onLogout, cartAmount }) => {
                 </Link>
             </div>
             {/* Flux Logo Text */}
-            <div className='grow w-1 md:self-center text-center items-center py-1 lg:text-2xl text-lg font-medium tracking-widest'>
+            <div className='flex grow w-1 self-center text-center justify-center items-center py-1 lg:text-2xl text-lg font-medium tracking-widest'>
                 <p>FluxCove</p>
             </div>
             {/* Instagram icon */}
-            <div className='flex flex-row grow-2 md:grow md:w-1 items-center justify-end space-x-2 md:space-x-4 text-sm'>
+            <div className='flex flex-row grow w-1 items-center justify-end md:space-x-2 space-x-4 text-sm'>
+                <div className='hidden lg:flex'>
                 <AiOutlineInstagram size={20} />
+                </div>
                 {/* If log in is true then show the following else show sign up */}
                 {isLoggedIn ? (
                     <>
-                        <p className='font-semibold text-xs md:text-sm'>Hi, {username}</p>
+                        <p className='hidden md:flex md:flex-row md:font-semibold md:text-sm'>Hi, {username}</p>
                         <div className='modal'>
                             <p className='border-transparent border-b hover:border-black py-1 text-xs md:text-sm font-light' onClick={onLogout}>Sign Out</p>
                         </div>
