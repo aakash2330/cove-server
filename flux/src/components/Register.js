@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 //Updating the state values here for the register
-const Register = ({ setIsLoggedIn, setUsername }) => {
+const Register = ({ setIsLoggedIn, setUsername, setAutoLogout }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -33,9 +33,10 @@ const Register = ({ setIsLoggedIn, setUsername }) => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                const { token, username } = responseData;
+                const { token, username, logoutOnExpire } = responseData;
                 console.log('Response Data: ', responseData);
                 setIsLoggedIn(true);
+                setAutoLogout(logoutOnExpire);
                 console.log('Lets see the value of Username: ', username);
                 //Save token to local storage for when the user makes a future request
                 Cookies.set('token', token, { expires: 1, secure: true });

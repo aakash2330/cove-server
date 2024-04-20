@@ -25,7 +25,7 @@ function HomeDisplay() {
                         className='object-cover w-full h-auto lg:w-[692.984px] lg:h-[518px] pr-8'
                     />
                     <a href='/api/product/category/sneakers'>
-                        <button className='font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2 w-1/2 md:w-1/3'>Sneakers</button>
+                        <button className='font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-auto mt-2 w-1/2'>Sneakers</button>
                     </a>
                 </motion.div>
                 <motion.div
@@ -42,7 +42,7 @@ function HomeDisplay() {
                         className='object-cover w-full h-auto lg:w-[692.984px] lg:h-[518px] pr-8 md:mx-auto'
                     />
                     <a href='/api/product/category/heels'>
-                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2 w-1/2 md:w-1/3'>Heels</button>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-auto mt-2 w-1/2'>Heels</button>
                     </a>
                 </motion.div>
                 <motion.div
@@ -59,7 +59,7 @@ function HomeDisplay() {
                         className='object-cover w-full h-auto lg:w-[692.984px] lg:h-[518px] pr-8 md:mx-auto'
                     />
                     <a href='/api/product/category/sandals'>
-                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2 w-1/2 md:w-1/3'>Sandals</button>
+                        <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-auto mt-2 w-1/2'>Sandals</button>
                     </a>
                 </motion.div>
             </div>
