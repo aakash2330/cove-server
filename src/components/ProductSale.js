@@ -18,7 +18,7 @@ const ProductSale = () => {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log('Data from API:', data);
+                // console.log('Data from API:', data);
                 setProducts(data);
                 // }
             } catch (error) {

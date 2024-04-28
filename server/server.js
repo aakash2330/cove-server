@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 require('dotenv').config();
 
 const PORT =process.env.PORT || 3001;
@@ -40,6 +42,8 @@ app.use(express.json());
 //Middleware for parsing urlencoded form data
 app.use(express.urlencoded({extended: false }));
 
+//Middleware for parsing cookies
+app.use(cookieParser());
 
 // Serve static files from the build folder (where react would create static files)
 app.use(express.static(path.join(__dirname, '../build')));

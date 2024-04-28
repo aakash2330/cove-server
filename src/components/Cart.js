@@ -1,15 +1,14 @@
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../index.css';
 
 
-
-const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, refetchCartData, userId }) => {
+const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetchCartData }) => {
     const token = Cookies.get('token');
     const [totalPrice, setTotalPrice] = useState(0);
-    const navigate = useNavigate();
+
     useEffect(() => {
         //Utilizing the fetch statement from the parent component
         refetchCartData();
@@ -17,6 +16,37 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
         calculateTotalPrice();
     }, [cartItems, isLoggedIn]);
 
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+    const successParam = urlParams.get('checkout-success');
+    if (successParam === 'true') {
+      checkoutDelete();
+    }
+    },[cartItems]); //Removed the dependency array so that this will run after any render
+
+    const checkoutDelete = async () => {
+        try {
+            //Setting loading to true before the request
+            const response = await fetch(`http://localhost:3001/auth/user/remove-checkout`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Cache-Control': 'no-cache', // This tells server not to use Cached Response
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Network response error: ${response.statusText}`);
+            }
+            const data = await response.json();
+            // console.log('Data that should be deleted: ', data);
+            setCartItems(data); 
+        } catch (error) {
+            console.error('Error deleting cart data:', error);
+            setError('Could not delete cart data');
+        }
+    }
 
     const deleteOneCart = async (cartId) => {
         try {
@@ -33,7 +63,6 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
             if (!response.ok) {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
-            const data = await response.json();
             //Removing the deleted item from cartItems state
             //Throwing the arrow function in setCarItems will make the parameter represent the last state as the argument
             setCartItems(prevItem => prevItem.filter(item => item._id !== cartId));
@@ -57,7 +86,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
         }).then(async (res) => {
             if (res.ok) {
                 const checkout = await res.json();
-                console.log(checkout);
+                // console.log(checkout);
                 window.location = checkout.url;
             } else {
                 return res.json().then(json => Promise.reject(json));
@@ -70,29 +99,29 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
 
     const calculateTotalPrice = () => {
         let addedValue = 0;
-        console.log('Calculate total price received and running');
+        // console.log('Calculate total price received and running');
         // Check if cart is defined and is an array
         if (cartItems && Array.isArray(cartItems)) {
             let totalPrice = 0;
-            console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
+            // console.log('This is to check the calculated price to see if cartItems is actually printing something worth while: ', cartItems);
             for (let i = 0; i < cartItems.length; i++) {
                 // Check if cart[i] is not undefined before accessing its properties
                 if (cartItems[i] && cartItems[i].productPrice) {
                     addedValue += cartItems[i].productPrice;
                 }
             }
-            console.log('Is total Price updating the price?: ', totalPrice);
+            // console.log('Is total Price updating the price?: ', totalPrice);
             setTotalPrice(addedValue);
         }
     }
 
     const quantityUpdater = async (prodId, img, title, price, size, quantity, updatedQuantity) => {
         try {
-            console.log('Getting token from singleProduct: ', token);
+            // console.log('Getting token from singleProduct: ', token);
             const showUserName = username;
-            console.log('Seeing if username has a value: ', showUserName);
+            // console.log('Seeing if username has a value: ', showUserName);
             const showProductId = prodId;
-            console.log('Seeing if product id has a value: ', showProductId);
+            // console.log('Seeing if product id has a value: ', showProductId);
 
             if (!token) {
                 throw new Error('Authentication token not found');
@@ -123,7 +152,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, error, 
             const updatedData = await response.json();
 
             setCartItems(updatedData);
-            console.log('updated data:', updatedData);
+            // console.log('updated data:', updatedData);
             //Calculate the new total price
             calculateTotalPrice();
         } catch (error) {

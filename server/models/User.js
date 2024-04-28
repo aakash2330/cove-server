@@ -39,10 +39,10 @@ const userSchema = new Schema({
 
     //Using .pre method to define middleware (hashing before info enters the db)
 userSchema.pre('save', async function (next) {
-    console.log('Save middleware registered!!');
+    // console.log('Save middleware registered!!');
     const user = this;
-    console.log('Is password modified?', user.isModified('password')); // Log if the password is modified
-    console.log('User password:', user.password); // Log the user's password before hashing
+    // console.log('Is password modified?', user.isModified('password')); // Log if the password is modified
+    // console.log('User password:', user.password); // Log the user's password before hashing
     //Only perform hashing if a password is present
     if(!user.isModified('password') || !user.password) {
         return next();
@@ -51,7 +51,7 @@ userSchema.pre('save', async function (next) {
     try {
         const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
         user.password = await bcrypt.hash(user.password, salt);
-        console.log('Hashed password: ', user.password);
+        // console.log('Hashed password: ', user.password);
 
         return next();
     }catch(error) {

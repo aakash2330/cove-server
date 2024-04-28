@@ -21,7 +21,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log('Data from API:', data);
+                // console.log('Data from API:', data);
                 setProduct(data);
                 // }
             } catch (error) {
@@ -36,11 +36,11 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
     const addToCart = async (productData) => {
         try {
             const token = Cookies.get('token');
-            console.log('Getting token from singleProduct: ', token);
-            const showUserName = username;
-            console.log('Seeing if username has a value: ', showUserName);
-            const showProductId = productId;
-            console.log('Seeing if product id has a value: ', showProductId);
+            // console.log('Getting token from singleProduct: ', token);
+            // const showUserName = username;
+            // console.log('Seeing if username has a value: ', showUserName);
+            // const showProductId = productId;
+            // console.log('Seeing if product id has a value: ', showProductId);
 
             const selectSizeEl = document.getElementById('shoe-size');
             const size = selectSizeEl.value;
@@ -68,7 +68,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                console.log('Cart Response Data After Pressing the add button: ', responseData);
+                // console.log('Cart Response Data After Pressing the add button: ', responseData);
                 setCartItems(responseData);
             } else {
                 const errorData = await response.json();

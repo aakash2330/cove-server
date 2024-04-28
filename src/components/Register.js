@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 //Updating the state values here for the register
-const Register = ({ setIsLoggedIn, setUsername, setAutoLogout }) => {
+const Register = ({ setIsLoggedIn, setUsername }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -33,11 +33,10 @@ const Register = ({ setIsLoggedIn, setUsername, setAutoLogout }) => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                const { token, username, logoutOnExpire } = responseData;
-                console.log('Response Data: ', responseData);
+                const { token, username } = responseData;
+                // console.log('Response Data: ', responseData);
                 setIsLoggedIn(true);
-                setAutoLogout(logoutOnExpire);
-                console.log('Lets see the value of Username: ', username);
+                // console.log('Lets see the value of Username: ', username);
                 //Save token to local storage for when the user makes a future request
                 Cookies.set('token', token, { expires: 1, secure: true });
                 //Saving the username as well so it is displayed and the state doesn't lose it on reload
@@ -59,13 +58,13 @@ const Register = ({ setIsLoggedIn, setUsername, setAutoLogout }) => {
     const handleInputChange = (e) => {
         if (e.target.name === 'createUsername') {
             setCreateUsername(e.target.value);
-            console.log("Creating username now: ", createUsername);
+            // console.log("Creating username now: ", createUsername);
         } else if (e.target.name === 'email') {
             setEmail(e.target.value);
-            console.log("Checking the email now: ", email);
+            // console.log("Checking the email now: ", email);
         } else if (e.target.name === 'password') {
             setPassword(e.target.value);
-            console.log("Checking the password now: ", password);
+            // console.log("Checking the password now: ", password);
         }
     };
 
