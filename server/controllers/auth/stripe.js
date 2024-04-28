@@ -7,10 +7,10 @@ const CLIENT_URL = process.env.CLIENT_URL;
 router.post('/create-checkout-session', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'], 
+      payment_method_types: ['card'],
       line_items: req.body.items.map(item => {
-        console.log(item.productTitle);
-        console.log(item.quantity);
+        // console.log(item.productTitle);
+        // console.log(item.quantity);
         return {
           price_data: {
             currency: 'usd',
@@ -26,13 +26,15 @@ router.post('/create-checkout-session', async (req, res) => {
         }
       }),
       mode: 'payment',
-      success_url: `${CLIENT_URL}/cart`,
+      success_url: `${CLIENT_URL}/cart?checkout-success=true`,
       cancel_url: `${CLIENT_URL}/cart`,
     });
 
+    // console.log('Checking the stripe session: ', session);
     res.json({ url: session.url });
-  } catch(e) {
-    res.status(500).json({ error: e.message });
+  } catch (e) {
+    console.error('Error creating checkout session:', e);
+    res.status(500).json({ error: 'Error creating checkout session' });
   }
 });
 

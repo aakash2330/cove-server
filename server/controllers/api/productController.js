@@ -14,7 +14,7 @@ router.get( '/:productId', async (req, res) => {
             return res.status(404).json({ error: 'Product not found'});
         }
         res.json(product);
-        console.log(product);
+        // console.log(product);
     } catch (error) {
         console.error('Error catching single product: ', error);
         res.status(500).json({ error: 'Could not fetch single product'});

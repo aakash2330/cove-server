@@ -4,7 +4,7 @@ import { HiOutlineShoppingBag } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 //Updating the state values here for the login info
-const Login = ({ setIsLoggedIn, setUsername, refetchCartData, setAutoLogout }) => {
+const Login = ({ setIsLoggedIn, setUsername, refetchCartData }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -31,12 +31,11 @@ const Login = ({ setIsLoggedIn, setUsername, refetchCartData, setAutoLogout }) =
 
             if (response.ok) {
                 const responseData = await response.json();
-                const { token, username, logoutOnExpire } = responseData;
-                console.log('Response Data: ', responseData);
+                const { token, username } = responseData;
+                // console.log('Response Data: ', responseData);
                 setIsLoggedIn(true);
                 setUsername(username); //setting the state of username to the associated username to use in Navbar
-                setAutoLogout(logoutOnExpire) //getting the value true when token expires
-                console.log('Lets see the value of Username: ', username);
+                // console.log('Lets see the value of Username: ', username);
                 //Saving token to cookies to avoid XSS attacks
                 Cookies.set('token', token, { expires: 7, secure: true });
                 //Saving the username as well so it is displayed and the state doesn't lose it on reload
@@ -59,10 +58,10 @@ const Login = ({ setIsLoggedIn, setUsername, refetchCartData, setAutoLogout }) =
     const handleInputChange = (e) => {
         if (e.target.name === 'email') {
             setEmail(e.target.value);
-            console.log('Checking the email now: ', email);
+            // console.log('Checking the email now: ', email);
         } else if (e.target.name === 'password') {
             setPassword(e.target.value);
-            console.log('Checking the password now: ', password);
+            // console.log('Checking the password now: ', password);
         }
     };
 

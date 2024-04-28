@@ -4,7 +4,6 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Advertisement from './components/Advertisement';
 import Cart from './components/Cart';
-import CheckoutSuccess from './components/CheckoutSuccess';
 import Collection from './components/Collection';
 import Comments from './components/Comments';
 import Contact from './components/Contact';
@@ -28,58 +27,32 @@ function App() {
   const [username, setUsername] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
-  const [autoLogout, setAutoLogout] = useState(false);
   const navigate = useNavigate(); //navigate directories
-  // const timeout = 10 * 1000; //currently testing for 10 seconds
-  // let logoutTimer; // Variable to be used in logout timer functions
 
   //useEffect allows me to perform side functions in my component
   useEffect(() => {
-    //Defining this in a component that is always rendered so it doesn't disappear on refresh
-    const username = localStorage.getItem('username');
-    //Checking to see if a token still exists in cookies then logging in a user based on that
-    const token = Cookies.get('token');
+    const username = localStorage.getItem('username'); //Defining this in a component that is always rendered so it doesn't disappear on refresh
+    const token = Cookies.get('token'); //Checking to see if a token still exists in cookies then logging in a user based on that
     if (token) {
       setIsLoggedIn(true);
       setUsername(username);
       fetchCartData();
-      // startLogoutTimer(); // starts timer once we log in
     }
   }, []); //Only fetches these once
 
-  useEffect(() => {
-    if(autoLogout) {
-      handleLogout();
-    }
-  }, [autoLogout]);
 
   const handleLogout = () => {
     try {
-      // clearTimeout(logoutTimer); //clearing timer so it doesnt trigger the logout function when signed out'
-      setAutoLogout(false);
       setIsLoggedIn(false);
       setUsername('');
       Cookies.remove('token');
       localStorage.removeItem('username');
-      //After logout redirect to the home page
-      navigate('/');
-      //Setting carts to 0 on logout
-      setCartItems([]);
-
+      navigate('/'); //After logout redirect to the home page
+      setCartItems([]); //Setting carts to 0 on logout
     } catch (error) {
       console.error('Error during logout: ', error.message);
     }
   };
-
-
-  // const startLogoutTimer = () => {
-  //   console.log('timer starting');
-  //   // setTimeout(callbackFunction, delay); so we run logout after delay 
-  //   logoutTimer = setTimeout(() => {
-  //     console.log('Logging out');
-  //     handleLogout();
-  //   }, timeout); // delay of 1 hour
-  // }
 
   //Fetching the items that are existing in the cart
   const fetchCartData = async () => {
@@ -97,7 +70,7 @@ function App() {
           throw new Error(`Network response error: ${response.statusText}`);
         }
         const data = await response.json();
-        console.log('Cart Data from API:', data);
+        // console.log('Cart Data from API:', data);
         setCartItems(data);
       } catch (error) {
         console.error('Error fetching cart data:', error);
@@ -178,18 +151,15 @@ function App() {
           }
           />
           <Route path="/auth/login" element={
-            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} refetchCartData={refetchCartData} setAutoLogout={setAutoLogout} />
+            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} refetchCartData={refetchCartData} />
           } />
           <Route path="/auth/register" element={
-            <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} setAutoLogout={setAutoLogout} />
+            <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
           } />
           {/* You can change the other routes so they arent so revealing */}
           <Route path="/cart" element={
             <Cart isLoggedIn={isLoggedIn} username={username} cartItems={cartItems}
               setCartItems={setCartItems} setError={setError} error={error} refetchCartData={refetchCartData} />
-          } />
-          <Route path="/checkout-success" element={
-            <CheckoutSuccess />
           } />
           <Route path="*" element={
             <NotFound />

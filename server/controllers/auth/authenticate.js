@@ -9,7 +9,6 @@ const { authenticate, secretKey } = require('../../middleware/Auth');
 
 //Register a new user
 router.post('/register', async (req, res, next) => {
-    let logoutOnExpire;
     const { username, email, password } = req.body;
 
     try {
@@ -18,9 +17,9 @@ router.post('/register', async (req, res, next) => {
         await user.save();
 
         //Trying to auto-log you in
-        console.log('User Created!');
+        // console.log('User Created!');
         const token = jwt.sign({ userId: user._id }, secretKey, {
-            expiresIn: '1 hour'
+            expiresIn: '7d'
         });
 
         res.cookie('token', token, {
@@ -30,16 +29,11 @@ router.post('/register', async (req, res, next) => {
             sameSite: 'strict' // Prevent CSRF attacks
         });
 
-        if(token.exp) {
-            logoutOnExpire = true;
-        }
-
         //Getting the username and the token 
         res.json({
             message: 'Account Created!',
             token,
             username,
-            logoutOnExpire
         });
 
     } catch (error) {
@@ -49,19 +43,18 @@ router.post('/register', async (req, res, next) => {
 
 //Login with an existing user
 router.post('/login', async (req, res, next) => {
-    let logoutOnExpire;
     const { email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     try {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'Invalid username or email. Please try again.' });
         }
 
-        console.log('User Found: ', user);
+        // console.log('User Found: ', user);
 
         const passwordMatch = await user.comparePassword(password);
-        console.log('Password Match: ', passwordMatch);
+        // console.log('Password Match: ', passwordMatch);
 
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Incorrect password' });
@@ -69,7 +62,7 @@ router.post('/login', async (req, res, next) => {
 
         //Saving the userid as userId to be used later
         const token = jwt.sign({ userId: user._id }, secretKey, {
-            expiresIn: '1 hour'
+            expiresIn: '7d'
         })
 
         res.cookie('token', token, {
@@ -79,16 +72,14 @@ router.post('/login', async (req, res, next) => {
             sameSite: 'strict' // Prevent CSRF attacks
         });
 
-        if(token.exp) {
-            logoutOnExpire = true;
-        }
 
-        res.json({ token, username: user.username, logoutOnExpire });
+        res.json({ token, username: user.username });
 
     } catch (error) {
         next(error);
     }
 });
+
 
 //Middleware to ensure authenticated access
 router.use(authenticate);

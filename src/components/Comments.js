@@ -16,7 +16,7 @@ const Comments = ({ isLoggedIn, username }) => {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
             const data = await response.json();
-            console.log('Comment Data from API:', data);
+            // console.log('Comment Data from API:', data);
             setComments(data.comments);
         } catch (error) {
             console.error('Error fetching data:', error.message);
@@ -32,7 +32,7 @@ const Comments = ({ isLoggedIn, username }) => {
     const handleInputChange = (e) => {
         if (e.target.name === 'newComment') {
             setNewComment(e.target.value);
-            console.log('Adding comment now: ', newComment);
+            // console.log('Adding comment now: ', newComment);
         }
     };
     // Handling the submission
@@ -53,8 +53,8 @@ const Comments = ({ isLoggedIn, username }) => {
             });
 
             if (response.ok) {
-                const responseData = await response.json();
-                console.log('Response Data: ', responseData);
+                // const responseData = await response.json();
+                // console.log('Response Data: ', responseData);
 
 
                 //Need to refresh the component
