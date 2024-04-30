@@ -5,7 +5,7 @@ function Advertisement() {
 
     return(
         <>
-        <div className='flex justify-center bg-black'>
+        <div className='flex justify-center bg-black overflow-hidden'>
         <motion.div
             className='py-14 text-white text-xl uppercase antialiased font-bold flex flex-row whitespace-nowrap'
             animate = {{ x: ['0%', '-30%']}}
