@@ -1,3 +1,5 @@
+const uri = process.env.MONGODB_URI;
+const db = require('../config/connection');
 const mongoose = require('mongoose');
 const Product = require('../models/Product');
 const User = require('../models/User');
@@ -11,7 +13,7 @@ const userData = require('./userData.json');
 const seedDB = async () => {
 
     try {
-        await mongoose.connect('mongodb://localhost:27017/fluxDB');
+        // await mongoose.connect(`${uri}`);
         console.log('Successfully connected to the database!!!');
 
         // Delete existing data
@@ -47,7 +49,7 @@ const seedDB = async () => {
     } catch (error) {
         console.error('Error seeding the database: ', error);
     } finally {
-        mongoose.connection.close();
+        db.close();
         console.log('Closing connection...');
     }
 };
