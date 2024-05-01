@@ -1,5 +1,6 @@
 //Importing mongoose packages for connection
-//Using destructuring to get connect and connection from the mongoose library
+require('dotenv').config(); // imported to load env variables
+const uri = process.env.MONGODB_URI;
 const mongoose = require('mongoose');
 
 //Handling the different connection events
@@ -25,6 +26,6 @@ process.on('SIGINT', () => {
 });
 
 //Connect to the database
-mongoose.connect('mongodb://localhost:27017/fluxDB');
+mongoose.connect(`${uri}`);
 
 module.exports = db;
