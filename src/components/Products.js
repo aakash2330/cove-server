@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Loader from '../functions/loader.js';
 import '../index.css';
+const apiUrl = process.env.API_URL;
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const Products = () => {
                 setLoading(true);
                 //Only fetching if the products dont exist
                 //    if(products.length === 0) {
-                const response = await fetch('/home/shop');
+                const response = await fetch(`${apiUrl}/home/shop`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
