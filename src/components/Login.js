@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css';
 //Updating the state values here for the login info
 const Login = ({ setIsLoggedIn, setUsername, refetchCartData }) => {
-    const apiUrl = process.env.API_URL;
+
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +18,7 @@ const Login = ({ setIsLoggedIn, setUsername, refetchCartData }) => {
 
         //API request to handle login
         try {
-            const response = await fetch(`${apiUrl}/auth/verify/login`, {
+            const response = await fetch('http://localhost:3001/auth/verify/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
