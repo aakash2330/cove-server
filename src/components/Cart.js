@@ -6,7 +6,6 @@ import '../index.css';
 
 
 const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetchCartData }) => {
-    const apiUrl = process.env.API_URL;
     const token = Cookies.get('token');
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -28,7 +27,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
     const checkoutDelete = async () => {
         try {
             //Setting loading to true before the request
-            const response = await fetch(`${apiUrl}/auth/user/remove-checkout`, {
+            const response = await fetch(`http://localhost:3001/auth/user/remove-checkout`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +51,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
     const deleteOneCart = async (cartId) => {
         try {
             //Setting loading to true before the request
-            const response = await fetch(`${apiUrl}/auth/user/deleteOneCart`, {
+            const response = await fetch(`http://localhost:3001/auth/user/deleteOneCart`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +74,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
 
     const checkoutCart = () => {
 
-        fetch(`${apiUrl}/auth/payment/create-checkout-session`, {
+        fetch('http://localhost:3001/auth/payment/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -128,7 +127,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
                 throw new Error('Authentication token not found');
             }
 
-            const response = await fetch(`${apiUrl}/auth/user/addCart`, {
+            const response = await fetch('http://localhost:3001/auth/user/addCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
