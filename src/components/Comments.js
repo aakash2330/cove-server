@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import '../index.css';
 
 const Comments = ({ isLoggedIn, username }) => {
+    const apiUrl = process.env.API_URL;
     const { productId } = useParams();
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
@@ -11,7 +12,7 @@ const Comments = ({ isLoggedIn, username }) => {
     //Retrieving comments from the database
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/comment/${productId}`);
+            const response = await fetch(`${apiUrl}/api/comment/${productId}`);
             if (!response.ok) {
                 throw new Error(`Network response error: ${response.statusText}`);
             }
@@ -40,7 +41,7 @@ const Comments = ({ isLoggedIn, username }) => {
         e.preventDefault();
         //API request to post comment if logged in
         try {
-            const response = await fetch('http://localhost:3001/api/comment/newComment', {
+            const response = await fetch(`${apiUrl}/api/comment/newComment`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

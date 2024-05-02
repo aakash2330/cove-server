@@ -6,7 +6,7 @@ import '../index.css';
 
 //Updating the state values here for the register
 const Register = ({ setIsLoggedIn, setUsername }) => {
-
+    const apiUrl = process.env.API_URL;
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ const Register = ({ setIsLoggedIn, setUsername }) => {
 
         //API request to handle register
         try {
-            const response = await fetch('http://localhost:3001/auth/verify/register', {
+            const response = await fetch(`${apiUrl}/auth/verify/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

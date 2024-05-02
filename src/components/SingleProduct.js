@@ -5,6 +5,7 @@ import '../index.css';
 
 //Try calling the set amount use state from here
 const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
+    const apiUrl = process.env.API_URL;
     const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});
@@ -49,7 +50,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
                 throw new Error('Authentication token not found');
             }
 
-            const response = await fetch('http://localhost:3001/auth/user/addCart', {
+            const response = await fetch(`${apiUrl}/auth/user/addCart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
