@@ -23,6 +23,7 @@ import SingleProduct from './components/SingleProduct';
 import './index.css';
 
 function App() {
+  const apiUrl = process.env.API_URL;
   const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
   const [username, setUsername] = useState('');
   const [cartItems, setCartItems] = useState([]);
@@ -59,7 +60,7 @@ function App() {
     const token = Cookies.get('token');
     if (cartItems.length === 0) {
       try {
-        const response = await fetch(`http://localhost:3001/auth/user/cart`, {
+        const response = await fetch(`${apiUrl}/auth/user/cart`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,

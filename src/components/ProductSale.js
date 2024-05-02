@@ -5,6 +5,7 @@ import Loader from '../functions/loader.js';
 import '../index.css';
 
 const ProductSale = () => {
+    const apiUrl = process.env.API_URL;
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ const ProductSale = () => {
         const fetchData = async () => {
             try {
                 // if(products.length === 0) {
-                const response = await fetch(`http://localhost:3001/api/product/sale/true`);
+                const response = await fetch(`${apiUrl}/api/product/sale/true`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }

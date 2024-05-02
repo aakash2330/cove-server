@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Loader from '../functions/loader.js';
 import '../index.css';
-const apiUrl = process.env.API_URL;
 
 const Products = () => {
+    const apiUrl = process.env.API_URL;
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
