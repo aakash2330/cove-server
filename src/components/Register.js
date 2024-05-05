@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 //Updating the state values here for the register
-const Register = ({ setIsLoggedIn, setUsername }) => {
+const Register = ({ setIsLoggedIn, setUsername, url }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ const Register = ({ setIsLoggedIn, setUsername }) => {
 
         //API request to handle register
         try {
-            const response = await fetch('http://localhost:3001/auth/verify/register', {
+            const response = await fetch(`${url}/auth/verify/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

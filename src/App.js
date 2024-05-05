@@ -23,6 +23,7 @@ import SingleProduct from './components/SingleProduct';
 import './index.css';
 
 function App() {
+  const url = process.env.API_URL; // Access localhost or vercel
   const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
   const [username, setUsername] = useState('');
   const [cartItems, setCartItems] = useState([]);
@@ -59,7 +60,7 @@ function App() {
     const token = Cookies.get('token');
     if (cartItems.length === 0) {
       try {
-        const response = await fetch(`http://localhost:3001/auth/user/cart`, {
+        const response = await fetch(`${url}/auth/user/cart`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -109,7 +110,7 @@ function App() {
           <Route path="/shop" element={
             <>
               <Shop />
-              <Products />
+              <Products url={url} />
               <Advertisement />
               <FooterAd />
             </>
@@ -130,7 +131,7 @@ function App() {
           <Route path="/api/product/category/:category" element={
             <>
               <Shop />
-              <ProductCategory />
+              <ProductCategory url={url} />
               <FooterAd />
             </>
           }
@@ -145,21 +146,21 @@ function App() {
           />
           <Route path="/api/product/:productId" element={
             <>
-              <SingleProduct isLoggedIn={isLoggedIn} username={username} setCartItems={setCartItems} />
-              <Comments isLoggedIn={isLoggedIn} username={username} />
+              <SingleProduct isLoggedIn={isLoggedIn} username={username} setCartItems={setCartItems} url={url} />
+              <Comments isLoggedIn={isLoggedIn} username={username} url={url} />
             </>
           }
           />
           <Route path="/auth/login" element={
-            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} refetchCartData={refetchCartData} />
+            <Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} refetchCartData={refetchCartData} url={url} />
           } />
           <Route path="/auth/register" element={
-            <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
+            <Register setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} url={url} />
           } />
           {/* You can change the other routes so they arent so revealing */}
           <Route path="/cart" element={
             <Cart isLoggedIn={isLoggedIn} username={username} cartItems={cartItems}
-              setCartItems={setCartItems} setError={setError} error={error} refetchCartData={refetchCartData} />
+              setCartItems={setCartItems} setError={setError} error={error} refetchCartData={refetchCartData} url={url} />
           } />
           <Route path="*" element={
             <NotFound />

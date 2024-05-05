@@ -1,6 +1,7 @@
 //Importing mongoose packages for connection
 require('dotenv').config(); // imported to load env variables
-const uri = process.env.MONGODB_URI;
+// const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_LOCAL; // testing with localhost for development
 const mongoose = require('mongoose');
 
 //Handling the different connection events
