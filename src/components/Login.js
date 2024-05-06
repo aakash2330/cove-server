@@ -4,7 +4,7 @@ import { HiOutlineShoppingBag } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 //Updating the state values here for the login info
-const Login = ({ setIsLoggedIn, setUsername, refetchCartData, url }) => {
+const Login = ({ setIsLoggedIn, setUsername, refetchCartData }) => {
 
     //State to manage the input fields in the form
     const [email, setEmail] = useState('');

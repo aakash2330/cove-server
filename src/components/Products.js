@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Loader from '../functions/loader.js';
 import '../index.css';
 
-const Products = ({ url }) => {
+const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -20,7 +20,6 @@ const Products = ({ url }) => {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log(`The Url should be localhost: ${url}`);
                 setProducts(data);
                 //    } 
             } catch (error) {

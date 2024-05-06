@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import '../index.css';
 
 
-const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetchCartData, url }) => {
+const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetchCartData }) => {
     const token = Cookies.get('token');
     const [totalPrice, setTotalPrice] = useState(0);
 
