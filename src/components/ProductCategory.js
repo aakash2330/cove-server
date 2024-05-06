@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loader from '../functions/loader';
 import '../index.css';
 
-const ProductCategory = ({ url }) => {
+const ProductCategory = () => {
     const { category } = useParams();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);

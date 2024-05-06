@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../index.css';
 
 //Try calling the set amount use state from here
-const SingleProduct = ({ isLoggedIn, username, setCartItems, url }) => {
+const SingleProduct = ({ isLoggedIn, username, setCartItems }) => {
     const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});

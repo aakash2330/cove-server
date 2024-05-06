@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import '../index.css';
 
 
-const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetchCartData, url }) => {
+const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetchCartData }) => {
     const token = Cookies.get('token');
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -74,7 +74,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
 
     const checkoutCart = () => {
 
-        fetch(`${url}/auth/payment/create-checkout-session`, {
+        fetch(`http://localhost:3001/auth/payment/create-checkout-session`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

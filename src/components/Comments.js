@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../index.css';
 
-const Comments = ({ isLoggedIn, username, url }) => {
+const Comments = ({ isLoggedIn, username }) => {
     const { productId } = useParams();
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
