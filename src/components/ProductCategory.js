@@ -15,7 +15,7 @@ const ProductCategory = ({ url }) => {
             try {
                 setLoading(true)
                 // if(products.length === 0) {
-                const response = await fetch(`${url}/api/product/category/${category}`);
+                const response = await fetch(`http://localhost:3001/api/product/category/${category}`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }

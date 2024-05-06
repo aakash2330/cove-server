@@ -15,7 +15,7 @@ const Products = ({ url }) => {
                 setLoading(true);
                 //Only fetching if the products dont exist
                 //    if(products.length === 0) {
-                const response = await fetch(`${url}/home/shop`);
+                const response = await fetch(`http://localhost:3001/home/shop`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }

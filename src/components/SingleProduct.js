@@ -16,7 +16,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems, url }) => {
         const fetchData = async () => {
             try {
                 // if(product.length === 0) {
-                const response = await fetch(`${url}/api/product/${productId}`);
+                const response = await fetch(`http://localhost:3001/api/product/${productId}`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
@@ -49,7 +49,7 @@ const SingleProduct = ({ isLoggedIn, username, setCartItems, url }) => {
                 throw new Error('Authentication token not found');
             }
 
-            const response = await fetch(`${url}/auth/user/addCart`, {
+            const response = await fetch(`http://localhost:3001/auth/user/addCart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

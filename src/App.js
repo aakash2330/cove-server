@@ -23,7 +23,7 @@ import SingleProduct from './components/SingleProduct';
 import './index.css';
 
 function App() {
-  const url = process.env.API_URL; // Access localhost or vercel
+  const url = process.env.MONGODB_URI; // Access localhost or vercel
   const [isLoggedIn, setIsLoggedIn] = useState(false); //Default so it doesn't display a user
   const [username, setUsername] = useState('');
   const [cartItems, setCartItems] = useState([]);

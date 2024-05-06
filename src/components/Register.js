@@ -19,7 +19,7 @@ const Register = ({ setIsLoggedIn, setUsername, url }) => {
 
         //API request to handle register
         try {
-            const response = await fetch(`${url}/auth/verify/register`, {
+            const response = await fetch(`http://localhost:3001/auth/verify/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

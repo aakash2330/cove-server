@@ -27,7 +27,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
     const checkoutDelete = async () => {
         try {
             //Setting loading to true before the request
-            const response = await fetch(`${url}/auth/user/remove-checkout`, {
+            const response = await fetch(`http://localhost:3001/auth/user/remove-checkout`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
     const deleteOneCart = async (cartId) => {
         try {
             //Setting loading to true before the request
-            const response = await fetch(`${url}/auth/user/deleteOneCart`, {
+            const response = await fetch(`http://localhost:3001/auth/user/deleteOneCart`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
