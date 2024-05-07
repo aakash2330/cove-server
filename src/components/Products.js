@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Loader from '../functions/loader.js';
 import '../index.css';
 
-const Products = () => {
+const Products = ({ url }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,7 +15,7 @@ const Products = () => {
                 setLoading(true);
                 //Only fetching if the products dont exist
                 //    if(products.length === 0) {
-                const response = await fetch(`http://localhost:3001/home/shop`);
+                const response = await fetch(`${url}/home/shop`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
