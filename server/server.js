@@ -8,13 +8,14 @@ require('dotenv').config();
 
 const PORT =process.env.PORT || 3001;
 const app = express();
-
+const appOrigin = process.env.CLIENT_URL || process.env.VERCEL_URL;
 const mongo = require('./config/connection');
 const MongoStore = require('connect-mongo')(session);
 
 // Enable CORS 
 app.use(cors({
-    origin: 'http://localhost:3000', // Using cors on localhost 3000 so it can talk to 3001
+    origin: appOrigin, // Using cors on localhost 3000 so it can talk to 3001 or on vercel
+    methods: ["POST", "GET", "UPDATE", "DELETE"],
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
   }));
   
