@@ -29,10 +29,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-client": "react-scripts start",
     "devStart": "concurrently \"npm run start\" \"nodemon server/server.js\"",
     "devStart2": "concurrently \"npm run build\" \"nodemon server/server.js\"",
-    "build": "react-scripts build",
+    "build": "react-scripts build && (cd ../server && npm install)",
     "seed": "node server/seeds/seed.js",
     "server": "node server/server.js",
     "test": "react-scripts test",
