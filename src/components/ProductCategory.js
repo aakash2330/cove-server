@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loader from '../functions/loader';
 import '../index.css';
 
-const ProductCategory = () => {
+const ProductCategory = ({ url }) => {
     const { category } = useParams();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const ProductCategory = () => {
             try {
                 setLoading(true)
                 // if(products.length === 0) {
-                const response = await fetch(`http://localhost:3001/api/product/category/${category}`);
+                const response = await fetch(`${url}/api/product/category/${category}`);
                 if (!response.ok) {
                     throw new Error(`Network response error: ${response.statusText}`);
                 }
