@@ -32,17 +32,15 @@ const Login = ({ setIsLoggedIn, setUsername, refetchCartData, url }) => {
             if (response.ok) {
                 const responseData = await response.json();
                 const { token, username } = responseData;
-                // console.log('Response Data: ', responseData);
+                console.log('Response Data, Token & Username: ', responseData);
                 setIsLoggedIn(true);
                 setUsername(username); //setting the state of username to the associated username to use in Navbar
                 // console.log('Lets see the value of Username: ', username);
-                //Saving token to cookies to avoid XSS attacks
-                Cookies.set('token', token, { expires: 7, secure: true });
-                //Saving the username as well so it is displayed and the state doesn't lose it on reload
-                localStorage.setItem('username', username);
+                console.log('Lets see the value of Token: ', token);
+                Cookies.set('token', token, { expires: 7, secure: true }); //Saving token to cookies to avoid XSS attacks
+                localStorage.setItem('username', username); //Saving the username as well so it is displayed and the state doesn't lose it on reload
                 refetchCartData();
-                //After login redirect to the home page
-                navigate('/');
+                navigate('/'); //After login redirect to the home page
             } else {
                 //Handle failed login
                 const errorData = await response.json();
@@ -66,7 +64,7 @@ const Login = ({ setIsLoggedIn, setUsername, refetchCartData, url }) => {
     };
 
     return (
-        <div className='mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8'>
+        <div className='mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 xl:my-32'>
             <div className='mx-auto max-w-lg text-center flex flex-col items-center'>
                 <h1 className='text-2xl font-bold sm:text-3xl'>Shop with us today!</h1>
 

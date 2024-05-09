@@ -178,7 +178,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
     //Array.isArray is a built in method to check to see if something is an array
     if (!Array.isArray(cartItems) || cartItems.length === 0) {
         return (
-            <div className='flex flex-col justify-center items-center my-8'>
+            <div className='flex flex-col justify-center items-center my-8 xl:my-48'>
                 <p className='text-2xl font-semibold uppercase'>Shopping Cart</p>
                 <p className='text-xl mt-4'>You have nothing in your shopping cart</p>
                 <p className="my-4">
@@ -202,7 +202,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
                 {/* Product Information */}
                 {/* Trying to retrieve index number */}
                 {cartItems.map((item, index) => (
-                    <div key={item.productId} className='flex flex-col grow mx-4 md:mx-8 h-1/3'>
+                    <div key={item.productId} className='flex flex-col grow mx-4 md:mx-8 xl:mt-16 h-1/3'>
                         <div className='flex flex-row'>
                             <div className='flex flex-row grow-2'>
                                 <img
@@ -259,7 +259,7 @@ const Cart = ({ isLoggedIn, username, cartItems, setCartItems, setError, refetch
                 </div>
             </div>
             {/* container for empty cart and checkout button */}
-            <div className='flex flex-row mb-8 mx-8'>
+            <div className='flex flex-row mb-8 xl:mb-32 mx-8'>
                 <div className='flex grow justify-end'>
                     <button className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-1.5 px-6 mt-2 w-1/2' onClick={() => checkoutCart()}>Checkout</button>
                 </div>

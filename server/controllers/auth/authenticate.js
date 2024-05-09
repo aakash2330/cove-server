@@ -17,7 +17,7 @@ router.post('/register', async (req, res, next) => {
         await user.save();
 
         //Trying to auto-log you in
-        // console.log('User Created!');
+        console.log('User Created!');
         const token = jwt.sign({ userId: user._id }, secretKey, {
             expiresIn: '7d'
         });
@@ -44,17 +44,17 @@ router.post('/register', async (req, res, next) => {
 //Login with an existing user
 router.post('/login', async (req, res, next) => {
     const { email, password } = req.body;
-    // console.log(req.body);
+    console.log(req.body);
     try {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'Invalid username or email. Please try again.' });
         }
 
-        // console.log('User Found: ', user);
+        console.log('User Found: ', user);
 
         const passwordMatch = await user.comparePassword(password);
-        // console.log('Password Match: ', passwordMatch);
+        console.log('Password Match: ', passwordMatch);
 
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Incorrect password' });

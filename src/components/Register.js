@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { HiOutlineShoppingBag } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
@@ -58,84 +58,84 @@ const Register = ({ setIsLoggedIn, setUsername, url }) => {
     const handleInputChange = (e) => {
         if (e.target.name === 'createUsername') {
             setCreateUsername(e.target.value);
-            // console.log("Creating username now: ", createUsername);
+            // console.log('Creating username now: ', createUsername);
         } else if (e.target.name === 'email') {
             setEmail(e.target.value);
-            // console.log("Checking the email now: ", email);
+            // console.log('Checking the email now: ', email);
         } else if (e.target.name === 'password') {
             setPassword(e.target.value);
-            // console.log("Checking the password now: ", password);
+            // console.log('Checking the password now: ', password);
         }
     };
 
     return (
-        <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-lg text-center flex flex-col items-center">
-                <h1 className="text-2xl font-bold sm:text-3xl">First time shopping?</h1>
+        <div className='mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 my-32'>
+            <div className='mx-auto max-w-lg text-center flex flex-col items-center'>
+                <h1 className='text-2xl font-bold sm:text-3xl'>First time shopping?</h1>
 
-                <p className="mt-4">
+                <p className='mt-4'>
                     <HiOutlineShoppingBag size={40} />
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit} method="POST" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+            <form onSubmit={handleSubmit} method='POST' className='mx-auto mb-0 mt-8 max-w-md space-y-4'>
                 <div>
-                    <label htmlFor="createUsername" className="sr-only">Username</label>
+                    <label htmlFor='createUsername' className='sr-only'>Username</label>
 
-                    <div className="relative">
+                    <div className='relative'>
                         <input
-                            type="text"
-                            id="createUsername"
-                            name="createUsername"
+                            type='text'
+                            id='createUsername'
+                            name='createUsername'
                             value={createUsername}
                             onChange={handleInputChange}
-                            className="w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter username"
+                            className='w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm'
+                            placeholder='Enter username'
                         />
                     </div>
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="sr-only">Email</label>
+                    <label htmlFor='email' className='sr-only'>Email</label>
 
-                    <div className="relative">
+                    <div className='relative'>
                         <input
-                            type="email"
-                            id="email"
-                            name="email"
+                            type='email'
+                            id='email'
+                            name='email'
                             value={email}
                             onChange={handleInputChange}
-                            className="w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter email"
+                            className='w-full border-[#e0e0e0] text-[#6B7280] p-4 pe-12 text-sm shadow-sm'
+                            placeholder='Enter email'
                         />
                     </div>
                 </div>
 
                 <div>
-                    <label htmlFor="password" className="sr-only">Password</label>
+                    <label htmlFor='password' className='sr-only'>Password</label>
 
-                    <div className="relative">
+                    <div className='relative'>
                         <input
-                            type="password"
-                            id="password"
-                            name="password"
+                            type='password'
+                            id='password'
+                            name='password'
                             value={password}
                             onChange={handleInputChange}
-                            className="w-full border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter password"
+                            className='w-full border-gray-200 p-4 pe-12 text-sm shadow-sm'
+                            placeholder='Enter password'
                         />
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-500">
+                <div className='flex items-center justify-between'>
+                    <p className='text-sm text-gray-500'>
                         Already have an account?
-                        <a className="underline" href="/auth/login">Sign in</a>
+                        <a className='underline' href='/auth/login'>Sign in</a>
                     </p>
 
                     <button
-                        type="submit"
-                        className="inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2"
+                        type='submit'
+                        className='inline-block font-medium bg-black text-white hover:bg-slate-800 py-3.5 px-6 mt-2'
                     >
                         Create Account
                     </button>
