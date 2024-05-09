@@ -2,7 +2,7 @@ import '../index.css';
 
 function Footer() {
     return (
-        <div className='bottom-0'>
+        <div className='bottom-0 w-full'>
             <div className='flex flex-col bg-black text-white w-full'>
                 <div className='flex flex-row items-end pt-2 px-4'>
                     <p className='grow font-sm text-left'>Follow Us</p>
