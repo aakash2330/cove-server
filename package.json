@@ -2,6 +2,7 @@
   "name": "flux",
   "version": "0.1.0",
   "private": true,
+  "main":"index.js",
   "dependencies": {
     "@stripe/react-stripe-js": "^2.7.0",
     "@stripe/stripe-js": "^3.3.0",
@@ -36,7 +37,8 @@
     "seed": "node server/seeds/seed.js",
     "server": "node server/server.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "vercel-build":"echo hello"
   },
   "eslintConfig": {
     "extends": [
