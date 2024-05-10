@@ -53,7 +53,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.use(express.static(path.join(__dirname, '../public')));
 
 //Using the controller routes
-app.use(require('./controllers/'));
+app.use(require('./controllers'));
 
 // Catch-all route for serving the React app
 app.get('*', (req, res) => {
