@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 // Serve static files from the 'public' folder (for other static files)
 app.use(express.static(path.join(__dirname, '../public')));
-
+//as
 //Using the controller routes
 app.use(require('./controllers'));
 
