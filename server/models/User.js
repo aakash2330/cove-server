@@ -1,7 +1,7 @@
 //Destructuring and getting schema and types from Mongoose documentation
 const { Schema, Types, model } = require('mongoose');
 //For a secure password
-bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 //This is to increase the amount of hashing of the password
 SALT_WORK_FACTOR = 10;
 
