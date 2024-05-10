@@ -64,3 +64,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`App Listening at PORT http://localhost:${PORT} !`);
 });
+
+export default app;
